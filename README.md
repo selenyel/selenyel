@@ -1,7 +1,7 @@
 ### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)
 
 <p align="left"> <img
-        src="https://komarev.com/ghpvc/?username=selenyel&label=Profile%20views&color=0e75b6&style=flat"
+        src="https://komarev.com/ghpvc/?username=selenyel&label=Profile%20views&color=blueviolet&style=plastic"
         alt="selenyel" /> </p>
 
 ***Hello! I'm a Computer Engineer from [TOBB ETÜ](https://www.etu.edu.tr/tr)*** 

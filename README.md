@@ -1,5 +1,9 @@
 ### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)
 
+<p align="left"> <img
+        src="https://komarev.com/ghpvc/?username=buraktemellioglu001&label=Profile%20views&color=0e75b6&style=flat"
+        alt="buraktemellioglu001" /> </p>
+
 ***Hello! I'm a Computer Engineer from [TOBB ETÜ](https://www.etu.edu.tr/tr)*** 
 
 *I love designing, creating and managing projects by focused as a Front-End Developer*

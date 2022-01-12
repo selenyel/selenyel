@@ -1,8 +1,8 @@
 ### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)
 
 <p align="left"> <img
-        src="https://komarev.com/ghpvc/?username=buraktemellioglu001&label=Profile%20views&color=0e75b6&style=flat"
-        alt="buraktemellioglu001" /> </p>
+        src="https://komarev.com/ghpvc/?username=selenyel&label=Profile%20views&color=0e75b6&style=flat"
+        alt="selenyel" /> </p>
 
 ***Hello! I'm a Computer Engineer from [TOBB ETÜ](https://www.etu.edu.tr/tr)*** 
 
@@ -17,7 +17,7 @@
 [![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=discord)
 ### 📫 How to reach me: 
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Linkedin.svg/220px-Linkedin.svg.png" alt="Girl in a jacket" width="30" height="30"> [Linkedin](https://www.linkedin.com/in/selen-y-b3205a145/)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Linkedin.svg/220px-Linkedin.svg.png" alt="anan zaa xd" width="30" height="30"> [Linkedin](https://www.linkedin.com/in/selen-y-b3205a145/)
 
 ### 💬 Stats:
 <p>&nbsp;<img align="center"

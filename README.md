@@ -8,9 +8,9 @@
 
 *I love designing, creating and managing projects by focused as a Front-End Developer*
 
-### I'm currently working at Ministry of Commerce as a Software Developer.
+### 🔭 I'm currently working at Ministry of Commerce as a Software Developer.
 
-### 🔭 I worked my professor's TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
+I worked my professor's TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
 
 🌱 I’m also currently learning: *React*
 

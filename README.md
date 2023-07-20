@@ -34,6 +34,12 @@
 -->
 
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="github-snake.svg" />
+  <img alt="." src="[github-snake.svg](https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake.svg)" />
+</picture>
+
 ### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)
 
 <p align="left"> <img
@@ -82,6 +88,7 @@ I worked my professor's TUBITAK project web site called [ADMPD](https://admpd.et
   <source media="(prefers-color-scheme: light)" srcset="github-snake.svg" />
   <img alt="." src="github-snake.svg" />
 </picture>
+
 <!--
 **selenyel/selenyel** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 

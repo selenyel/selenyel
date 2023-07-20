@@ -1,18 +1,59 @@
+<!---
+  Hey there! Welcome to My Awesome Front-end Playground! 🎉
+  I'm [Your Name], a front-end developer with a passion for React and Angular, and a dash of creativity! 🚀
+
+  💼 I work at the Ministry of Commerce, where I'm building cool and innovative web applications to improve e-commerce experiences.
+
+  🎓 Graduated from TOBB ETU, I'm always eager to learn and stay up-to-date with the latest trends in the front-end world.
+
+  🔥 In this repository, you'll find a collection of my favorite projects and experiments. I love playing with animations, interactive designs, and crafting delightful user experiences.
+
+  🌟 Let me walk you through the goodies:
+
+  1. **Project X**: [Short Project Description]
+     ![Project X Preview](./project_x_preview.gif)
+
+  2. **Angular Magic**: [Short Project Description]
+     ![Angular Magic Preview](./angular_magic_preview.gif)
+
+  3. **Reactiverse**: [Short Project Description]
+     ![Reactiverse Preview](./reactiverse_preview.gif)
+
+  🚀 Feel free to explore each project and dive into their respective folders for more details. I've poured my heart and soul into these, so I hope you enjoy them as much as I did building them.
+
+  📜 Check out the individual READMEs in each project folder for installation instructions, usage examples, and live demos.
+
+  💬 I'm always open to feedback and suggestions! If you have any ideas or just want to say hi, feel free to [reach out to me](mailto:youremail@example.com) or [follow me on Twitter](https://twitter.com/your_twitter_handle).
+
+  🎉 Here's a little celebration for your visit! 🎉
+  ![GitHub Party](https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif)
+
+  📣 Psst! If you're a fan of my work, why not give this repo a ⭐️ and share it with your friends? It would mean the world to me!
+
+  Happy coding! 😄
+-->
+
+
 ### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)
 
 <p align="left"> <img
         src="https://komarev.com/ghpvc/?username=selenyel&label=Profile%20views&color=blueviolet&style=plastic"
         alt="selenyel" /> </p>
 
-***Hello! I'm a Computer Engineer from [TOBB ETÜ](https://www.etu.edu.tr/tr)*** 
+**Hello! I'm Selen YEL**
+### 🔭 I'm currently working at Ministry of Commerce as a Software Developer.
+
+***Graduated from [TOBB ETÜ](https://www.etu.edu.tr/tr)  :  Computer Engineering***
+
 
 *I love designing, creating and managing projects by focused as a Front-End Developer*
 
-### 🔭 I'm currently working at Ministry of Commerce as a Software Developer.
 
 I worked my professor's TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
 
-🌱 I’m also currently learning: *React*
+🌱 I’m also currently learning: *Angular*
+
+**Please look at my public repos for my recent Angular projects!
 
 
 ### :trophy: My Trophies

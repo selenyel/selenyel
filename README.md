@@ -52,14 +52,13 @@
 *I love designing, creating and managing projects by focused as a Front-End Developer*
 
 
-I worked my professor's TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
+I worked on my professor's TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
 
 🌱 I’m also currently learning: *Angular*
 
 **Please look at my public repos for my recent Angular projects!
 
 <hr/>
-<div width='100%'></div>
 
 ### :trophy: My Trophies
 ![trophy](https://github-profile-trophy.vercel.app/?username=selenyel&theme=discord)

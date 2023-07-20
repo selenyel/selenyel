@@ -33,7 +33,8 @@
   Happy coding! 😄
 -->
 
-  <img alt="." src="[github-snake.svg](https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake.svg)" />
+  <img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake.svg" />
+
 
 
 ### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)

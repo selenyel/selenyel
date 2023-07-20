@@ -33,12 +33,8 @@
   Happy coding! 😄
 -->
 
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="github-snake.svg" />
   <img alt="." src="[github-snake.svg](https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake.svg)" />
-</picture>
+
 
 ### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)
 

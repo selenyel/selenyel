@@ -54,6 +54,11 @@
 
 I worked on my professor's TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
 
+I was an intern at [LOGO](https://www.logo.com.tr/en) about 6.5 months
+
+Later I was an intern at [BISOFT](https://en.bisoft.com.tr/) about 3.5 months
+
+
 🌱 I’m also currently learning: *Angular*
 
 **Please look at my public repos for my recent Angular projects!

@@ -44,7 +44,7 @@
         alt="selenyel" /> </p>
 
 **Hello! I'm Selen YEL**
-### 🔭 I'm currently working at Ministry of Commerce as a Software Developer.
+### 🔭 I'm currently working at Ministry of Commerce as a Front-End Developer for almost 2 years.
 
 ***Graduated from [TOBB ETÜ](https://www.etu.edu.tr/tr)  :  Computer Engineering***
 

@@ -43,6 +43,7 @@
         src="https://komarev.com/ghpvc/?username=selenyel&label=Profile%20views&color=blueviolet&style=plastic"
         alt="selenyel" /> </p>
 
+<!---
 **Hello! I'm Selen YEL**
 ### 🔭 I'm currently working at Ministry of Commerce as a Front-End Developer for almost 2 years.
 
@@ -52,7 +53,7 @@
 *I love designing, creating and managing projects by focused as a Front-End Developer*
 
 
-I worked with [Mehmet Akşit](https://scholar.google.nl/citations?user=8lwFYb0AAAAJ&hl=nl) TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
+I worked with [Mehmet Akşit](https://scholar.google.nl/citations?user=8lwFYb0AAAAJ&hl=nl)s on his TUBITAK projects web site called : [ADMPD](https://admpd.etu.edu.tr/en) @ [TOBB ETU](https://www.etu.edu.tr/tr)
 
 I was an intern at [LOGO](https://www.logo.com.tr/en) about 6.5 months
 
@@ -62,6 +63,20 @@ Later I was an intern at [BISOFT](https://en.bisoft.com.tr/) about 3.5 months
 🌱 I’m also currently learning: *Angular*
 
 **Please look at my public repos for my recent Angular projects!
+-->
+Hello! I'm Selen YEL
+####  🔭 Currently: Front-End Developer at the Ministry of Commerce for nearly 2 years.
+
+##### 🎓 Education: Graduated from TOBB ETÜ with a degree in Computer Engineering.
+
+##### 💼 Experience:
+
+##### Worked on TUBITAK projects website [ADMPD](https://admpd.etu.edu.tr/en) with [Mehmet Akşit](https://scholar.google.nl/citations?user=8lwFYb0AAAAJ&hl=nl) at [TOBB ETU](https://www.etu.edu.tr/tr).
+##### Interned at [LOGO](https://www.logo.com.tr/en) for 6.5 months.
+##### Interned at [BISOFT](https://en.bisoft.com.tr/) for 3.5 months.
+##### 🌱 Currently Learning: GraphQL
+
+##### 🔗 Explore my projects: Please check out my public repositories for recent projects!
 
 <hr/>
 

@@ -84,7 +84,7 @@ Hello! I'm Selen YEL
 ![trophy](https://github-profile-trophy.vercel.app/?username=selenyel&theme=discord)
 ### 📫 How to reach me: 
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Linkedin.svg/220px-Linkedin.svg.png" alt="anan zaa xd" width="30" height="30"> [Linkedin](https://www.linkedin.com/in/selen-y-b3205a145/)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Linkedin.svg/220px-Linkedin.svg.png" alt="anan zaa xd" width="30" height="30"> [Linkedin](www.linkedin.com/in/selenyel)
 
 ### 💬 Stats:
 <p>&nbsp;<img align="center"

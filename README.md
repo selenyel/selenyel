@@ -52,7 +52,7 @@
 *I love designing, creating and managing projects by focused as a Front-End Developer*
 
 
-I worked on my professor's TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
+I worked with [Mehmet Akşit](https://scholar.google.nl/citations?user=8lwFYb0AAAAJ&hl=nl) TUBITAK project web site called [ADMPD](https://admpd.etu.edu.tr/en) in [TOBB ETU](https://www.etu.edu.tr/tr)
 
 I was an intern at [LOGO](https://www.logo.com.tr/en) about 6.5 months
 

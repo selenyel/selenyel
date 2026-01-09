@@ -71,7 +71,7 @@ Hello! I'm Selen YEL
 
 ##### 💼 Experience:
 
-##### Currently orking as Front-End Developer & UXE for 4 months.
+##### Currently working as UXE for 4 months.
 ##### Worked as Front-End Developer at the [Ministry of Commerce](https://ticaret.gov.tr/) for nearly 3 years.
 ##### Worked on TUBITAK projects website [ADMPD](https://admpd.etu.edu.tr/en) with [Mehmet Akşit](https://scholar.google.nl/citations?user=8lwFYb0AAAAJ&hl=nl) at [TOBB ETU](https://www.etu.edu.tr/tr).
 ##### Interned at [LOGO](https://www.logo.com.tr/en) for 8 months.

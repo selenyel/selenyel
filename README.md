@@ -65,12 +65,13 @@ Later I was an intern at [BISOFT](https://en.bisoft.com.tr/) about 3.5 months
 **Please look at my public repos for my recent Angular projects!
 -->
 Hello! I'm Selen YEL
-####  🔭 Currently: Freelance + Remote  
+####  🔭 Currently: UXE  
 
 ##### 🎓 Education: Graduated from TOBB ETÜ with a degree in Computer Engineering.
 
 ##### 💼 Experience:
 
+##### Currently orking as Front-End Developer & UXE for 4 months.
 ##### Worked as Front-End Developer at the [Ministry of Commerce](https://ticaret.gov.tr/) for nearly 3 years.
 ##### Worked on TUBITAK projects website [ADMPD](https://admpd.etu.edu.tr/en) with [Mehmet Akşit](https://scholar.google.nl/citations?user=8lwFYb0AAAAJ&hl=nl) at [TOBB ETU](https://www.etu.edu.tr/tr).
 ##### Interned at [LOGO](https://www.logo.com.tr/en) for 8 months.

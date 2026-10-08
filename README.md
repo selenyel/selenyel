@@ -32,12 +32,13 @@
 
   Happy coding! 😄
 -->
-
   <img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake.svg" />
 
-
-
+<!--
 ### ![Thats me!]([https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png](https://www.linkedin.com/in/selenyeltemellioglu/))
+-->
+
+
 
 <p align="left"> <img
         src="https://komarev.com/ghpvc/?username=selenyel&label=Profile%20views&color=blueviolet&style=plastic"

@@ -37,7 +37,7 @@
 
 
 
-### ![Thats me!](https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png)
+### ![Thats me!]([https://raw.githubusercontent.com/selenyel/cv/master/images/fun%20cv%20final%20-%20Kopya.png](https://www.linkedin.com/in/selenyeltemellioglu/))
 
 <p align="left"> <img
         src="https://komarev.com/ghpvc/?username=selenyel&label=Profile%20views&color=blueviolet&style=plastic"

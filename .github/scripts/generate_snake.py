@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
 Custom Contribution Snake & Glassmorphism Asset Generator for Selen Yel Temellioğlu
+- Clean floating glassmorphic cards (NO awkward background plates/containers)
 - Diamond apples for contribution cells (rainbow colored: cyan -> emerald -> gold -> prism magenta)
 - Grass cells with blades/spikes for zero-contribution days
 - Orange snake with black tiger stripes and dots
-- Glassmorphic Droplet Career Timeline SVGs with ambient traversing spotlight
-- Adaptive Froplet Pill Button SVGs
-- Generates glassmorphic profile header banners
+- Floating Droplet Career Timeline SVGs with transparent canvas
+- Adaptive Droplet Pill Button SVGs without underline artifacts
 - Deploys full interactive web profile (index.html) to GitHub Pages
 """
 import sys
@@ -198,7 +198,7 @@ def generate_snake_path(grid):
 
 
 def build_snake_svg(grid, path, apple_eats, dark_mode=False):
-    """Build the animated SVG with custom snake, diamond apples, and glass meadow."""
+    """Build the animated SVG with custom snake, diamond apples, and clean floating card."""
     num_steps = len(path)
     duration_ms = 25000
 
@@ -212,12 +212,12 @@ def build_snake_svg(grid, path, apple_eats, dark_mode=False):
         text_color = "#94a3b8"
         text_sub = "#64748b"
     else:
-        bg_fill = "#dedfd8"
-        border_stroke = "#d2d5cc"
-        grass_tile_fill = "#f2f4ee"
-        grass_tile_stroke = "#e1e4dc"
+        bg_fill = "#ffffff"
+        border_stroke = "#e2e8f0"
+        grass_tile_fill = "#f8fafc"
+        grass_tile_stroke = "#e2e8f0"
         grass_blade_stroke = "#10b981"
-        grass_blade_opacity = "0.6"
+        grass_blade_opacity = "0.5"
         text_color = "#334155"
         text_sub = "#64748b"
 
@@ -277,6 +277,9 @@ def build_snake_svg(grid, path, apple_eats, dark_mode=False):
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{total_svg_width}" height="{total_svg_height}" viewBox="0 0 {total_svg_width} {total_svg_height}">',
         f'<desc>Stemellioglu Glass Meadow Snake — Selen Yel Temellioğlu</desc>',
         '<defs>',
+        '  <filter id="snakeCardShadow" x="-2%" y="-5%" width="104%" height="115%">',
+        '    <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="' + ('0.3' if dark_mode else '0.05') + '"/>',
+        '  </filter>',
         '  <linearGradient id="snakeOrange" x1="0%" y1="0%" x2="100%" y2="100%">',
         '    <stop offset="0%" stop-color="#ff7a00"/>',
         '    <stop offset="100%" stop-color="#ff9500"/>',
@@ -344,7 +347,7 @@ def build_snake_svg(grid, path, apple_eats, dark_mode=False):
         '\n'.join(keyframes_css),
         '\n'.join(apple_styles),
         '</style>',
-        f'<rect class="bg-box" width="{total_svg_width}" height="{total_svg_height}" fill="{bg_fill}" stroke="{border_stroke}" stroke-width="1"/>',
+        f'<rect class="bg-box" x="2" y="2" width="{total_svg_width - 4}" height="{total_svg_height - 4}" fill="{bg_fill}" stroke="{border_stroke}" stroke-width="1" filter="url(#snakeCardShadow)"/>',
     ]
 
     for c in range(COLS):
@@ -386,48 +389,42 @@ def build_snake_svg(grid, path, apple_eats, dark_mode=False):
 
 
 def build_header_svg(username="Selen Yel Temellioğlu", dark_mode=False):
-    """Build a signature glassmorphic header card with ambient low-saturated traversing spotlight."""
+    """Build a single clean floating glassmorphic header card with NO outer plate."""
     width = 880
-    height = 200
+    height = 185
 
     if dark_mode:
-        bg_card = "#0B0F19"
+        card_fill = "#0B0F19"
         border_grad_stops = """
           <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
           <stop offset="50%" stop-color="#818cf8" stop-opacity="0.25"/>
           <stop offset="100%" stop-color="#c084fc" stop-opacity="0.6"/>
         """
-        inner_glass_fill = "#111827"
-        inner_glass_opacity = "0.75"
         text_title = "#f8fafc"
         text_subtitle = "#94a3b8"
         badge_bg = "#1e293b"
         badge_border = "#334155"
         badge_text = "#38bdf8"
-        chip_bg = "#0f172a"
+        chip_bg = "#111827"
         chip_border = "#1e293b"
         chip_text = "#cbd5e1"
-        glow_1 = "#0284c7"
-        glow_2 = "#7c3aed"
+        shadow_opacity = "0.35"
     else:
-        bg_card = "#dedfd8"
+        card_fill = "#ffffff"
         border_grad_stops = """
           <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5"/>
-          <stop offset="50%" stop-color="#6366f1" stop-opacity="0.25"/>
+          <stop offset="50%" stop-color="#6366f1" stop-opacity="0.2"/>
           <stop offset="100%" stop-color="#9333ea" stop-opacity="0.5"/>
         """
-        inner_glass_fill = "#ffffff"
-        inner_glass_opacity = "0.95"
         text_title = "#0f172a"
         text_subtitle = "#475569"
         badge_bg = "#e0f2fe"
         badge_border = "#bae6fd"
         badge_text = "#0369a1"
-        chip_bg = "#f1f3ed"
-        chip_border = "#e2e5dc"
-        chip_text = "#1e293b"
-        glow_1 = "#38bdf8"
-        glow_2 = "#c084fc"
+        chip_bg = "#f8fafc"
+        chip_border = "#e2e8f0"
+        chip_text = "#334155"
+        shadow_opacity = "0.06"
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
   <defs>
@@ -438,44 +435,33 @@ def build_header_svg(username="Selen Yel Temellioğlu", dark_mode=False):
       <stop offset="0%" stop-color="{text_title}"/>
       <stop offset="100%" stop-color="{text_subtitle}"/>
     </linearGradient>
-    <radialGradient id="traversingSpotlight" cx="50%" cy="50%" r="65%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.18">
-        <animate attributeName="stop-color" values="#38bdf8;#34d399;#fbbf24;#f472b6;#38bdf8" dur="16s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="headerShadow" x="-5%" y="-5%" width="110%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>
+    </filter>
   </defs>
 
-  <rect width="{width}" height="{height}" rx="20" fill="{bg_card}"/>
-
-  <!-- Ambient Low-Saturated Traversing Spotlight -->
-  <circle cx="280" cy="90" r="220" fill="url(#traversingSpotlight)">
-    <animate attributeName="cx" values="180;680;420;180" dur="18s" repeatCount="indefinite"/>
-    <animate attributeName="cy" values="60;140;90;60" dur="18s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Glass Card Overlay -->
-  <rect x="12" y="12" width="{width - 24}" height="{height - 24}" rx="16" fill="{inner_glass_fill}" fill-opacity="{inner_glass_opacity}" stroke="url(#headerBorder)" stroke-width="1.2"/>
+  <!-- Clean Floating Card (NO outer backdrop plate) -->
+  <rect x="2" y="2" width="{width - 4}" height="{height - 4}" rx="18" fill="{card_fill}" stroke="url(#headerBorder)" stroke-width="1.2" filter="url(#headerShadow)"/>
 
   <!-- Top Discipline Pill Badge -->
-  <g transform="translate(42, 34)">
+  <g transform="translate(32, 26)">
     <rect width="284" height="24" rx="12" fill="{badge_bg}" stroke="{badge_border}" stroke-width="1"/>
     <circle cx="14" cy="12" r="3.5" fill="#10b981"/>
     <text x="26" y="16" fill="{badge_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1">UX ENGINEER • FRONT-END ARCHITECTURE</text>
   </g>
 
   <!-- Name & UXE Badge -->
-  <g transform="translate(42, 98)">
-    <text x="0" y="0" fill="url(#titleGrad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" letter-spacing="-0.5">{username}</text>
-    <rect x="420" y="-22" width="46" height="22" rx="11" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1"/>
-    <text x="443" y="-7" text-anchor="middle" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">UXE</text>
+  <g transform="translate(32, 86)">
+    <text x="0" y="0" fill="url(#titleGrad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800" letter-spacing="-0.5">{username}</text>
+    <rect x="390" y="-20" width="46" height="22" rx="11" fill="#38bdf8" fill-opacity="0.12" stroke="#38bdf8" stroke-width="1"/>
+    <text x="413" y="-5" text-anchor="middle" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">UXE</text>
   </g>
 
   <!-- Subtitle -->
-  <text x="42" y="126" fill="{text_subtitle}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500">UX Engineer • Front-End Architecture • OneWell</text>
+  <text x="32" y="114" fill="{text_subtitle}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500">UX Engineer • Front-End Architecture • OneWell</text>
 
   <!-- Tags / Chips along bottom -->
-  <g transform="translate(42, 148)">
+  <g transform="translate(32, 136)">
     <rect x="0" y="0" width="138" height="24" rx="6" fill="{chip_bg}" stroke="{chip_border}" stroke-width="1"/>
     <text x="10" y="16" fill="{chip_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Web • iOS • watchOS</text>
 
@@ -493,15 +479,15 @@ def build_header_svg(username="Selen Yel Temellioğlu", dark_mode=False):
 
 
 def build_timeline_svg(dark_mode=False):
-    """Build glassmorphic droplet timeline cards with ambient traversing spotlight."""
-    w, h = 880, 810
-    bg_canvas = '#0B0F19' if dark_mode else '#dedfd8'
-    card_bg = '#141d2e' if dark_mode else '#ffffff'
-    card_stroke = '#1e293b' if dark_mode else '#f1f3ed'
+    """Build floating glassmorphic droplet timeline cards with transparent canvas (NO background plate)."""
+    w, h = 880, 770
+    card_bg = '#111827' if dark_mode else '#ffffff'
+    card_stroke = '#1e293b' if dark_mode else '#e2e8f0'
     text_primary = '#f8fafc' if dark_mode else '#0f172a'
-    text_muted = '#94a3b8' if dark_mode else '#526071'
+    text_muted = '#94a3b8' if dark_mode else '#64748b'
     section_title = '#38bdf8' if dark_mode else '#0284c7'
-    archive_text = '#64748b' if dark_mode else '#8a99a8'
+    archive_text = '#64748b' if dark_mode else '#94a3b8'
+    shadow_opacity = '0.35' if dark_mode else '0.06'
 
     jobs = [
         ('Sep 2025 – Present', '#38bdf8' if dark_mode else '#0284c7', 'UI/UX Designer & Front-End Developer', 'OneWell',
@@ -532,33 +518,21 @@ def build_timeline_svg(dark_mode=False):
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '  <defs>',
-        '    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="120%">',
-        '      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#000000" flood-opacity="' + ('0.35' if dark_mode else '0.07') + '"/>',
+        '    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="125%">',
+        f'      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
         '    </filter>',
-        '    <radialGradient id="traversingLight" cx="50%" cy="50%" r="65%">',
-        '      <stop offset="0%" stop-color="#38bdf8" stop-opacity="' + ('0.15' if dark_mode else '0.22') + '">',
-        '        <animate attributeName="stop-color" values="#38bdf8;#34d399;#fbbf24;#f472b6;#38bdf8" dur="16s" repeatCount="indefinite"/>',
-        '      </stop>',
-        '      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>',
-        '    </radialGradient>',
         '  </defs>',
-        f'  <rect width="{w}" height="{h}" rx="24" fill="{bg_canvas}"/>',
-        f'  <!-- Ambient Traversing Light (Continuous Low-Saturated Glow) -->',
-        f'  <circle cx="380" cy="280" r="340" fill="url(#traversingLight)">',
-        '    <animate attributeName="cx" values="220;660;400;220" dur="18s" repeatCount="indefinite"/>',
-        '    <animate attributeName="cy" values="180;520;300;180" dur="18s" repeatCount="indefinite"/>',
-        '  </circle>',
-        f'  <text x="32" y="38" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
-        f'  <text x="848" y="38" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>',
+        f'  <text x="8" y="24" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
+        f'  <text x="872" y="24" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>',
     ]
 
-    y_offset = 54
+    y_offset = 38
     card_h = 132
-    gap = 16
+    gap = 14
 
     for date_str, color, role, company, desc_lines in jobs:
-        parts.append(f'  <g transform="translate(24, {y_offset})">')
-        parts.append(f'    <rect width="832" height="{card_h}" rx="20" fill="{card_bg}" stroke="{card_stroke}" stroke-width="1.5" filter="url(#cardShadow)"/>')
+        parts.append(f'  <g transform="translate(4, {y_offset})">')
+        parts.append(f'    <rect width="872" height="{card_h}" rx="16" fill="{card_bg}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
         parts.append(f'    <text x="24" y="28" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="700">{clean_xml(date_str)}</text>')
         parts.append(f'    <text x="24" y="54" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="16" font-weight="700">{clean_xml(role)}</text>')
         parts.append(f'    <text x="24" y="75" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="13" font-weight="600">{clean_xml(company)}</text>')
@@ -578,11 +552,11 @@ def build_button_svg(text, width=150):
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="38" viewBox="0 0 {width} 38">
   <defs>
     <filter id="btnShadow" x="-10%" y="-20%" width="120%" height="150%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.08"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.06"/>
     </filter>
   </defs>
   <style>
-    .btn-bg {{ fill: #f0f2eb; stroke: #e0e3da; }}
+    .btn-bg {{ fill: #ffffff; stroke: #e2e8f0; }}
     .btn-txt {{ fill: #1e293b; }}
     @media (prefers-color-scheme: dark) {{
       .btn-bg {{ fill: #1e293b; stroke: #334155; }}
@@ -600,7 +574,7 @@ def main():
     username = sys.argv[2] if len(sys.argv) > 2 else os.environ.get("GITHUB_ACTOR", "selenyel")
 
     os.makedirs(out_dir, exist_ok=True)
-    print(f"Generating Stemellioglu Snake & Glassmorphic SVGs for '{username}' -> '{out_dir}'...")
+    print(f"Generating Clean Plateless SVGs for '{username}' -> '{out_dir}'...")
 
     grid = fetch_contributions(username=username)
     print(f"Fetched {len(grid)} columns of contribution data.")
@@ -619,7 +593,7 @@ def main():
         f.write(snake_dark)
     print("✓ Saved github-contribution-grid-snake-dark.svg (dark)")
 
-    # 2. Header SVGs
+    # 2. Header SVGs (Single clean floating card)
     header_light = build_header_svg("Selen Yel Temellioğlu", dark_mode=False)
     with open(os.path.join(out_dir, "header-glass-light.svg"), "w", encoding="utf-8") as f:
         f.write(header_light)
@@ -630,7 +604,7 @@ def main():
         f.write(header_dark)
     print("✓ Saved header-glass-dark.svg (dark)")
 
-    # 3. Career Timeline SVGs
+    # 3. Career Timeline SVGs (Plateless floating cards)
     timeline_light = build_timeline_svg(dark_mode=False)
     with open(os.path.join(out_dir, "career-timeline-light.svg"), "w", encoding="utf-8") as f:
         f.write(timeline_light)

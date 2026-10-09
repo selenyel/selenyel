@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p dist
-          python3 scripts/generate_snake.py dist
+          python3 .github/scripts/generate_snake.py dist ${{ github.repository_owner }}
       - name: Deploy to Output Branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:

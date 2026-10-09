@@ -389,159 +389,149 @@ def build_snake_svg(grid, path, apple_eats, dark_mode=False):
 
 
 def build_header_svg(username="Selen Yel Temellioğlu", dark_mode=False):
-    """Build a single clean floating glassmorphic header card with NO outer plate."""
+    """Build clean header matching interactive CV without enclosing plate."""
     width = 880
-    height = 185
+    height = 70
 
     if dark_mode:
-        card_fill = "#0B0F19"
-        border_grad_stops = """
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6"/>
-          <stop offset="50%" stop-color="#818cf8" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="#c084fc" stop-opacity="0.6"/>
-        """
         text_title = "#f8fafc"
         text_subtitle = "#94a3b8"
-        badge_bg = "#1e293b"
-        badge_border = "#334155"
+        badge_bg = "rgba(56, 189, 248, 0.12)"
+        badge_border = "rgba(56, 189, 248, 0.3)"
         badge_text = "#38bdf8"
-        chip_bg = "#111827"
-        chip_border = "#1e293b"
-        chip_text = "#cbd5e1"
-        shadow_opacity = "0.35"
     else:
-        card_fill = "#ffffff"
-        border_grad_stops = """
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5"/>
-          <stop offset="50%" stop-color="#6366f1" stop-opacity="0.2"/>
-          <stop offset="100%" stop-color="#9333ea" stop-opacity="0.5"/>
-        """
         text_title = "#0f172a"
-        text_subtitle = "#475569"
-        badge_bg = "#e0f2fe"
-        badge_border = "#bae6fd"
-        badge_text = "#0369a1"
-        chip_bg = "#f8fafc"
-        chip_border = "#e2e8f0"
-        chip_text = "#334155"
-        shadow_opacity = "0.06"
+        text_subtitle = "#64748b"
+        badge_bg = "rgba(2, 132, 199, 0.08)"
+        badge_border = "rgba(2, 132, 199, 0.25)"
+        badge_text = "#0284c7"
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
-  <defs>
-    <linearGradient id="headerBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-      {border_grad_stops}
-    </linearGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="{text_title}"/>
-      <stop offset="100%" stop-color="{text_subtitle}"/>
-    </linearGradient>
-    <filter id="headerShadow" x="-5%" y="-5%" width="110%" height="125%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>
-    </filter>
-  </defs>
-
-  <!-- Clean Floating Card (NO outer backdrop plate) -->
-  <rect x="2" y="2" width="{width - 4}" height="{height - 4}" rx="18" fill="{card_fill}" stroke="url(#headerBorder)" stroke-width="1.2" filter="url(#headerShadow)"/>
-
-  <!-- Top Discipline Pill Badge -->
-  <g transform="translate(32, 26)">
-    <rect width="284" height="24" rx="12" fill="{badge_bg}" stroke="{badge_border}" stroke-width="1"/>
-    <circle cx="14" cy="12" r="3.5" fill="#10b981"/>
-    <text x="26" y="16" fill="{badge_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1">UX ENGINEER • FRONT-END ARCHITECTURE</text>
-  </g>
-
   <!-- Name & UXE Badge -->
-  <g transform="translate(32, 86)">
-    <text x="0" y="0" fill="url(#titleGrad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800" letter-spacing="-0.5">{username}</text>
-    <rect x="390" y="-20" width="46" height="22" rx="11" fill="#38bdf8" fill-opacity="0.12" stroke="#38bdf8" stroke-width="1"/>
-    <text x="413" y="-5" text-anchor="middle" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">UXE</text>
+  <g transform="translate(8, 32)">
+    <text x="0" y="0" fill="{text_title}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">{clean_xml(username)}</text>
+    <rect x="330" y="-20" width="46" height="22" rx="11" fill="{badge_bg}" stroke="{badge_border}" stroke-width="1"/>
+    <text x="353" y="-5" text-anchor="middle" fill="{badge_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700">UXE</text>
   </g>
 
   <!-- Subtitle -->
-  <text x="32" y="114" fill="{text_subtitle}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500">UX Engineer • Front-End Architecture • OneWell</text>
-
-  <!-- Tags / Chips along bottom -->
-  <g transform="translate(32, 136)">
-    <rect x="0" y="0" width="138" height="24" rx="6" fill="{chip_bg}" stroke="{chip_border}" stroke-width="1"/>
-    <text x="10" y="16" fill="{chip_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Web • iOS • watchOS</text>
-
-    <rect x="146" y="0" width="156" height="24" rx="6" fill="{chip_bg}" stroke="{chip_border}" stroke-width="1"/>
-    <text x="156" y="16" fill="{chip_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Design Systems (Tokens)</text>
-
-    <rect x="310" y="0" width="186" height="24" rx="6" fill="{chip_bg}" stroke="{chip_border}" stroke-width="1"/>
-    <text x="320" y="16" fill="{chip_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">React • Angular • TypeScript</text>
-
-    <rect x="504" y="0" width="144" height="24" rx="6" fill="{chip_bg}" stroke="{chip_border}" stroke-width="1"/>
-    <text x="514" y="16" fill="{chip_text}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">WCAG 2.1 AA Compliant</text>
-  </g>
+  <text x="8" y="58" fill="{text_subtitle}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14.5" font-weight="500">UX Engineer • Front-End Architecture • OneWell</text>
 </svg>"""
     return svg
 
 
 def build_timeline_svg(dark_mode=False):
     """Build floating glassmorphic droplet timeline cards with transparent canvas (NO background plate)."""
-    w, h = 880, 770
+    # Alternating Left/Right Timeline with Central Spine and Glowing Beads
+    w, h = 880, 860
+    spine_cx = 440
+    card_w = 390
+    card_h = 136
+    
     card_bg = '#111827' if dark_mode else '#ffffff'
     card_stroke = '#1e293b' if dark_mode else '#e2e8f0'
     text_primary = '#f8fafc' if dark_mode else '#0f172a'
-    text_muted = '#94a3b8' if dark_mode else '#64748b'
+    text_muted = '#94a3b8' if dark_mode else '#526071'
     section_title = '#38bdf8' if dark_mode else '#0284c7'
     archive_text = '#64748b' if dark_mode else '#94a3b8'
     shadow_opacity = '0.35' if dark_mode else '0.06'
+    node_fill = '#0f172a' if dark_mode else '#ffffff'
+    meniscus_stroke = 'rgba(255, 255, 255, 0.2)' if dark_mode else 'rgba(255, 255, 255, 0.95)'
 
-    jobs = [
-        ('Sep 2025 – Present', '#38bdf8' if dark_mode else '#0284c7', 'UI/UX Designer & Front-End Developer', 'OneWell',
-         ['Design and engineer the unified interface layer of a workforce management and care support',
-          'platform for Direct Support Professionals across watchOS, iOS, Android, and Web. Own the',
-          'component system, accessibility (WCAG AA), and API contracts under active shift conditions.']),
+    # (is_right, date, subtitle, color, role, company, desc_lines)
+    items = [
+        (True, 'Sep 2025 – Present', 'Multi-Platform Ecosystem',
+         '#38bdf8' if dark_mode else '#0284c7',
+         'UI/UX Designer & Front-End Developer', 'OneWell',
+         ['Design and engineer the unified interface layer across',
+          'watchOS, iOS, Android, and Web. Own component systems,',
+          'WCAG 2.1 AA accessibility, and API contracts under shift.']),
 
-        ('Nov 2022 – Jul 2025', '#34d399' if dark_mode else '#059669', 'Lead Front-End Developer', 'Ministry of Commerce • ESBIS & Consumer Portal',
-         ['Led front-end architecture and implementation for two national government web applications.',
-          'Governed component lifecycles, rendering performance, state isolation, and responsive UI',
-          'serving millions of citizens and regulatory committees nationwide.']),
+        (False, 'Nov 2022 – Jul 2025', 'National Scale Systems',
+         '#34d399' if dark_mode else '#059669',
+         'Lead Front-End Developer', 'Ministry of Commerce • ESBIS & Consumer Portal',
+         ['Led front-end architecture for two national government web',
+          'applications. Governed component lifecycles, rendering',
+          'performance, state isolation, and responsive UI for citizens.']),
 
-        ('Jan – Mar 2020', '#fbbf24' if dark_mode else '#d97706', 'Front-End Engineering Intern', 'Bisoft',
-         ['Engineered React dashboards rendering complex multi-dimensional metric datasets, including',
-          'real-time seismic readings. Focused on adaptive graphs, proportional data density across',
-          'screen sizes, and tabular data stability.']),
+        (True, 'Jan – Mar 2020', 'Spatial & Metric Dashboards',
+         '#fbbf24' if dark_mode else '#d97706',
+         'Front-End Engineering Intern', 'Bisoft',
+         ['Engineered React dashboards rendering complex real-time',
+          'seismic metric datasets. Focused on adaptive graphs, data',
+          'density normalization, and tabular stability.']),
 
-        ('2017 & 2018', '#c084fc' if dark_mode else '#7c3aed', 'Front-End Engineering Intern', 'LOGO Yazılım',
-         ['Angular enterprise component design implementation, test coverage scripting, and',
-          'automated CI package publication pipelines. Built accessible enterprise UI patterns.']),
+        (False, '2017 & 2018', 'Enterprise Component Architecture',
+         '#c084fc' if dark_mode else '#7c3aed',
+         'Front-End Engineering Intern', 'LOGO Yazılım',
+         ['Developed enterprise Angular components directly from design',
+          'specs. Authored automated release scripts, test coverage suites,',
+          'and CI verification pipelines.']),
 
-        ('Academic Foundations', '#60a5fa' if dark_mode else '#2563eb', 'B.S. in Computer Engineering • TÜBİTAK Researcher', 'TOBB University of Economics & Technology',
-         ['Collaborated with Prof. Mehmet Akşit on TÜBİTAK research website (ADMPD). Rigorous',
-          'training in algorithmic design and distributed systems that laid the foundation for treating',
-          'user interfaces as mission-critical systems.'])
+        (True, 'Academic Foundations', 'Computer Engineering',
+         '#f472b6' if dark_mode else '#db2777',
+         'B.S. in Computer Engineering • TÜBİTAK Researcher', 'TOBB University of Economics & Technology',
+         ['Collaborated on TÜBİTAK research website (ADMPD). Rigorous',
+          'training in algorithmic design and distributed systems that',
+          'laid the foundation for treating user interfaces as mission-critical.'])
     ]
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '  <defs>',
+        '    <linearGradient id="spineGrad" x1="0%" y1="0%" x2="0%" y2="100%">',
+        '      <stop offset="0%" stop-color="#38bdf8"/>',
+        '      <stop offset="50%" stop-color="#10b981"/>',
+        '      <stop offset="100%" stop-color="#f472b6"/>',
+        '    </linearGradient>',
         '    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="125%">',
         f'      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
         '    </filter>',
         '  </defs>',
         f'  <text x="8" y="24" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
         f'  <text x="872" y="24" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>',
+        f'  <!-- Central Spine Line -->',
+        f'  <line x1="{spine_cx}" y1="45" x2="{spine_cx}" y2="{h - 30}" stroke="url(#spineGrad)" stroke-width="2" stroke-linecap="round" opacity="0.45"/>',
     ]
 
-    y_offset = 38
-    card_h = 132
-    gap = 14
+    y_pos = 50
+    step_y = 158
 
-    for date_str, color, role, company, desc_lines in jobs:
-        parts.append(f'  <g transform="translate(4, {y_offset})">')
-        parts.append(f'    <rect width="872" height="{card_h}" rx="16" fill="{card_bg}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
-        parts.append(f'    <text x="24" y="28" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="700">{clean_xml(date_str)}</text>')
-        parts.append(f'    <text x="24" y="54" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="16" font-weight="700">{clean_xml(role)}</text>')
-        parts.append(f'    <text x="24" y="75" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="13" font-weight="600">{clean_xml(company)}</text>')
-        line_y = 96
+    for is_right, date_str, sub_meta, color, role, company, desc_lines in items:
+        node_cy = y_pos + card_h / 2
+        
+        # Node Bead at center spine
+        parts.append(f'  <!-- Node Bead at y={node_cy:.0f} -->')
+        parts.append(f'  <circle cx="{spine_cx}" cy="{node_cy:.0f}" r="12" fill="{color}" fill-opacity="0.18"/>')
+        parts.append(f'  <circle cx="{spine_cx}" cy="{node_cy:.0f}" r="7" fill="{node_fill}" stroke="{color}" stroke-width="2"/>')
+        parts.append(f'  <circle cx="{spine_cx}" cy="{node_cy:.0f}" r="2.5" fill="{color}"/>')
+
+        if is_right:
+            # Card on Right
+            card_x = spine_cx + 26
+            meta_x = spine_cx - 24
+            parts.append(f'  <text x="{meta_x}" y="{node_cy - 4:.0f}" text-anchor="end" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="700">{clean_xml(date_str)}</text>')
+            parts.append(f'  <text x="{meta_x}" y="{node_cy + 14:.0f}" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="500">{clean_xml(sub_meta)}</text>')
+        else:
+            # Card on Left
+            card_x = spine_cx - 26 - card_w
+            meta_x = spine_cx + 24
+            parts.append(f'  <text x="{meta_x}" y="{node_cy - 4:.0f}" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="700">{clean_xml(date_str)}</text>')
+            parts.append(f'  <text x="{meta_x}" y="{node_cy + 14:.0f}" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="500">{clean_xml(sub_meta)}</text>')
+
+        # Card Container
+        parts.append(f'  <g transform="translate({card_x}, {y_pos})">')
+        parts.append(f'    <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
+        parts.append(f'    <line x1="20" y1="1.5" x2="{card_w - 20}" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
+        parts.append(f'    <text x="18" y="26" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="13.5" font-weight="700">{clean_xml(role)}</text>')
+        parts.append(f'    <text x="18" y="46" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="600">{clean_xml(company)}</text>')
+        line_y = 68
         for line in desc_lines:
-            parts.append(f'    <text x="24" y="{line_y}" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="400">{clean_xml(line)}</text>')
-            line_y += 17
+            parts.append(f'    <text x="18" y="{line_y}" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="400">{clean_xml(line)}</text>')
+            line_y += 16
         parts.append('  </g>')
-        y_offset += card_h + gap
+
+        y_pos += step_y
 
     parts.append('</svg>')
     return '\n'.join(parts)

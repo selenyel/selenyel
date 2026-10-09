@@ -494,6 +494,20 @@ def build_timeline_svg(dark_mode=False):
         '    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="125%">',
         f'      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
         '    </filter>',
+        '    <!-- Card Clip Path for Rounded Iridescent Sheen -->',
+        f'    <clipPath id="cardClip">',
+        f'      <rect width="{card_w}" height="{card_h}" rx="16"/>',
+        f'    </clipPath>',
+        '    <!-- Soft Pale Rainbow Iridescent Gradient -->',
+        '    <linearGradient id="rainbowSheen" x1="0%" y1="0%" x2="100%" y2="50%">',
+        '      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0"/>',
+        '      <stop offset="18%" stop-color="#f43f5e" stop-opacity="0.09"/>',
+        '      <stop offset="35%" stop-color="#fbbf24" stop-opacity="0.11"/>',
+        '      <stop offset="50%" stop-color="#34d399" stop-opacity="0.13"/>',
+        '      <stop offset="65%" stop-color="#38bdf8" stop-opacity="0.13"/>',
+        '      <stop offset="82%" stop-color="#c084fc" stop-opacity="0.10"/>',
+        '      <stop offset="100%" stop-color="#c084fc" stop-opacity="0"/>',
+        '    </linearGradient>',
         '    <!-- Drifting Ambient Spotlight (Simulating mouse-light mesh) -->',
         '    <radialGradient id="ambientGlow1" cx="50%" cy="50%" r="50%">',
         f'      <stop offset="0%" stop-color="{spotlight_color}" stop-opacity="{spotlight_opacity}"/>',
@@ -540,7 +554,7 @@ def build_timeline_svg(dark_mode=False):
     y_pos = 50
     step_y = 158
 
-    for is_right, date_str, sub_meta, color, role, company, desc_lines in items:
+    for idx, (is_right, date_str, sub_meta, color, role, company, desc_lines) in enumerate(items):
         node_cy = y_pos + card_h / 2
         
         # Node Bead at center spine
@@ -562,10 +576,27 @@ def build_timeline_svg(dark_mode=False):
             parts.append(f'  <text x="{meta_x}" y="{node_cy - 4:.0f}" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="700">{clean_xml(date_str)}</text>')
             parts.append(f'  <text x="{meta_x}" y="{node_cy + 14:.0f}" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="500">{clean_xml(sub_meta)}</text>')
 
-        # Card Container
+        # Card Container with Glass Backing and Pale Rainbow Sheen
+        sweep_delay = idx * 1.5
         parts.append(f'  <g transform="translate({card_x}, {y_pos})">')
-        parts.append(f'    <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
-        parts.append(f'    <line x1="20" y1="1.5" x2="{card_w - 20}" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
+        parts.append(f'    <g clip-path="url(#cardClip)">')
+        parts.append(f'      <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
+        parts.append(f'      <!-- Pale Rainbow Iridescent Shimmer Sweep -->')
+        parts.append(f'      <g>')
+        parts.append(f'        <animateTransform')
+        parts.append(f'          attributeName="transform"')
+        parts.append(f'          type="translate"')
+        parts.append(f'          values="-{card_w * 1.6:.0f} 0; {card_w * 1.6:.0f} 0"')
+        parts.append(f'          dur="8s"')
+        parts.append(f'          begin="{sweep_delay:.1f}s"')
+        parts.append(f'          repeatCount="indefinite"')
+        parts.append(f'          calcMode="spline"')
+        parts.append(f'          keySplines="0.25 0.1 0.25 1"')
+        parts.append(f'        />')
+        parts.append(f'        <rect x="0" y="-30" width="{card_w}" height="{card_h + 60}" fill="url(#rainbowSheen)" transform="skewX(-22)"/>')
+        parts.append(f'      </g>')
+        parts.append(f'      <line x1="20" y1="1.5" x2="{card_w - 20}" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
+        parts.append(f'    </g>')
         parts.append(f'    <text x="18" y="26" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="13.5" font-weight="700">{clean_xml(role)}</text>')
         parts.append(f'    <text x="18" y="46" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="600">{clean_xml(company)}</text>')
         line_y = 68

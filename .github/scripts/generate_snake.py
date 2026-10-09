@@ -437,6 +437,13 @@ def build_timeline_svg(dark_mode=False):
     shadow_opacity = '0.35' if dark_mode else '0.06'
     node_fill = '#0f172a' if dark_mode else '#ffffff'
     meniscus_stroke = 'rgba(255, 255, 255, 0.2)' if dark_mode else 'rgba(255, 255, 255, 0.95)'
+    card_fill_opacity = '0.90' if dark_mode else '0.90'
+
+    # Ambient spotlight glow colors matching interactive CV
+    spotlight_color = '#38bdf8' if dark_mode else '#0284c7'
+    spotlight_opacity = 0.24 if dark_mode else 0.16
+    spotlight_color_2 = '#10b981' if dark_mode else '#059669'
+    spotlight_opacity_2 = 0.18 if dark_mode else 0.11
 
     # (is_right, date, subtitle, color, role, company, desc_lines)
     items = [
@@ -487,7 +494,43 @@ def build_timeline_svg(dark_mode=False):
         '    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="125%">',
         f'      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
         '    </filter>',
+        '    <!-- Drifting Ambient Spotlight (Simulating mouse-light mesh) -->',
+        '    <radialGradient id="ambientGlow1" cx="50%" cy="50%" r="50%">',
+        f'      <stop offset="0%" stop-color="{spotlight_color}" stop-opacity="{spotlight_opacity}"/>',
+        f'      <stop offset="45%" stop-color="{spotlight_color}" stop-opacity="{spotlight_opacity * 0.4:.3f}"/>',
+        f'      <stop offset="100%" stop-color="{spotlight_color}" stop-opacity="0"/>',
+        '    </radialGradient>',
+        '    <radialGradient id="ambientGlow2" cx="50%" cy="50%" r="50%">',
+        f'      <stop offset="0%" stop-color="{spotlight_color_2}" stop-opacity="{spotlight_opacity_2}"/>',
+        f'      <stop offset="45%" stop-color="{spotlight_color_2}" stop-opacity="{spotlight_opacity_2 * 0.4:.3f}"/>',
+        f'      <stop offset="100%" stop-color="{spotlight_color_2}" stop-opacity="0"/>',
+        '    </radialGradient>',
         '  </defs>',
+        '  <!-- Ambient Drifting Spotlight Lights -->',
+        '  <g>',
+        '    <animateTransform',
+        '      attributeName="transform"',
+        '      type="translate"',
+        '      values="440 180; 530 330; 350 490; 520 670; 390 380; 440 180"',
+        '      dur="18s"',
+        '      repeatCount="indefinite"',
+        '      calcMode="spline"',
+        '      keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"',
+        '    />',
+        '    <circle cx="0" cy="0" r="330" fill="url(#ambientGlow1)"/>',
+        '  </g>',
+        '  <g>',
+        '    <animateTransform',
+        '      attributeName="transform"',
+        '      type="translate"',
+        '      values="380 620; 470 440; 530 240; 360 330; 440 550; 380 620"',
+        '      dur="22s"',
+        '      repeatCount="indefinite"',
+        '      calcMode="spline"',
+        '      keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"',
+        '    />',
+        '    <circle cx="0" cy="0" r="290" fill="url(#ambientGlow2)"/>',
+        '  </g>',
         f'  <text x="8" y="24" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
         f'  <text x="872" y="24" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>',
         f'  <!-- Central Spine Line -->',
@@ -521,7 +564,7 @@ def build_timeline_svg(dark_mode=False):
 
         # Card Container
         parts.append(f'  <g transform="translate({card_x}, {y_pos})">')
-        parts.append(f'    <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
+        parts.append(f'    <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
         parts.append(f'    <line x1="20" y1="1.5" x2="{card_w - 20}" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
         parts.append(f'    <text x="18" y="26" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="13.5" font-weight="700">{clean_xml(role)}</text>')
         parts.append(f'    <text x="18" y="46" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="600">{clean_xml(company)}</text>')

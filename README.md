@@ -9,20 +9,20 @@
 <br/>
 
 <p align="center">
-  <a href="https://selenyel.github.io/cv/">
-    <img src="https://img.shields.io/badge/Interactive_CV-1E293B?style=for-the-badge&logoColor=white" alt="Interactive CV" />
+  <a href="https://selenyel.github.io/selenyel/">
+    <img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-interactive-cv.svg" height="34" alt="Interactive CV" />
   </a>
   &nbsp;
   <a href="https://www.linkedin.com/in/selenyeltemellioglu/">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    <img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-linkedin.svg" height="34" alt="LinkedIn Profile" />
   </a>
   &nbsp;
   <a href="https://www.credly.com/users/selen-yel-temellioglu">
-    <img src="https://img.shields.io/badge/Credly_Badges-FF6B00?style=for-the-badge&logo=credly&logoColor=white" alt="Credly" />
+    <img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-credly.svg" height="34" alt="Credly Badges" />
   </a>
   &nbsp;
   <a href="https://developers.google.com/profile/u/112478902926410002610">
-    <img src="https://img.shields.io/badge/Google_Developers-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google Developers" />
+    <img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-google.svg" height="34" alt="Google Developers" />
   </a>
 </p>
 

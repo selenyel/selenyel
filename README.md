@@ -1,8 +1,5 @@
 <div align="center">
 
-# Selen Yel Temellioğlu
-### UX Engineer &bull; Front-End Architecture
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-light.svg">
@@ -37,27 +34,11 @@
 
 I specialize in bridging the gap between product design systems and engineering architecture—translating tokens, multi-platform ergonomics, and complex workflows into accessible, resilient interfaces.
 
-```
-● Sep 2025 – Present ── OneWell (UI/UX Designer & Front-End Developer)
-│  └─ Multi-Platform Platform across watchOS, iOS, Android & Web
-│  └─ High-stress one-handed shift documentation & WCAG AA token architecture
-│
-● Nov 2022 – Jul 2025 ── Ministry of Commerce (Lead Front-End Developer)
-│  └─ ESBIS Advertising Board & National Consumer Portal
-│  └─ Architecture, component lifecycles, and rendering performance serving millions
-│
-● Jan – Mar 2020 ─────── Bisoft (Front-End Engineering Intern)
-│  └─ Complex spatial & seismic real-time metric visualization dashboards in React
-│  └─ Adaptive graphing and data density normalization across screen sizes
-│
-● 2017 & 2018 ────────── LOGO Yazılım (Front-End Engineering Intern)
-│  └─ Angular enterprise component design implementation
-│  └─ Test coverage scripting and automated CI package publication pipelines
-│
-● Academic ───────────── TOBB ETÜ & TÜBİTAK (Computer Engineering)
-   └─ B.S. in Computer Engineering & ADMPD research website with Prof. Mehmet Akşit
-   └─ Algorithmic foundations and treating UI as mission-critical systems
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg">
+  <img alt="Career Journey — Selen Yel Temellioğlu" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg" width="100%">
+</picture>
 
 ---
 

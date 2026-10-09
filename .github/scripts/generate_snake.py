@@ -523,6 +523,67 @@ def build_header_svg(username="Selen Yel Temellioğlu", dark_mode=False):
     return svg
 
 
+def clean_xml(s):
+    return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+def build_timeline_svg(dark_mode=False):
+    """Build glassmorphic timeline cards matching the interactive web app design."""
+    w, h = 880, 608
+    bg = '#0B0F19' if dark_mode else '#f8fafc'
+    border = '#1e293b' if dark_mode else '#e2e8f0'
+    head_title = '#38bdf8' if dark_mode else '#0284c7'
+    head_sub = '#64748b' if dark_mode else '#94a3b8'
+    card_bg = '#111827' if dark_mode else '#ffffff'
+    card_opacity = '0.75' if dark_mode else '0.95'
+    card_border = '#1e293b' if dark_mode else '#e2e8f0'
+    text_primary = '#f8fafc' if dark_mode else '#0f172a'
+    text_muted = '#94a3b8' if dark_mode else '#475569'
+
+    jobs = [
+        ('Sep 2025 – Present', '#38bdf8', 'UI/UX Designer & Front-End Developer', 'OneWell',
+         'Design and engineer the unified interface layer of a workforce management and care support platform for Direct Support Professionals',
+         'across watchOS, iOS, Android, and Web. Own component systems, WCAG 2.1 AA accessibility, and API contracts under active shift conditions.'),
+        ('Nov 2022 – Jul 2025', '#34d399', 'Lead Front-End Developer', 'Ministry of Commerce (ESBIS & Consumer Portal)',
+         'Led front-end architecture and implementation for two national government web applications serving millions of citizens.',
+         'Governed component lifecycles, rendering performance, state isolation, and responsive UI for regulatory committees nationwide.'),
+        ('Jan – Mar 2020', '#fbbf24', 'Front-End Engineering Intern', 'Bisoft',
+         'Engineered React dashboards rendering complex multi-dimensional metric datasets, including real-time seismic readings.',
+         'Focused on adaptive graphing, proportional data density across screen sizes, and tabular data stability.'),
+        ('2017 & 2018', '#c084fc', 'Front-End Engineering Intern', 'LOGO Yazılım',
+         'Angular enterprise component design implementation and UI integration across core ERP modules.',
+         'Test coverage scripting and automated CI package publication pipelines.'),
+        ('Academic Foundations', '#60a5fa', 'B.S. in Computer Engineering • TÜBİTAK Researcher', 'TOBB ETÜ & TÜBİTAK (Prof. Mehmet Akşit)',
+         'Collaborated on TÜBİTAK research website (ADMPD). Rigorous training in algorithmic design and distributed systems.',
+         'Built foundations for treating user interfaces and design token architecture as mission-critical systems.')
+    ]
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
+        f'  <rect width="{w}" height="{h}" rx="16" fill="{bg}" stroke="{border}" stroke-width="1"/>',
+        f'  <text x="28" y="32" fill="{head_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
+        f'  <text x="852" y="32" text-anchor="end" fill="{head_sub}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="500">Chronological Archive</text>',
+    ]
+
+    y_offset = 48
+    card_h = 98
+    gap = 12
+
+    for date_str, color, role, company, line1, line2 in jobs:
+        parts.append(f'  <g transform="translate(24, {y_offset})">')
+        parts.append(f'    <rect width="832" height="{card_h}" rx="12" fill="{card_bg}" fill-opacity="{card_opacity}" stroke="{card_border}" stroke-width="1"/>')
+        parts.append(f'    <text x="20" y="24" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="700">{clean_xml(date_str)}</text>')
+        parts.append(f'    <text x="20" y="46" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="14.5" font-weight="700">{clean_xml(role)}</text>')
+        offset_x = 24 + len(role) * 8.2
+        parts.append(f'    <text x="{offset_x:.0f}" y="46" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12.5" font-weight="600">• {clean_xml(company)}</text>')
+        parts.append(f'    <text x="20" y="68" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="400">{clean_xml(line1)}</text>')
+        parts.append(f'    <text x="20" y="84" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="400">{clean_xml(line2)}</text>')
+        parts.append('  </g>')
+        y_offset += card_h + gap
+
+    parts.append('</svg>')
+    return '\n'.join(parts)
+
+
 def main():
     out_dir = sys.argv[1] if len(sys.argv) > 1 else "dist"
     username = sys.argv[2] if len(sys.argv) > 2 else os.environ.get("GITHUB_ACTOR", "selenyel")
@@ -559,6 +620,26 @@ def main():
     with open(os.path.join(out_dir, "header-glass-dark.svg"), "w", encoding="utf-8") as f:
         f.write(header_dark)
     print("✓ Saved header-glass-dark.svg (dark)")
+
+    # 5. Light Mode Career Timeline SVG
+    timeline_light = build_timeline_svg(dark_mode=False)
+    with open(os.path.join(out_dir, "career-timeline-light.svg"), "w", encoding="utf-8") as f:
+        f.write(timeline_light)
+    print("✓ Saved career-timeline-light.svg (light)")
+
+    # 6. Dark Mode Career Timeline SVG
+    timeline_dark = build_timeline_svg(dark_mode=True)
+    with open(os.path.join(out_dir, "career-timeline-dark.svg"), "w", encoding="utf-8") as f:
+        f.write(timeline_dark)
+    print("✓ Saved career-timeline-dark.svg (dark)")
+
+    # 7. Copy interactive profile HTML for GitHub Pages if exists
+    for src in ["interactive_profile.html", os.path.join(os.path.dirname(__file__), "../../interactive_profile.html")]:
+        if os.path.exists(src):
+            import shutil
+            shutil.copy(src, os.path.join(out_dir, "index.html"))
+            print("✓ Saved index.html (interactive web profile)")
+            break
 
     print("All SVGs successfully generated!")
 

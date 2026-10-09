@@ -9,9 +9,9 @@
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg">
-  <img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg?v=3">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg?v=3">
+  <img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg?v=3" width="100%">
 </picture>
 
 ---

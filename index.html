@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <title>Selen Yel Temellioğlu — Water Droplet Glass Profile &amp; Timeline</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/sn-pro');
+
+    * {
+      font-family: 'SN Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Ambient mouse spotlight with dynamic HSL traversal */
+    .mouse-mesh {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        var(--mouse-radius, 600px) circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        var(--mouse-color, hsla(198, 85%, 65%, 0.16)),
+        transparent 75%
+      );
+      transition: background 0.12s ease-out;
+      z-index: 1;
+    }
+
+    /* =========================================================
+       WATER DROPLET GLASSMORPHISM TOKENS
+       - Asymmetric variable-thickness borders (thicker top-left meniscus, fine bottom-right)
+       - Dual reflection artifacts (top highlight meniscus & bottom caustics bounce)
+       ========================================================= */
+    .droplet-glass {
+      position: relative;
+      background: rgba(15, 23, 42, 0.68);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 24px;
+      overflow: hidden;
+      /* Layered shadows: inner specular rim + outer droplet shadow */
+      box-shadow:
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.4),
+        inset 1px 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset -1px 0 1.5px 0 rgba(0, 0, 0, 0.3),
+        0 12px 36px -4px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    html:not(.dark) .droplet-glass {
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow:
+        inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.08),
+        inset 1px 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset -1px 0 1px 0 rgba(0, 0, 0, 0.05),
+        0 12px 32px -4px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    /* Top Specular Meniscus Reflection */
+    .droplet-glass::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75) 50%, transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Bottom Caustics Bounce Reflection */
+    .droplet-glass::after {
+      content: "";
+      position: absolute;
+      bottom: 2px;
+      left: 20%;
+      right: 20%;
+      height: 1.5px;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3) 50%, transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Droplet Pill Buttons */
+    .droplet-pill {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 9999px;
+      overflow: hidden;
+      box-shadow:
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 1.5px 0 rgba(0, 0, 0, 0.3),
+        0 4px 14px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html:not(.dark) .droplet-pill {
+      background: rgba(0, 0, 0, 0.03);
+      box-shadow:
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.06),
+        0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .droplet-pill:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.7),
+        0 8px 24px -2px rgba(56, 189, 248, 0.25);
+    }
+
+    /* =========================================================
+       RAINBOW SHINE ON HOVER
+       A sudden faded chromatic iridescent sweep traversing across the surface once per hover
+       ========================================================= */
+    .rainbow-surface {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rainbow-sweep-layer {
+      position: absolute;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        115deg,
+        transparent 28%,
+        rgba(255, 99, 132, 0) 35%,
+        rgba(255, 99, 132, 0.18) 42%,
+        rgba(255, 205, 86, 0.22) 48%,
+        rgba(75, 192, 192, 0.26) 54%,
+        rgba(54, 162, 235, 0.24) 60%,
+        rgba(153, 102, 255, 0.18) 66%,
+        transparent 74%
+      );
+      transform: translateX(-130%) rotate(15deg);
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0;
+    }
+
+    /* Triggered by JS animation class on mouseenter */
+    .animate-rainbow {
+      animation: rainbowSweep 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes rainbowSweep {
+      0% {
+        opacity: 0;
+        transform: translateX(-120%) rotate(15deg);
+      }
+      20% {
+        opacity: 0.9;
+      }
+      75% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(110%) rotate(15deg);
+      }
+    }
+
+    /* Timeline spine & nodes */
+    .timeline-spine {
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.5) 0%, rgba(16, 185, 129, 0.5) 50%, rgba(244, 114, 182, 0.3) 100%);
+    }
+
+    /* Pulsing diamond keyframes */
+    @keyframes diamondGleam {
+      0%, 100% { transform: scale(1) rotate(45deg); filter: drop-shadow(0 0 4px currentColor); }
+      50% { transform: scale(1.2) rotate(45deg); filter: drop-shadow(0 0 10px currentColor); }
+    }
+    .diamond-icon {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      animation: diamondGleam 2.8s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-2 sm:p-5 relative select-none">
+  <div id="container" class="relative max-w-4xl mx-auto rounded-3xl overflow-hidden transition-colors duration-300 droplet-glass p-6 sm:p-8">
+    <div id="mouseMesh" class="mouse-mesh"></div>
+
+    <!-- Header & Theme Switcher -->
+    <div class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 dark:border-white/10 border-black/10 pb-6">
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+            Selen Yel Temellioğlu
+          </h1>
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/25">
+            UXE
+          </span>
+        </div>
+        <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium mt-1">
+          UX Engineer &bull; Front-End Architecture &bull; OneWell
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2 self-end sm:self-auto">
+        <button id="themeToggle" type="button" class="droplet-pill rainbow-surface px-4 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2 cursor-pointer">
+          <div class="rainbow-sweep-layer"></div>
+          <span id="themeLabel">Toggle Light / Dark</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Glassmorphic Rounded Buttons (No green dot, pure droplet with rainbow sweep) -->
+    <div class="relative z-10 flex flex-wrap gap-3 pt-6 pb-8">
+      <a href="https://selenyel.github.io/cv/" target="_blank" class="droplet-pill rainbow-surface px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center">
+        <div class="rainbow-sweep-layer"></div>
+        <span>Interactive CV</span>
+      </a>
+      <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank" class="droplet-pill rainbow-surface px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center">
+        <div class="rainbow-sweep-layer"></div>
+        <span>LinkedIn Profile</span>
+      </a>
+      <a href="https://www.credly.com/users/selen-yel-temellioglu" target="_blank" class="droplet-pill rainbow-surface px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center">
+        <div class="rainbow-sweep-layer"></div>
+        <span>Credly Badges</span>
+      </a>
+      <a href="https://developers.google.com/profile/u/112478902926410002610" target="_blank" class="droplet-pill rainbow-surface px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center">
+        <div class="rainbow-sweep-layer"></div>
+        <span>Google Developers</span>
+      </a>
+    </div>
+
+    <!-- =========================================================
+         THE JOURNEY: ALTERNATING TIMELINE (RECENT TO OLD)
+         ========================================================= -->
+    <div class="relative z-10 space-y-6 pt-2 pb-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs uppercase tracking-widest font-bold text-sky-400">
+          Career Timeline &bull; Engineering &amp; UX Journey
+        </h2>
+        <span class="text-xs font-mono text-slate-400">Chronological Archive</span>
+      </div>
+
+      <!-- Timeline Wrapper -->
+      <div class="relative">
+        <!-- Central Spine (visible on desktop) -->
+        <div class="hidden md:block absolute left-1/2 top-4 bottom-4 w-[2px] -translate-x-1/2 timeline-spine rounded-full opacity-40"></div>
+
+        <div class="space-y-6">
+
+          <!-- 01: OneWell (Right) -->
+          <div class="relative flex flex-col md:flex-row items-center">
+            <div class="hidden md:block md:w-1/2 pr-8 text-right">
+              <span class="text-xs font-mono text-sky-400 font-semibold">Sep 2025 – Present</span>
+              <p class="text-xs text-slate-400 mt-0.5">Multi-Platform Ecosystem</p>
+            </div>
+            <!-- Node Bead -->
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-900 border-2 border-sky-400 items-center justify-center z-20 shadow-[0_0_12px_rgba(56,189,248,0.5)]">
+              <div class="w-2 h-2 rounded-full bg-sky-400"></div>
+            </div>
+            <!-- Card Container -->
+            <div class="w-full md:w-1/2 md:pl-8">
+              <div class="droplet-glass rainbow-surface p-5 hover:-translate-y-1">
+                <div class="rainbow-sweep-layer"></div>
+                <div class="flex justify-between items-start mb-1.5 md:hidden">
+                  <span class="text-xs font-mono text-sky-400 font-semibold">Sep 2025 – Present</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">
+                  UI/UX Designer &amp; Front-End Developer
+                </h3>
+                <p class="text-xs font-semibold text-sky-400/90 mb-2">OneWell</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Design and engineer the unified interface layer of a workforce management and care support platform for Direct Support Professionals across <strong>watchOS, iOS, Android, and Web</strong>. Own the component system, accessibility (WCAG AA), and API contracts for one-handed field care documentation under active shift conditions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02: Ministry of Commerce (Left) -->
+          <div class="relative flex flex-col md:flex-row items-center">
+            <!-- Card Container -->
+            <div class="w-full md:w-1/2 md:pr-8 order-2 md:order-1">
+              <div class="droplet-glass rainbow-surface p-5 hover:-translate-y-1">
+                <div class="rainbow-sweep-layer"></div>
+                <div class="flex justify-between items-start mb-1.5 md:hidden">
+                  <span class="text-xs font-mono text-emerald-400 font-semibold">Nov 2022 – Jul 2025</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">
+                  Lead Front-End Developer
+                </h3>
+                <p class="text-xs font-semibold text-emerald-400/90 mb-2">Ministry of Commerce &bull; ESBIS &amp; Consumer Portal</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Led front-end architecture and implementation for two national government web applications. Governed component lifecycles, rendering performance, state isolation, and responsive UI serving millions of citizens and regulatory committees nationwide.
+                </p>
+              </div>
+            </div>
+            <!-- Node Bead -->
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-900 border-2 border-emerald-400 items-center justify-center z-20 shadow-[0_0_12px_rgba(16,185,129,0.5)] order-1 md:order-2">
+              <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+            </div>
+            <div class="hidden md:block md:w-1/2 pl-8 order-3">
+              <span class="text-xs font-mono text-emerald-400 font-semibold">Nov 2022 – Jul 2025</span>
+              <p class="text-xs text-slate-400 mt-0.5">National Scale Systems</p>
+            </div>
+          </div>
+
+          <!-- 03: Bisoft (Right) -->
+          <div class="relative flex flex-col md:flex-row items-center">
+            <div class="hidden md:block md:w-1/2 pr-8 text-right">
+              <span class="text-xs font-mono text-amber-400 font-semibold">Jan – Mar 2020</span>
+              <p class="text-xs text-slate-400 mt-0.5">Spatial &amp; Metric Dashboards</p>
+            </div>
+            <!-- Node Bead -->
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-900 border-2 border-amber-400 items-center justify-center z-20 shadow-[0_0_12px_rgba(245,158,11,0.5)]">
+              <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+            </div>
+            <!-- Card Container -->
+            <div class="w-full md:w-1/2 md:pl-8">
+              <div class="droplet-glass rainbow-surface p-5 hover:-translate-y-1">
+                <div class="rainbow-sweep-layer"></div>
+                <div class="flex justify-between items-start mb-1.5 md:hidden">
+                  <span class="text-xs font-mono text-amber-400 font-semibold">Jan – Mar 2020</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">
+                  Front-End Engineering Intern
+                </h3>
+                <p class="text-xs font-semibold text-amber-400/90 mb-2">Bisoft</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Engineered React dashboards rendering complex multi-dimensional metric datasets, including real-time seismic readings. Focused on adaptive graphs, proportional data density across screen sizes, and tabular data stability.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04: LOGO Yazılım (Left) -->
+          <div class="relative flex flex-col md:flex-row items-center">
+            <!-- Card Container -->
+            <div class="w-full md:w-1/2 md:pr-8 order-2 md:order-1">
+              <div class="droplet-glass rainbow-surface p-5 hover:-translate-y-1">
+                <div class="rainbow-sweep-layer"></div>
+                <div class="flex justify-between items-start mb-1.5 md:hidden">
+                  <span class="text-xs font-mono text-purple-400 font-semibold">2017 &amp; 2018</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">
+                  Front-End Engineering Intern
+                </h3>
+                <p class="text-xs font-semibold text-purple-400/90 mb-2">LOGO Yazılım</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Developed enterprise Angular components directly from design specs. Authored automated release scripts, test suites, and CI verification pipelines to ensure build passes before package publication.
+                </p>
+              </div>
+            </div>
+            <!-- Node Bead -->
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-900 border-2 border-purple-400 items-center justify-center z-20 shadow-[0_0_12px_rgba(168,85,247,0.5)] order-1 md:order-2">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+            </div>
+            <div class="hidden md:block md:w-1/2 pl-8 order-3">
+              <span class="text-xs font-mono text-purple-400 font-semibold">2017 &amp; 2018</span>
+              <p class="text-xs text-slate-400 mt-0.5">Enterprise Component Architecture</p>
+            </div>
+          </div>
+
+          <!-- 05: TOBB ETÜ & TÜBİTAK (Right) -->
+          <div class="relative flex flex-col md:flex-row items-center">
+            <div class="hidden md:block md:w-1/2 pr-8 text-right">
+              <span class="text-xs font-mono text-pink-400 font-semibold">Academic Foundations</span>
+              <p class="text-xs text-slate-400 mt-0.5">Computer Engineering</p>
+            </div>
+            <!-- Node Bead -->
+            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-900 border-2 border-pink-400 items-center justify-center z-20 shadow-[0_0_12px_rgba(236,72,153,0.5)]">
+              <div class="w-2 h-2 rounded-full bg-pink-400"></div>
+            </div>
+            <!-- Card Container -->
+            <div class="w-full md:w-1/2 md:pl-8">
+              <div class="droplet-glass rainbow-surface p-5 hover:-translate-y-1">
+                <div class="rainbow-sweep-layer"></div>
+                <div class="flex justify-between items-start mb-1.5 md:hidden">
+                  <span class="text-xs font-mono text-pink-400 font-semibold">Academic Foundations</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">
+                  B.S. in Computer Engineering &bull; TÜBİTAK Researcher
+                </h3>
+                <p class="text-xs font-semibold text-pink-400/90 mb-2">TOBB University of Economics &amp; Technology</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Collaborated with Prof. Mehmet Akşit on TÜBİTAK research website (ADMPD). Rigorous training in algorithmic design and distributed systems that laid the foundation for treating user interfaces as mission-critical systems.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         REALISTIC GLASSY SNAKE TILES CANVAS
+         ========================================================= -->
+    <div class="relative z-10 mt-8 pt-6 border-t border-white/10 dark:border-white/10 border-black/10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+        <div>
+          <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <span>Realistic Glass Meadow &bull; Stemellioglu Snake</span>
+            <span class="text-[11px] font-mono font-normal text-slate-400">.github/workflows/stemellioglu.yml</span>
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            Convex acrylic glass tiles &bull; Rainbow crystal diamonds &bull; Glossy tiger snake
+          </p>
+        </div>
+        <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+          <span class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-sm bg-emerald-500/30 border border-emerald-400/50 shadow-sm"></span> Glass Meadow
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="diamond-icon bg-cyan-400 text-cyan-400"></span>
+            <span class="diamond-icon bg-emerald-400 text-emerald-400"></span>
+            <span class="diamond-icon bg-amber-400 text-amber-400"></span>
+            <span class="diamond-icon bg-pink-400 text-pink-400"></span>
+            Crystals
+          </span>
+        </div>
+      </div>
+
+      <div class="droplet-glass p-2 sm:p-3 overflow-hidden">
+        <canvas id="snakeCanvas" width="760" height="150" class="w-full h-auto block rounded-xl"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // =========================================================
+    // 1. SMOOTH HSL COLOR TRAVERSAL & MOUSE LIGHT DIMMING ON HOVER
+    // =========================================================
+    const container = document.getElementById('container');
+    const mouseMesh = document.getElementById('mouseMesh');
+    let currentHue = 198; // Starts at Selen's favorite light blue
+    let mouseX = 50;
+    let mouseY = 50;
+    let isHoveringCard = false;
+    let currentAlpha = 0.16;
+    let targetAlpha = 0.16;
+    let currentRadius = 600;
+    let targetRadius = 600;
+
+    window.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    // Dim mouse spotlight when hovering cards or buttons
+    const interactiveSurfaces = document.querySelectorAll('.rainbow-surface, .droplet-glass, .droplet-pill');
+    interactiveSurfaces.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        isHoveringCard = true;
+        // Trigger Rainbow Sweep Animation once per hover
+        const sweepLayer = el.querySelector('.rainbow-sweep-layer');
+        if (sweepLayer) {
+          sweepLayer.classList.remove('animate-rainbow');
+          void sweepLayer.offsetWidth; // Force reflow
+          sweepLayer.classList.add('animate-rainbow');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        isHoveringCard = false;
+      });
+    });
+
+    function updateAmbientMesh() {
+      // Very slowly and smoothly traverse the hue spectrum while keeping saturation & lightness constant
+      currentHue = (currentHue + 0.12) % 360;
+
+      // Dim and shrink spotlight when user hovers a card to focus visual attention
+      targetAlpha = isHoveringCard ? 0.03 : 0.16;
+      targetRadius = isHoveringCard ? 300 : 620;
+
+      currentAlpha += (targetAlpha - currentAlpha) * 0.08;
+      currentRadius += (targetRadius - currentRadius) * 0.08;
+
+      const isDark = document.documentElement.classList.contains('dark');
+      const lightness = isDark ? '65%' : '50%';
+      const hslaColor = `hsla(${currentHue.toFixed(1)}, 85%, ${lightness}, ${currentAlpha.toFixed(3)})`;
+
+      container.style.setProperty('--mouse-x', `${mouseX}px`);
+      container.style.setProperty('--mouse-y', `${mouseY}px`);
+      container.style.setProperty('--mouse-color', hslaColor);
+      container.style.setProperty('--mouse-radius', `${currentRadius.toFixed(0)}px`);
+
+      requestAnimationFrame(updateAmbientMesh);
+    }
+    updateAmbientMesh();
+
+    // =========================================================
+    // 2. THEME TOGGLE
+    // =========================================================
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    themeToggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      drawSnake();
+    });
+
+    // =========================================================
+    // 3. REALISTIC GLASSY TILES & CRYSTAL SNAKE SIMULATION
+    // =========================================================
+    const canvas = document.getElementById('snakeCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const COLS = 46;
+    const ROWS = 8;
+    const CELL = 14;
+    const GAP = 2;
+    const OFFSET_X = 14;
+    const OFFSET_Y = 14;
+
+    const masterGrid = [];
+    for (let c = 0; c < COLS; c++) {
+      masterGrid[c] = [];
+      for (let r = 0; r < ROWS; r++) {
+        const rand = Math.random();
+        if (rand < 0.72) masterGrid[c][r] = 0;
+        else if (rand < 0.85) masterGrid[c][r] = 1; // Cyan
+        else if (rand < 0.94) masterGrid[c][r] = 2; // Emerald
+        else if (rand < 0.98) masterGrid[c][r] = 3; // Amber
+        else masterGrid[c][r] = 4; // Prism Magenta
+      }
+    }
+
+    const grid = [];
+    let remainingApples = 0;
+    let snake = [];
+    let lastDir = { dc: 1, dr: 0 };
+    let resetCooldown = 0;
+    let bloomEffect = 0;
+    let frame = 0;
+
+    function resetMeadow() {
+      remainingApples = 0;
+      for (let c = 0; c < COLS; c++) {
+        grid[c] = [];
+        for (let r = 0; r < ROWS; r++) {
+          grid[c][r] = masterGrid[c][r];
+          if (grid[c][r] > 0) remainingApples++;
+        }
+      }
+      snake = [
+        { c: 8, r: 4 },
+        { c: 7, r: 4 },
+        { c: 6, r: 4 },
+        { c: 5, r: 4 },
+        { c: 4, r: 4 }
+      ];
+      lastDir = { dc: 1, dr: 0 };
+    }
+    resetMeadow();
+
+    function getTargetApple() {
+      let closest = null;
+      let minDist = 999;
+      for (let c = 0; c < COLS; c++) {
+        for (let r = 0; r < ROWS; r++) {
+          if (grid[c][r] > 0) {
+            const d = Math.abs(c - snake[0].c) + Math.abs(r - snake[0].r);
+            if (d < minDist) {
+              minDist = d;
+              closest = { c, r };
+            }
+          }
+        }
+      }
+      return closest;
+    }
+
+    function findNextStep(target) {
+      const head = snake[0];
+      const validMoves = [
+        { dc: 1, dr: 0 },
+        { dc: -1, dr: 0 },
+        { dc: 0, dr: 1 },
+        { dc: 0, dr: -1 }
+      ];
+
+      const candidates = validMoves.filter(m => !(m.dc === -lastDir.dc && m.dr === -lastDir.dr));
+
+      function isBody(c, r) {
+        for (let i = 0; i < snake.length - 1; i++) {
+          if (snake[i].c === c && snake[i].r === r) return true;
+        }
+        return false;
+      }
+
+      let safeMoves = candidates.filter(m => {
+        const nc = (head.c + m.dc + COLS) % COLS;
+        const nr = (head.r + m.dr + ROWS) % ROWS;
+        return !isBody(nc, nr);
+      });
+
+      if (safeMoves.length === 0) safeMoves = candidates;
+
+      if (!target) {
+        const straight = safeMoves.find(m => m.dc === lastDir.dc && m.dr === lastDir.dr);
+        return straight || safeMoves[0];
+      }
+
+      safeMoves.sort((a, b) => {
+        const da = Math.abs(((head.c + a.dc + COLS) % COLS) - target.c) + Math.abs(((head.r + a.dr + ROWS) % ROWS) - target.r);
+        const db = Math.abs(((head.c + b.dc + COLS) % COLS) - target.c) + Math.abs(((head.r + b.dr + ROWS) % ROWS) - target.r);
+        return da - db;
+      });
+
+      return safeMoves[0];
+    }
+
+    function stepSnake() {
+      if (resetCooldown > 0) {
+        resetCooldown--;
+        if (resetCooldown === 0) {
+          bloomEffect = 22;
+          resetMeadow();
+        }
+        return;
+      }
+
+      const target = getTargetApple();
+      if (!target || remainingApples < 3) {
+        resetCooldown = 18;
+        return;
+      }
+
+      const move = findNextStep(target);
+      lastDir = move;
+
+      const head = snake[0];
+      const nextC = (head.c + move.dc + COLS) % COLS;
+      const nextR = (head.r + move.dr + ROWS) % ROWS;
+
+      snake.unshift({ c: nextC, r: nextR });
+
+      if (grid[nextC][nextR] > 0) {
+        grid[nextC][nextR] = 0;
+        remainingApples--;
+        if (snake.length > 7) snake.pop();
+      } else {
+        snake.pop();
+      }
+    }
+
+    const crystalColors = {
+      1: { fill: '#06B6D4', stroke: '#67E8F9', light: '#A5F3FC' },
+      2: { fill: '#10B981', stroke: '#6EE7B7', light: '#A7F3D0' },
+      3: { fill: '#F59E0B', stroke: '#FCD34D', light: '#FDE68A' },
+      4: { fill: '#EC4899', stroke: '#F472B6', light: '#FBCFE8' }
+    };
+
+    function drawSnake() {
+      const isDark = html.classList.contains('dark');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Draw Realistic Glassy Tiles
+      for (let c = 0; c < COLS; c++) {
+        for (let r = 0; r < ROWS; r++) {
+          const x = OFFSET_X + c * (CELL + GAP);
+          const y = OFFSET_Y + r * (CELL + GAP);
+          const val = grid[c][r];
+
+          if (val === 0) {
+            // Realistic Convex Frosted Glass Tile
+            const tileGrad = ctx.createLinearGradient(x, y, x, y + CELL);
+            if (isDark) {
+              tileGrad.addColorStop(0, 'rgba(34, 197, 94, 0.16)');
+              tileGrad.addColorStop(0.5, 'rgba(18, 40, 30, 0.85)');
+              tileGrad.addColorStop(1, 'rgba(15, 30, 22, 0.95)');
+            } else {
+              tileGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+              tileGrad.addColorStop(0.4, 'rgba(220, 252, 231, 0.7)');
+              tileGrad.addColorStop(1, 'rgba(187, 247, 208, 0.85)');
+            }
+
+            ctx.fillStyle = tileGrad;
+            ctx.beginPath();
+            ctx.roundRect(x, y, CELL, CELL, 3.5);
+            ctx.fill();
+
+            // Glass Meniscus Top Rim
+            ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.35)' : 'rgba(255, 255, 255, 0.9)';
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(x + 2, y + 1);
+            ctx.lineTo(x + CELL - 2, y + 1);
+            ctx.stroke();
+
+            // Embossed Meadow Blade Spikes inside the glass matrix
+            ctx.strokeStyle = isDark ? 'rgba(74, 222, 128, 0.85)' : 'rgba(22, 163, 74, 0.9)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x + 4, y + CELL - 2.5);
+            ctx.lineTo(x + 3, y + CELL - 7.5);
+            ctx.moveTo(x + 9, y + CELL - 2.5);
+            ctx.lineTo(x + 10, y + CELL - 8.5);
+            ctx.stroke();
+          } else {
+            // Realistic Cut-Glass Crystal Diamond Apple
+            const cx = x + CELL / 2;
+            const cy = y + CELL / 2;
+            const rad = val === 4 ? 6.2 : (val === 3 ? 5.5 : 4.8);
+            const col = crystalColors[val];
+
+            ctx.save();
+            ctx.translate(cx, cy);
+
+            // Caustic Glow
+            ctx.shadowColor = col.fill;
+            ctx.shadowBlur = 10;
+
+            // Diamond Facets
+            ctx.rotate(Math.PI / 4);
+            const crystalGrad = ctx.createLinearGradient(-rad/2, -rad/2, rad/2, rad/2);
+            crystalGrad.addColorStop(0, col.light);
+            crystalGrad.addColorStop(0.5, col.fill);
+            crystalGrad.addColorStop(1, '#0F172A');
+
+            ctx.fillStyle = crystalGrad;
+            ctx.fillRect(-rad / 2, -rad / 2, rad, rad);
+
+            // Specular Facet Outline
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+            ctx.lineWidth = 0.9;
+            ctx.strokeRect(-rad / 2, -rad / 2, rad, rad);
+
+            // Gleam point
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(-rad / 4, -rad / 4, 0.9, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+          }
+        }
+      }
+
+      // Smooth Bloom Overlay on Meadow Regrowth
+      if (bloomEffect > 0) {
+        ctx.save();
+        ctx.fillStyle = isDark ? `rgba(56, 189, 248, ${bloomEffect * 0.018})` : `rgba(14, 165, 233, ${bloomEffect * 0.018})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+        bloomEffect--;
+      }
+
+      // 2. Draw Glossy Orange Tiger Snake with Specular Droplet Highlights
+      for (let i = snake.length - 1; i >= 0; i--) {
+        const seg = snake[i];
+        const cx = OFFSET_X + seg.c * (CELL + GAP) + CELL / 2;
+        const cy = OFFSET_Y + seg.r * (CELL + GAP) + CELL / 2;
+        const radius = i === 0 ? 6.8 : 5.4;
+
+        ctx.save();
+        ctx.shadowColor = 'rgba(255, 122, 0, 0.6)';
+        ctx.shadowBlur = i === 0 ? 12 : 5;
+
+        // Glossy Base Body Gradient
+        const snakeGrad = ctx.createRadialGradient(cx - 1.5, cy - 1.5, 1, cx, cy, radius);
+        snakeGrad.addColorStop(0, '#FFB366');
+        snakeGrad.addColorStop(0.6, '#FF7A00');
+        snakeGrad.addColorStop(1, '#CC5500');
+
+        ctx.fillStyle = snakeGrad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Tiger stripes / black markings
+        ctx.fillStyle = '#111827';
+        if (i % 2 === 0) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillRect(cx - 3, cy - 1, 6, 2);
+        }
+
+        // Specular Droplet Gloss on Each Segment
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+        ctx.beginPath();
+        ctx.arc(cx - 1.8, cy - 1.8, radius * 0.28, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Head Eyes & Tongue
+        if (i === 0) {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(cx - 2.2, cy - 2, 1.7, 0, Math.PI * 2);
+          ctx.arc(cx + 2.2, cy - 2, 1.7, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#000000';
+          ctx.beginPath();
+          ctx.arc(cx - 2.2, cy - 2, 0.9, 0, Math.PI * 2);
+          ctx.arc(cx + 2.2, cy - 2, 0.9, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    function loop() {
+      frame++;
+      if (frame % 8 === 0) {
+        stepSnake();
+      }
+      drawSnake();
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>

@@ -89,7 +89,7 @@ def fetch_contributions(username="selenyel", token=None):
 
     # Fallback to public contributions API
     try:
-        url = f"https://github-contributions-api.jogruber.de/v4/{username}"
+        url = f"https://github-contributions-api.jogruber.de/v4/{username}?y=last"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=10) as res:
             data = json.loads(res.read().decode())
@@ -715,14 +715,37 @@ def build_timeline_svg(dark_mode=False):
         '  </g>',
         f'  <text x="8" y="24" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
         f'  <text x="872" y="24" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>',
-        f'  <!-- Central Spine Track (Universal slim hairline) -->',
-        f'  <rect x="{spine_cx - 1.5}" y="42" width="3" height="{h - 74}" rx="1.5" fill="url(#spineGrad)" opacity="0.18"/>',
-        f'  <rect x="{spine_cx - 0.7}" y="42" width="1.4" height="{h - 74}" rx="0.7" fill="url(#spineGrad)" opacity="0.95"/>',
-        f'  <!-- Top Start Node Bead -->',
-        f'  <circle cx="{spine_cx}" cy="42" r="3.5" fill="{spine_start_color}" stroke="{node_fill}" stroke-width="1.2"/>',
-        f'  <!-- Downwards Terminal Chevron -->',
-        f'  <path d="M {spine_cx - 4.5} {h - 30} L {spine_cx} {h - 22} L {spine_cx + 4.5} {h - 30}" stroke="{spine_end_color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>',
     ]
+
+    # Central Spine Track: thin at top (1.2px) -> wider in middle (2.8px) -> thin at bottom (1.2px)
+    start_y = 42.0
+    end_y = float(h - 23)
+    mid_y = (start_y + end_y) / 2.0
+
+    spine_ribbon = (
+        f'M {spine_cx - 0.6:.1f} {start_y:.1f} '
+        f'C {spine_cx - 0.7:.1f} {start_y + (mid_y - start_y)*0.4:.1f}, {spine_cx - 1.4:.1f} {start_y + (mid_y - start_y)*0.75:.1f}, {spine_cx - 1.4:.1f} {mid_y:.1f} '
+        f'C {spine_cx - 1.4:.1f} {mid_y + (end_y - mid_y)*0.25:.1f}, {spine_cx - 0.7:.1f} {mid_y + (end_y - mid_y)*0.6:.1f}, {spine_cx - 0.6:.1f} {end_y:.1f} '
+        f'L {spine_cx + 0.6:.1f} {end_y:.1f} '
+        f'C {spine_cx + 0.7:.1f} {mid_y + (end_y - mid_y)*0.6:.1f}, {spine_cx + 1.4:.1f} {mid_y + (end_y - mid_y)*0.25:.1f}, {spine_cx + 1.4:.1f} {mid_y:.1f} '
+        f'C {spine_cx + 1.4:.1f} {start_y + (mid_y - start_y)*0.75:.1f}, {spine_cx + 0.7:.1f} {start_y + (mid_y - start_y)*0.4:.1f}, {spine_cx + 0.6:.1f} {start_y:.1f} Z'
+    )
+    spine_glow = (
+        f'M {spine_cx - 1.2:.1f} {start_y:.1f} '
+        f'C {spine_cx - 1.5:.1f} {start_y + (mid_y - start_y)*0.4:.1f}, {spine_cx - 2.4:.1f} {start_y + (mid_y - start_y)*0.75:.1f}, {spine_cx - 2.4:.1f} {mid_y:.1f} '
+        f'C {spine_cx - 2.4:.1f} {mid_y + (end_y - mid_y)*0.25:.1f}, {spine_cx - 1.5:.1f} {mid_y + (end_y - mid_y)*0.6:.1f}, {spine_cx - 1.2:.1f} {end_y:.1f} '
+        f'L {spine_cx + 1.2:.1f} {end_y:.1f} '
+        f'C {spine_cx + 1.5:.1f} {mid_y + (end_y - mid_y)*0.6:.1f}, {spine_cx + 2.4:.1f} {mid_y + (end_y - mid_y)*0.25:.1f}, {spine_cx + 2.4:.1f} {mid_y:.1f} '
+        f'C {spine_cx + 2.4:.1f} {start_y + (mid_y - start_y)*0.75:.1f}, {spine_cx + 1.5:.1f} {start_y + (mid_y - start_y)*0.4:.1f}, {spine_cx + 1.2:.1f} {start_y:.1f} Z'
+    )
+
+    parts.append('  <!-- Central Spine Track (Tapered dynamic rainbow ribbon) -->')
+    parts.append(f'  <path d="{spine_glow}" fill="url(#spineGrad)" opacity="0.18"/>')
+    parts.append(f'  <path d="{spine_ribbon}" fill="url(#spineGrad)" opacity="0.95"/>')
+    parts.append('  <!-- Top Start Node Bead -->')
+    parts.append(f'  <circle cx="{spine_cx}" cy="{start_y}" r="3.5" fill="{spine_start_color}" stroke="{node_fill}" stroke-width="1.2"/>')
+    parts.append('  <!-- Downwards Terminal Chevron (Touches line apex directly) -->')
+    parts.append(f'  <path d="M {spine_cx - 5} {end_y - 8:.1f} L {spine_cx} {end_y:.1f} L {spine_cx + 5} {end_y - 8:.1f}" stroke="{spine_end_color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>')
 
     y_pos = 50
     step_y = 158
@@ -755,6 +778,15 @@ def build_timeline_svg(dark_mode=False):
 
         # Floating Glassmorphic Experience Card
         parts.append(f'  <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">')
+        if company == 'LOGO Yazılım':
+            # Double Card Effect: tilted under-card signifying returning twice (2017 & 2018)
+            parts.append(f'    <!-- Double Stacked Card (Went there twice: 2017 & 2018) -->')
+            parts.append(f'    <g transform="translate({card_x - 3}, {y_pos + 4}) rotate(-2.4, {card_w / 2}, {card_h / 2})">')
+            parts.append(f'      <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
+            parts.append(f'      <line x1="20" y1="1.5" x2="{card_w - 20}" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
+            parts.append(f'      <rect x="20" y="24" width="70" height="5" rx="2.5" fill="{color}" fill-opacity="0.2"/>')
+            parts.append(f'      <rect x="20" y="36" width="110" height="4" rx="2" fill="{color}" fill-opacity="0.12"/>')
+            parts.append(f'    </g>')
         parts.append(f'    <g transform="translate({card_x}, {y_pos})">')
         parts.append(f'      <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
         parts.append(f'      <!-- Specular Meniscus Reflection Highlight -->')
@@ -1208,7 +1240,7 @@ def build_daily_insights_svg(dark_mode=False):
 
 def build_tech_stack_svg(dark_mode=False):
     """Build responsive plateless Tech Stack SVG with semantic pastel color categorization."""
-    w, h = 880, 240
+    w, h = 880, 295
     font_sans = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
 
     if dark_mode:
@@ -1274,6 +1306,18 @@ def build_tech_stack_svg(dark_mode=False):
         ])
     ]
 
+    def estimate_chip_w(name):
+        w = 0
+        for ch in name:
+            if ch in "ijl| ':;.,!()[]": w += 3.5
+            elif ch in "mw": w += 8.5
+            elif ch in "MW": w += 9.5
+            elif ch.isupper(): w += 7.2
+            elif ch.isdigit(): w += 6.2
+            elif ch in "+-&/": w += 6.5
+            else: w += 5.7
+        return max(38.0, w + 24.0)
+
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '  <defs>',
@@ -1281,10 +1325,32 @@ def build_tech_stack_svg(dark_mode=False):
         f'      <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
         '    </filter>',
         '  </defs>',
-        f'  <text x="8" y="20" fill="{section_title}" font-family="{font_sans}" font-size="11.5" font-weight="700" letter-spacing="1.5">TECHNICAL STACK • CORE DISCIPLINES &amp; ARCHITECTURE</text>',
+        f'  <text x="8" y="22" fill="{section_title}" font-family="{font_sans}" font-size="12" font-weight="800" letter-spacing="1.5">TECH STACK</text>',
     ]
 
-    # Semantic pastel legend at top-right
+    y = 48
+    for title, items in sections:
+        # Section title: closely coupled to its chips row below
+        parts.append(f'  <text x="8" y="{y}" fill="{sub_title}" font-family="{font_sans}" font-size="10.5" font-weight="700" letter-spacing="1">{clean_xml(title)}</text>')
+        x = 8
+        y += 10
+        for name, cat_key in items:
+            c_info = cats[cat_key]
+            pill_w = estimate_chip_w(name)
+            if x + pill_w > 872:
+                x = 8
+                y += 28
+            # Draw pastel pill
+            parts.append(f'  <g transform="translate({x:.1f}, {y:.1f})">')
+            parts.append(f'    <rect width="{pill_w:.1f}" height="{pill_height}" rx="6" fill="{c_info["bg"]}" stroke="{c_info["border"]}" stroke-width="1" filter="url(#pillShadow)"/>')
+            parts.append(f'    <circle cx="8" cy="12" r="2.3" fill="{c_info["color"]}"/>')
+            parts.append(f'    <text x="15" y="15.5" fill="{c_info["color"]}" font-family="{font_sans}" font-size="11" font-weight="600">{clean_xml(name)}</text>')
+            parts.append('  </g>')
+            x += pill_w + 10
+        # Breathing room to next section title
+        y += 36
+
+    # Semantic pastel legend placed at BOTTOM RIGHT
     leg_x = 872
     legend_cats = [
         ('test', 'Testing'),
@@ -1295,34 +1361,14 @@ def build_tech_stack_svg(dark_mode=False):
         ('lang', 'Language'),
         ('tool', 'Tool')
     ]
+    leg_y = h - 16
     for c_key, c_label in legend_cats:
         c_info = cats[c_key]
         text_w = len(c_label) * 5.8
         leg_x -= (text_w + 14)
-        parts.append(f'  <circle cx="{leg_x}" cy="16.5" r="3" fill="{c_info["color"]}"/>')
-        parts.append(f'  <text x="{leg_x + 6}" y="20" fill="{c_info["color"]}" font-family="{font_sans}" font-size="9.5" font-weight="600">{clean_xml(c_label)}</text>')
-        leg_x -= 6
-
-    y = 44
-    for title, items in sections:
-        parts.append(f'  <text x="8" y="{y}" fill="{sub_title}" font-family="{font_sans}" font-size="10.5" font-weight="700" letter-spacing="1">{clean_xml(title)}</text>')
-        x = 8
-        y += 10
-        for name, cat_key in items:
-            c_info = cats[cat_key]
-            text_len = len(name)
-            pill_w = max(44, text_len * 7.1 + 22)
-            if x + pill_w > 872:
-                x = 8
-                y += 30
-            # Draw pastel pill
-            parts.append(f'  <g transform="translate({x:.1f}, {y:.1f})">')
-            parts.append(f'    <rect width="{pill_w:.1f}" height="{pill_height}" rx="6" fill="{c_info["bg"]}" stroke="{c_info["border"]}" stroke-width="1" filter="url(#pillShadow)"/>')
-            parts.append(f'    <circle cx="8" cy="12" r="2.5" fill="{c_info["color"]}"/>')
-            parts.append(f'    <text x="16" y="15.5" fill="{c_info["color"]}" font-family="{font_sans}" font-size="11" font-weight="600">{clean_xml(name)}</text>')
-            parts.append('  </g>')
-            x += pill_w + 7
-        y += 38
+        parts.append(f'  <circle cx="{leg_x:.1f}" cy="{leg_y - 3.5:.1f}" r="3" fill="{c_info["color"]}"/>')
+        parts.append(f'  <text x="{leg_x + 6:.1f}" y="{leg_y:.1f}" fill="{c_info["color"]}" font-family="{font_sans}" font-size="9.5" font-weight="600">{clean_xml(c_label)}</text>')
+        leg_x -= 10
 
     parts.append('</svg>')
     return '\n'.join(parts)
@@ -1350,8 +1396,27 @@ def build_button_svg(text, width=150):
     return svg
 
 
-def update_readme_daily_links(readme_path, law_link, cosmic_link):
-    """Keep README.md outer wrapper links in sync with today's UX Law and NASA observation."""
+def compute_current_streak(grid):
+    """Calculate current consecutive contribution day streak."""
+    all_days = [d for col in grid for d in col if d.get("date")]
+    all_days.sort(key=lambda x: x["date"])
+    if not all_days:
+        return 1
+    idx = len(all_days) - 1
+    if all_days[idx].get("count", 0) == 0:
+        if idx > 0 and all_days[idx - 1].get("count", 0) > 0:
+            idx -= 1
+        else:
+            return 0
+    streak = 0
+    while idx >= 0 and all_days[idx].get("count", 0) > 0:
+        streak += 1
+        idx -= 1
+    return max(1, streak)
+
+
+def update_readme_daily_links(readme_path, law_link, cosmic_link, streak=None):
+    """Keep README.md outer wrapper links in sync with today's UX Law and NASA observation, and sync streak header."""
     if not os.path.exists(readme_path):
         return
     with open(readme_path, "r", encoding="utf-8") as f:
@@ -1370,9 +1435,17 @@ def update_readme_daily_links(readme_path, law_link, cosmic_link):
         f'<a href="{cosmic_link}" target="_blank">\\1',
         content
     )
+    # Update streak header
+    if streak is not None:
+        streak_text = f"{streak}-Day Contribution Streak" if streak > 0 else "Contribution Streak"
+        content = re.sub(
+            r'## (?:Stemellioglu Glass Meadow|\d+-Day (?:Contribution )?Streak|Contribution Streak) &bull; Custom Snake',
+            f'## {streak_text} &bull; Custom Snake',
+            content
+        )
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f"✓ Synchronized {readme_path} daily links: law -> {law_link}, cosmic -> {cosmic_link}")
+    print(f"✓ Synchronized {readme_path} daily links & streak ({streak}): law -> {law_link}, cosmic -> {cosmic_link}")
 
 
 def main():
@@ -1490,9 +1563,10 @@ def main():
     today_law = laws[day_idx % len(laws)]
     nasa_archive = get_nasa_archive()
     today_cosmic = nasa_archive[day_idx % len(nasa_archive)]
+    streak = compute_current_streak(grid)
     for rm in ["README.md", os.path.join(os.path.dirname(__file__), "../../README.md")]:
         if os.path.exists(rm):
-            update_readme_daily_links(rm, today_law["link"], today_cosmic["link"])
+            update_readme_daily_links(rm, today_law["link"], today_cosmic["link"], streak=streak)
             break
 
     print("All SVGs successfully generated!")

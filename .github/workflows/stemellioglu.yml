@@ -24,7 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p dist
-          python3 .github/scripts/generate_snake.py dist ${{ github.repository_owner }}
+          python3 .github/scripts/stemellioglu.py dist ${{ github.repository_owner }}
       - name: Commit updated README if daily links rotated
         run: |
           git config user.name "github-actions[bot]"

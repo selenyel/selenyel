@@ -1301,7 +1301,6 @@ def main():
     # 4. Adaptive Pill Button SVGs
     buttons = [
         ("btn-interactive-cv.svg", "Interactive CV", 145),
-        ("btn-cv-repo.svg", "CV Repository", 145),
         ("btn-linkedin.svg", "LinkedIn Profile", 150),
         ("btn-credly.svg", "Credly Badges", 140),
         ("btn-google.svg", "Google Developers", 160),

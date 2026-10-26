@@ -1,7 +1,7 @@
 <a href="#gh-light-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-light.svg?v=11" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-dark.svg?v=11" width="100%"></a>
 
 <p align="left">
-  <a href="https://selenyel.github.io/cv/" target="_blank"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-interactive-cv.svg" height="34" alt="Interactive CV"/></a> <a href="https://github.com/selenyel/cv" target="_blank"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-cv-repo.svg" height="34" alt="CV Repository"/></a> <a href="https://www.linkedin.com/in/selenyeltemellioglu/"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-linkedin.svg" height="34" alt="LinkedIn Profile"/></a> <a href="https://www.credly.com/users/selen-yel-temellioglu"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-credly.svg" height="34" alt="Credly Badges"/></a> <a href="https://developers.google.com/profile/u/112478902926410002610"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-google.svg" height="34" alt="Google Developers"/></a>
+  <a href="https://selenyel.github.io/cv/" target="_blank"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-interactive-cv.svg" height="34" alt="Interactive CV"/></a> <a href="https://www.linkedin.com/in/selenyeltemellioglu/"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-linkedin.svg" height="34" alt="LinkedIn Profile"/></a> <a href="https://www.credly.com/users/selen-yel-temellioglu"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-credly.svg" height="34" alt="Credly Badges"/></a> <a href="https://developers.google.com/profile/u/112478902926410002610"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-google.svg" height="34" alt="Google Developers"/></a>
 </p>
 
 <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">
@@ -50,28 +50,6 @@
 
 #### Workflow & Infrastructure
 `Git` &bull; `GitHub Actions` &bull; `Vite` &bull; `Webpack` &bull; `Jest / Vitest`
-
----
-
-## Featured Architecture &bull; Interactive 3D CV
-
-<div align="center">
-  <table border="0">
-    <tr>
-      <td align="center">
-        <a href="https://github.com/selenyel/cv" target="_blank">
-          <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/pin/?username=selenyel&repo=cv&theme=tokyonight&hide_border=true&bg_color=0B0F19&title_color=38bdf8">
-            <img alt="Interactive CV Repository" src="https://github-readme-stats.vercel.app/api/pin/?username=selenyel&repo=cv&theme=default&hide_border=true&title_color=0284c7" />
-          </picture>
-        </a>
-      </td>
-    </tr>
-  </table>
-  <p align="center">
-    <sub>Live Web Application: <a href="https://selenyel.github.io/cv/" target="_blank"><strong>selenyel.github.io/cv</strong></a> &bull; Source Repository: <a href="https://github.com/selenyel/cv" target="_blank"><strong>github.com/selenyel/cv</strong></a></sub>
-  </p>
-</div>
 
 ---
 

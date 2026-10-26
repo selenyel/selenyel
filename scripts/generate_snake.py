@@ -442,6 +442,8 @@ def build_timeline_svg(dark_mode=False):
         shadow_opacity = "0.45"
         spine_start_color = "#38bdf8"
         spine_mid_color = "#34d399"
+        spine_mid2_color = "#fbbf24"
+        spine_mid3_color = "#c084fc"
         spine_end_color = "#f472b6"
         spotlight_opacity = 0.28
         spotlight_opacity_2 = 0.22
@@ -457,6 +459,8 @@ def build_timeline_svg(dark_mode=False):
         shadow_opacity = "0.08"
         spine_start_color = "#0284c7"
         spine_mid_color = "#059669"
+        spine_mid2_color = "#d97706"
+        spine_mid3_color = "#7c3aed"
         spine_end_color = "#db2777"
         spotlight_opacity = 0.20
         spotlight_opacity_2 = 0.15
@@ -504,10 +508,12 @@ def build_timeline_svg(dark_mode=False):
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '  <defs>',
-        '    <linearGradient id="spineGrad" x1="0%" y1="0%" x2="0%" y2="100%">',
+        f'    <linearGradient id="spineGrad" x1="{spine_cx}" y1="42" x2="{spine_cx}" y2="{h - 32}" gradientUnits="userSpaceOnUse">',
         f'      <stop offset="0%" stop-color="{spine_start_color}"/>',
-        f'      <stop offset="45%" stop-color="{spine_mid_color}"/>',
-        f'      <stop offset="80%" stop-color="{spine_end_color}"/>',
+        f'      <stop offset="25%" stop-color="{spine_mid_color}"/>',
+        f'      <stop offset="50%" stop-color="{spine_mid2_color}"/>',
+        f'      <stop offset="75%" stop-color="{spine_mid3_color}"/>',
+        f'      <stop offset="100%" stop-color="{spine_end_color}"/>',
         '    </linearGradient>',
         '    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="125%">',
         f'      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
@@ -563,13 +569,15 @@ def build_timeline_svg(dark_mode=False):
         '  </g>',
         f'  <text x="8" y="24" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
         f'  <text x="872" y="24" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>',
+        f'  <!-- Central Spine Track (Universal rendering via non-zero width rect) -->',
+        f'  <rect x="{spine_cx - 2.5}" y="42" width="5" height="{h - 74}" rx="2.5" fill="url(#spineGrad)" opacity="0.25"/>',
+        f'  <rect x="{spine_cx - 1.25}" y="42" width="2.5" height="{h - 74}" rx="1.25" fill="url(#spineGrad)" opacity="0.95"/>',
         f'  <!-- Central Spine Line (Prominent Downward Trajectory) -->',
-        f'  <line x1="{spine_cx}" y1="42" x2="{spine_cx}" y2="{h - 32}" stroke="url(#spineGrad)" stroke-width="5" stroke-linecap="round" opacity="0.22"/>',
-        f'  <line x1="{spine_cx}" y1="42" x2="{spine_cx}" y2="{h - 32}" stroke="url(#spineGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.88"/>',
+        f'  <line x1="{spine_cx}" y1="42" x2="{spine_cx}" y2="{h - 32}" stroke="url(#spineGrad)" stroke-width="2.5" stroke-linecap="round"/>',
         f'  <!-- Top Start Node Bead -->',
-        f'  <circle cx="{spine_cx}" cy="42" r="4" fill="{spine_start_color}" opacity="0.9"/>',
+        f'  <circle cx="{spine_cx}" cy="42" r="5" fill="{spine_start_color}" stroke="{node_fill}" stroke-width="1.5"/>',
         f'  <!-- Downwards Terminal Chevron -->',
-        f'  <path d="M {spine_cx - 5} {h - 32} L {spine_cx} {h - 22} L {spine_cx + 5} {h - 32}" stroke="{spine_end_color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>',
+        f'  <path d="M {spine_cx - 6} {h - 34} L {spine_cx} {h - 22} L {spine_cx + 6} {h - 34}" stroke="{spine_end_color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>',
     ]
 
     y_pos = 50

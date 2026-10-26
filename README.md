@@ -37,19 +37,10 @@
 
 ---
 
-## Technical Stack &bull; Core Disciplines
-
-#### Design & Systems
-`Figma` &bull; `Design Token Architecture` &bull; `WCAG 2.1 AA Accessibility` &bull; `Micro-Interactions` &bull; `Component Contracts`
-
-#### Front-End & Cross-Platform
-`TypeScript` &bull; `JavaScript (ES6+)` &bull; `React` &bull; `Angular` &bull; `Next.js` &bull; `SwiftUI (iOS & watchOS)` &bull; `Tailwind CSS` &bull; `Sass/SCSS`
-
-#### State & Data Architecture
-`GraphQL` &bull; `RESTful APIs` &bull; `Redux` &bull; `NgRx` &bull; `Reactive State`
-
-#### Workflow & Infrastructure
-`Git` &bull; `GitHub Actions` &bull; `Vite` &bull; `Webpack` &bull; `Jest / Vitest`
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/tech-stack-dark.svg?v=11">
+  <img alt="Technical Stack • Core Disciplines &amp; Architecture" src="https://raw.githubusercontent.com/selenyel/selenyel/output/tech-stack-light.svg?v=11" width="100%">
+</picture>
 
 ---
 

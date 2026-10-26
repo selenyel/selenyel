@@ -1205,6 +1205,129 @@ def build_daily_insights_svg(dark_mode=False):
     parts.append('</svg>')
     return '\n'.join(parts)
 
+
+def build_tech_stack_svg(dark_mode=False):
+    """Build responsive plateless Tech Stack SVG with semantic pastel color categorization."""
+    w, h = 880, 240
+    font_sans = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+
+    if dark_mode:
+        section_title = "#38bdf8"
+        sub_title = "#94a3b8"
+        pill_height = 24
+        shadow_opacity = "0.35"
+        cats = {
+            'tool': {'name': 'Tool & Tech', 'color': '#f472b6', 'bg': 'rgba(244, 114, 182, 0.12)', 'border': 'rgba(244, 114, 182, 0.35)'},
+            'lang': {'name': 'Language', 'color': '#38bdf8', 'bg': 'rgba(56, 189, 248, 0.12)', 'border': 'rgba(56, 189, 248, 0.35)'},
+            'frame': {'name': 'Framework', 'color': '#c084fc', 'bg': 'rgba(192, 132, 252, 0.12)', 'border': 'rgba(192, 132, 252, 0.35)'},
+            'rule': {'name': 'Standard', 'color': '#34d399', 'bg': 'rgba(52, 211, 153, 0.12)', 'border': 'rgba(52, 211, 153, 0.35)'},
+            'arch': {'name': 'Architecture', 'color': '#fbbf24', 'bg': 'rgba(251, 191, 36, 0.12)', 'border': 'rgba(251, 191, 36, 0.35)'},
+            'devops': {'name': 'CI / CD', 'color': '#818cf8', 'bg': 'rgba(129, 140, 248, 0.12)', 'border': 'rgba(129, 140, 248, 0.35)'},
+            'test': {'name': 'Testing', 'color': '#fb7185', 'bg': 'rgba(251, 113, 133, 0.12)', 'border': 'rgba(251, 113, 133, 0.35)'},
+        }
+    else:
+        section_title = "#0284c7"
+        sub_title = "#475569"
+        pill_height = 24
+        shadow_opacity = "0.06"
+        cats = {
+            'tool': {'name': 'Tool & Tech', 'color': '#be185d', 'bg': 'rgba(244, 114, 182, 0.14)', 'border': 'rgba(190, 24, 93, 0.28)'},
+            'lang': {'name': 'Language', 'color': '#0369a1', 'bg': 'rgba(56, 189, 248, 0.14)', 'border': 'rgba(3, 105, 161, 0.28)'},
+            'frame': {'name': 'Framework', 'color': '#6d28d9', 'bg': 'rgba(192, 132, 252, 0.14)', 'border': 'rgba(109, 40, 217, 0.28)'},
+            'rule': {'name': 'Standard', 'color': '#047857', 'bg': 'rgba(52, 211, 153, 0.14)', 'border': 'rgba(4, 120, 87, 0.28)'},
+            'arch': {'name': 'Architecture', 'color': '#b45309', 'bg': 'rgba(251, 191, 36, 0.14)', 'border': 'rgba(180, 83, 9, 0.28)'},
+            'devops': {'name': 'CI / CD', 'color': '#4338ca', 'bg': 'rgba(129, 140, 248, 0.14)', 'border': 'rgba(67, 56, 202, 0.28)'},
+            'test': {'name': 'Testing', 'color': '#be123c', 'bg': 'rgba(251, 113, 133, 0.14)', 'border': 'rgba(190, 18, 60, 0.28)'},
+        }
+
+    sections = [
+        ('DESIGN & SYSTEMS', [
+            ('Figma', 'tool'),
+            ('Design Token Architecture', 'arch'),
+            ('WCAG 2.1 AA Accessibility', 'rule'),
+            ('Micro-Interactions', 'frame'),
+            ('Component Contracts', 'rule')
+        ]),
+        ('FRONT-END & CROSS-PLATFORM', [
+            ('TypeScript', 'lang'),
+            ('React', 'frame'),
+            ('JavaScript (ES6+)', 'lang'),
+            ('Angular', 'frame'),
+            ('Next.js', 'arch'),
+            ('SwiftUI (iOS & watchOS)', 'tool'),
+            ('Tailwind CSS', 'rule'),
+            ('Sass/SCSS', 'lang')
+        ]),
+        ('STATE & DATA ARCHITECTURE', [
+            ('GraphQL', 'lang'),
+            ('RESTful APIs', 'rule'),
+            ('Redux', 'frame'),
+            ('NgRx', 'devops'),
+            ('Reactive State', 'arch')
+        ]),
+        ('WORKFLOW & INFRASTRUCTURE', [
+            ('Git', 'tool'),
+            ('GitHub Actions', 'devops'),
+            ('Vite', 'frame'),
+            ('Webpack', 'arch'),
+            ('Jest / Vitest', 'test')
+        ])
+    ]
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
+        '  <defs>',
+        f'    <filter id="pillShadow" x="-5%" y="-10%" width="110%" height="125%">',
+        f'      <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
+        '    </filter>',
+        '  </defs>',
+        f'  <text x="8" y="20" fill="{section_title}" font-family="{font_sans}" font-size="11.5" font-weight="700" letter-spacing="1.5">TECHNICAL STACK • CORE DISCIPLINES &amp; ARCHITECTURE</text>',
+    ]
+
+    # Semantic pastel legend at top-right
+    leg_x = 872
+    legend_cats = [
+        ('test', 'Testing'),
+        ('devops', 'CI / CD'),
+        ('arch', 'Architecture'),
+        ('rule', 'Standard'),
+        ('frame', 'Framework'),
+        ('lang', 'Language'),
+        ('tool', 'Tool')
+    ]
+    for c_key, c_label in legend_cats:
+        c_info = cats[c_key]
+        text_w = len(c_label) * 5.8
+        leg_x -= (text_w + 14)
+        parts.append(f'  <circle cx="{leg_x}" cy="16.5" r="3" fill="{c_info["color"]}"/>')
+        parts.append(f'  <text x="{leg_x + 6}" y="20" fill="{c_info["color"]}" font-family="{font_sans}" font-size="9.5" font-weight="600">{clean_xml(c_label)}</text>')
+        leg_x -= 6
+
+    y = 44
+    for title, items in sections:
+        parts.append(f'  <text x="8" y="{y}" fill="{sub_title}" font-family="{font_sans}" font-size="10.5" font-weight="700" letter-spacing="1">{clean_xml(title)}</text>')
+        x = 8
+        y += 10
+        for name, cat_key in items:
+            c_info = cats[cat_key]
+            text_len = len(name)
+            pill_w = max(44, text_len * 7.1 + 22)
+            if x + pill_w > 872:
+                x = 8
+                y += 30
+            # Draw pastel pill
+            parts.append(f'  <g transform="translate({x:.1f}, {y:.1f})">')
+            parts.append(f'    <rect width="{pill_w:.1f}" height="{pill_height}" rx="6" fill="{c_info["bg"]}" stroke="{c_info["border"]}" stroke-width="1" filter="url(#pillShadow)"/>')
+            parts.append(f'    <circle cx="8" cy="12" r="2.5" fill="{c_info["color"]}"/>')
+            parts.append(f'    <text x="16" y="15.5" fill="{c_info["color"]}" font-family="{font_sans}" font-size="11" font-weight="600">{clean_xml(name)}</text>')
+            parts.append('  </g>')
+            x += pill_w + 7
+        y += 38
+
+    parts.append('</svg>')
+    return '\n'.join(parts)
+
+
 def build_button_svg(text, width=150):
     """Build an adaptive droplet pill button SVG matching the web app design."""
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="38" viewBox="0 0 {width} 38">
@@ -1341,6 +1464,17 @@ def main():
     with open(os.path.join(out_dir, "daily-insights-dark.svg"), "w", encoding="utf-8") as f:
         f.write(insights_dark)
     print("✓ Saved daily-insights-dark.svg (dark)")
+
+    # 5.5 Tech Stack SVGs (Semantic Pastel Color Categorized)
+    tech_light = build_tech_stack_svg(dark_mode=False)
+    with open(os.path.join(out_dir, "tech-stack-light.svg"), "w", encoding="utf-8") as f:
+        f.write(tech_light)
+    print("✓ Saved tech-stack-light.svg (light)")
+
+    tech_dark = build_tech_stack_svg(dark_mode=True)
+    with open(os.path.join(out_dir, "tech-stack-dark.svg"), "w", encoding="utf-8") as f:
+        f.write(tech_dark)
+    print("✓ Saved tech-stack-dark.svg (dark)")
 
     # 6. Copy interactive profile HTML for GitHub Pages (live interactive site)
     for src in ["interactive_profile.html", os.path.join(os.path.dirname(__file__), "../../interactive_profile.html")]:

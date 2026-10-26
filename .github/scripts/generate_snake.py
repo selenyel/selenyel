@@ -282,13 +282,22 @@ def build_snake_svg(grid, path, apple_eats, dark_mode=False):
         '  <filter id="snakeCardShadow" x="-2%" y="-5%" width="104%" height="115%">',
         '    <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="' + ('0.3' if dark_mode else '0.05') + '"/>',
         '  </filter>',
-        '  <linearGradient id="snakeOrange" x1="0%" y1="0%" x2="100%" y2="100%">',
-        '    <stop offset="0%" stop-color="#ff7a00"/>',
-        '    <stop offset="100%" stop-color="#ff9500"/>',
+        '  <linearGradient id="snakePearlWhite" x1="0%" y1="0%" x2="100%" y2="100%">',
+        '    <stop offset="0%" stop-color="#ffffff"/>',
+        '    <stop offset="35%" stop-color="#f5f3ff"/>',
+        '    <stop offset="70%" stop-color="#ede9fe"/>',
+        '    <stop offset="100%" stop-color="#fae8ff"/>',
         '  </linearGradient>',
-        '  <linearGradient id="snakeHead" x1="0%" y1="0%" x2="100%" y2="100%">',
-        '    <stop offset="0%" stop-color="#ff8c00"/>',
-        '    <stop offset="100%" stop-color="#ff5500"/>',
+        '  <linearGradient id="snakeHoloRainbow" x1="0%" y1="0%" x2="100%" y2="100%">',
+        '    <stop offset="0%" stop-color="#38bdf8"/>',
+        '    <stop offset="25%" stop-color="#818cf8"/>',
+        '    <stop offset="50%" stop-color="#c084fc"/>',
+        '    <stop offset="75%" stop-color="#f472b6"/>',
+        '    <stop offset="100%" stop-color="#fde047"/>',
+        '  </linearGradient>',
+        '  <linearGradient id="snakeTongueGrad" x1="0%" y1="0%" x2="100%" y2="0%">',
+        '    <stop offset="0%" stop-color="#f472b6"/>',
+        '    <stop offset="100%" stop-color="#d946ef"/>',
         '  </linearGradient>',
         '  <g id="diamond-apple-1">',
         '    <path d="M6,2.2 L10.5,5.5 L6,11.5 L1.5,5.5 Z" fill="#0284c7"/>',
@@ -322,25 +331,47 @@ def build_snake_svg(grid, path, apple_eats, dark_mode=False):
         f'    <rect width="{CELL_SIZE}" height="{CELL_SIZE}" rx="3" fill="{grass_tile_fill}" stroke="{grass_tile_stroke}" stroke-width="0.75"/>',
         f'    <path d="M4,10 L5,5 L6,10 M8,10 L8.5,3.5 L9.5,10" stroke="{grass_blade_stroke}" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round" opacity="{grass_blade_opacity}" fill="none"/>',
         f'  </g>',
+        '  <!-- Iridescent Pearlescent Crystal Snake with Purple Makeup & Pink Tongue -->',
         '  <g id="snake-head-asset">',
-        '    <rect width="13" height="13" rx="4" fill="url(#snakeHead)" stroke="#c2410c" stroke-width="0.75"/>',
-        '    <path d="M3.5,1.5 L6.5,4.5 L9.5,1.5" stroke="#09090b" stroke-width="1.2" stroke-linecap="round" fill="none"/>',
-        '    <path d="M3.5,11.5 L6.5,8.5 L9.5,11.5" stroke="#09090b" stroke-width="1.2" stroke-linecap="round" fill="none"/>',
-        '    <circle cx="9.5" cy="4" r="1.8" fill="#ffffff"/>',
-        '    <circle cx="10" cy="4" r="1" fill="#09090b"/>',
-        '    <circle cx="10.3" cy="3.7" r="0.4" fill="#38bdf8"/>',
-        '    <circle cx="9.5" cy="9" r="1.8" fill="#ffffff"/>',
-        '    <circle cx="10" cy="9" r="1" fill="#09090b"/>',
-        '    <circle cx="10.3" cy="8.7" r="0.4" fill="#38bdf8"/>',
-        '    <path d="M13,6.5 L15,6.5 L16.5,5 M15,6.5 L16.5,8" stroke="#ef4444" stroke-width="0.9" stroke-linecap="round" fill="none"/>',
+        '    <!-- Pearlescent White Viper Crown -->',
+        '    <path d="M 1,2 C 1,2 5,0.8 9,2 C 12.2,3.1 14.2,5 14.2,6.5 C 14.2,8 12.2,9.9 9,11 C 5,12.2 1,11 1,11 C -0.5,9 -0.5,4 1,2 Z" fill="url(#snakePearlWhite)" stroke="#c084fc" stroke-width="0.8"/>',
+        '    <!-- Prismatic Rainbow Facet Shimmer -->',
+        '    <path d="M 4,3 L 8,3 L 11,6.5 L 8,10 L 4,10 L 6.5,6.5 Z" fill="url(#snakeHoloRainbow)" fill-opacity="0.35" stroke="#a855f7" stroke-width="0.5" stroke-opacity="0.5"/>',
+        '    <!-- Diamond Forehead Glint -->',
+        '    <path d="M 6.5,4.5 L 8,6.5 L 6.5,8.5 L 5,6.5 Z" fill="#ffffff" fill-opacity="0.85"/>',
+        '    <!-- Purple Makeup (Eyeshadow Aura & Eyeliner) - Upper Eye -->',
+        '    <ellipse cx="9.6" cy="3.5" rx="2.6" ry="2.1" fill="#c084fc" fill-opacity="0.55"/>',
+        '    <path d="M 7.2,3.8 C 8,2.2 10.8,2.2 12,3.4" stroke="#9333ea" stroke-width="0.8" stroke-linecap="round" fill="none"/>',
+        '    <circle cx="9.6" cy="3.5" r="1.4" fill="#3b0764"/>',
+        '    <circle cx="10" cy="3.1" r="0.5" fill="#ffffff"/>',
+        '    <!-- Purple Makeup (Eyeshadow Aura & Eyeliner) - Lower Eye -->',
+        '    <ellipse cx="9.6" cy="9.5" rx="2.6" ry="2.1" fill="#c084fc" fill-opacity="0.55"/>',
+        '    <path d="M 7.2,9.2 C 8,10.8 10.8,10.8 12,9.6" stroke="#9333ea" stroke-width="0.8" stroke-linecap="round" fill="none"/>',
+        '    <circle cx="9.6" cy="9.5" r="1.4" fill="#3b0764"/>',
+        '    <circle cx="10" cy="9.1" r="0.5" fill="#ffffff"/>',
+        '    <!-- Cute Pink & Violet Forked Tongue -->',
+        '    <path d="M 13.8,6.5 L 16.5,6.5 L 18.2,5.1 M 16.5,6.5 L 18.2,7.9" stroke="url(#snakeTongueGrad)" stroke-width="1.0" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
         '  </g>',
         '  <g id="snake-body-asset">',
-        '    <rect width="12" height="12" rx="3.5" fill="url(#snakeOrange)" stroke="#c2410c" stroke-width="0.75"/>',
-        '    <path d="M2.5,2.5 L6,6 L2.5,9.5 M6.5,2.5 L10,6 L6.5,9.5" stroke="#09090b" stroke-width="1.2" stroke-linecap="round" fill="none"/>',
+        '    <!-- Pearlescent White Diamond Scale Base -->',
+        '    <rect width="12" height="12" rx="3.5" fill="url(#snakePearlWhite)" stroke="#c084fc" stroke-width="0.75"/>',
+        '    <!-- Rainbow Diamond Mosaic Scales -->',
+        '    <path d="M 6,1.5 L 10.5,6 L 6,10.5 L 1.5,6 Z" fill="url(#snakeHoloRainbow)" fill-opacity="0.4" stroke="#a855f7" stroke-width="0.5" stroke-opacity="0.6"/>',
+        '    <!-- Specular Highlight Facet -->',
+        '    <path d="M 6,3 L 8.8,5.8 L 6,8.6 L 3.2,5.8 Z" fill="#ffffff" fill-opacity="0.75"/>',
+        '    <!-- Center Crystal Sparkle -->',
+        '    <path d="M 6,4.5 L 6,7.5 M 4.5,6 L 7.5,6" stroke="#c084fc" stroke-width="0.75" stroke-linecap="round"/>',
+        '    <circle cx="6" cy="6" r="0.6" fill="#ffffff"/>',
         '  </g>',
         '  <g id="snake-tail-asset">',
-        '    <path d="M1,2.5 L11,1 L11,11 L1,9.5 Z" fill="url(#snakeOrange)" stroke="#c2410c" stroke-width="0.75"/>',
-        '    <path d="M4,3 L8,3 M4,6 L8,6 M4,9 L8,9" stroke="#09090b" stroke-width="1.1" stroke-linecap="round" fill="none"/>',
+        '    <!-- Pearlescent Tapered Tail Wedge -->',
+        '    <path d="M 1,6 C 2.5,4 6,2.5 11,2 L 11,10 C 6,9.5 2.5,8 1,6 Z" fill="url(#snakePearlWhite)" stroke="#c084fc" stroke-width="0.75"/>',
+        '    <!-- Holographic Rainbow Facet -->',
+        '    <path d="M 4.5,4 L 7,6 L 4.5,8 L 2.5,6 Z" fill="url(#snakeHoloRainbow)" fill-opacity="0.45" stroke="#a855f7" stroke-width="0.5"/>',
+        '    <!-- Chevron Facet Ridge -->',
+        '    <path d="M 8,3 L 10.2,6 L 8,9" stroke="#c084fc" stroke-width="0.75" stroke-linecap="round" fill="none"/>',
+        '    <!-- Diamond Tip Glint -->',
+        '    <circle cx="2" cy="6" r="0.6" fill="#ffffff"/>',
         '  </g>',
         '</defs>',
         '<style>',
@@ -571,15 +602,13 @@ def build_timeline_svg(dark_mode=False):
         '  </g>',
         f'  <text x="8" y="24" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>',
         f'  <text x="872" y="24" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>',
-        f'  <!-- Central Spine Track (Universal rendering via non-zero width rect) -->',
-        f'  <rect x="{spine_cx - 2.5}" y="42" width="5" height="{h - 74}" rx="2.5" fill="url(#spineGrad)" opacity="0.25"/>',
-        f'  <rect x="{spine_cx - 1.25}" y="42" width="2.5" height="{h - 74}" rx="1.25" fill="url(#spineGrad)" opacity="0.95"/>',
-        f'  <!-- Central Spine Line (Prominent Downward Trajectory) -->',
-        f'  <line x1="{spine_cx}" y1="42" x2="{spine_cx}" y2="{h - 32}" stroke="url(#spineGrad)" stroke-width="2.5" stroke-linecap="round"/>',
+        f'  <!-- Central Spine Track (Universal slim hairline) -->',
+        f'  <rect x="{spine_cx - 1.5}" y="42" width="3" height="{h - 74}" rx="1.5" fill="url(#spineGrad)" opacity="0.18"/>',
+        f'  <rect x="{spine_cx - 0.7}" y="42" width="1.4" height="{h - 74}" rx="0.7" fill="url(#spineGrad)" opacity="0.95"/>',
         f'  <!-- Top Start Node Bead -->',
-        f'  <circle cx="{spine_cx}" cy="42" r="5" fill="{spine_start_color}" stroke="{node_fill}" stroke-width="1.5"/>',
+        f'  <circle cx="{spine_cx}" cy="42" r="3.5" fill="{spine_start_color}" stroke="{node_fill}" stroke-width="1.2"/>',
         f'  <!-- Downwards Terminal Chevron -->',
-        f'  <path d="M {spine_cx - 6} {h - 34} L {spine_cx} {h - 22} L {spine_cx + 6} {h - 34}" stroke="{spine_end_color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>',
+        f'  <path d="M {spine_cx - 4.5} {h - 30} L {spine_cx} {h - 22} L {spine_cx + 4.5} {h - 30}" stroke="{spine_end_color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>',
     ]
 
     y_pos = 50
@@ -599,7 +628,7 @@ def build_timeline_svg(dark_mode=False):
             card_x = spine_cx + 26
             meta_x = spine_cx - 24
             # Connector Line
-            parts.append(f'  <line x1="{spine_cx + 12}" y1="{node_cy:.0f}" x2="{card_x}" y2="{node_cy:.0f}" stroke="{color}" stroke-width="1.8" stroke-dasharray="3 3" stroke-linecap="round" opacity="0.7"/>')
+            parts.append(f'  <line x1="{spine_cx + 12}" y1="{node_cy:.0f}" x2="{card_x}" y2="{node_cy:.0f}" stroke="{color}" stroke-width="1.3" stroke-dasharray="2.5 2.5" stroke-linecap="round" opacity="0.7"/>')
             parts.append(f'  <text x="{meta_x}" y="{node_cy - 4:.0f}" text-anchor="end" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="700">{clean_xml(date_str)}</text>')
             parts.append(f'  <text x="{meta_x}" y="{node_cy + 14:.0f}" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="500">{clean_xml(sub_meta)}</text>')
         else:
@@ -607,7 +636,7 @@ def build_timeline_svg(dark_mode=False):
             card_x = spine_cx - 26 - card_w
             meta_x = spine_cx + 24
             # Connector Line
-            parts.append(f'  <line x1="{card_x + card_w}" y1="{node_cy:.0f}" x2="{spine_cx - 12}" y2="{node_cy:.0f}" stroke="{color}" stroke-width="1.8" stroke-dasharray="3 3" stroke-linecap="round" opacity="0.7"/>')
+            parts.append(f'  <line x1="{card_x + card_w}" y1="{node_cy:.0f}" x2="{spine_cx - 12}" y2="{node_cy:.0f}" stroke="{color}" stroke-width="1.3" stroke-dasharray="2.5 2.5" stroke-linecap="round" opacity="0.7"/>')
             parts.append(f'  <text x="{meta_x}" y="{node_cy - 4:.0f}" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="700">{clean_xml(date_str)}</text>')
             parts.append(f'  <text x="{meta_x}" y="{node_cy + 14:.0f}" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="500">{clean_xml(sub_meta)}</text>')
 
@@ -1085,6 +1114,31 @@ def build_button_svg(text, width=150):
     return svg
 
 
+def update_readme_daily_links(readme_path, law_link, cosmic_link):
+    """Keep README.md outer wrapper links in sync with today's UX Law and NASA observation."""
+    if not os.path.exists(readme_path):
+        return
+    with open(readme_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    import re
+    # Update UX Law wrapper link
+    content = re.sub(
+        r'<a href="[^"]*lawsofux\.com[^"]*" target="_blank">(\s*<picture>\s*<source media="\(prefers-color-scheme: dark\)" srcset="https://raw\.githubusercontent\.com/selenyel/selenyel/output/daily-law)',
+        f'<a href="{law_link}" target="_blank">\\1',
+        content
+    )
+    # Update NASA Deep Space wrapper link
+    content = re.sub(
+        r'<a href="[^"]*" target="_blank">(\s*<picture>\s*<source media="\(prefers-color-scheme: dark\)" srcset="https://raw\.githubusercontent\.com/selenyel/selenyel/output/daily-cosmic)',
+        f'<a href="{cosmic_link}" target="_blank">\\1',
+        content
+    )
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"✓ Synchronized {readme_path} daily links: law -> {law_link}, cosmic -> {cosmic_link}")
+
+
 def main():
     out_dir = sys.argv[1] if len(sys.argv) > 1 else "dist"
     username = sys.argv[2] if len(sys.argv) > 2 else os.environ.get("GITHUB_ACTOR", "selenyel")
@@ -1181,6 +1235,17 @@ def main():
             import shutil
             shutil.copy(src, os.path.join(out_dir, "index.html"))
             print("✓ Saved index.html (interactive web profile)")
+            break
+
+    # 7. Synchronize active daily links into README.md
+    day_idx = datetime.date.today().timetuple().tm_yday
+    laws = get_ux_laws(dark_mode=False)
+    today_law = laws[day_idx % len(laws)]
+    nasa_archive = get_nasa_archive()
+    today_cosmic = nasa_archive[day_idx % len(nasa_archive)]
+    for rm in ["README.md", os.path.join(os.path.dirname(__file__), "../../README.md")]:
+        if os.path.exists(rm):
+            update_readme_daily_links(rm, today_law["link"], today_cosmic["link"])
             break
 
     print("All SVGs successfully generated!")

@@ -1,4 +1,4 @@
-<a href="#gh-light-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-light.svg?v=10" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-dark.svg?v=10" width="100%"></a>
+<a href="#gh-light-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-light.svg?v=11" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-dark.svg?v=11" width="100%"></a>
 
 <p align="left">
   <!-- <a href="https://selenyel.github.io/selenyel/"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-interactive-cv.svg" height="34" alt="Interactive CV"/></a> -->
@@ -7,8 +7,8 @@
 
 <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg?v=10">
-    <img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg?v=10" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg?v=11">
+    <img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg?v=11" width="100%">
   </picture>
 </a>
 
@@ -18,8 +18,8 @@
       <td width="49%" align="center" valign="top">
         <a href="https://lawsofux.com/millers-law/" target="_blank">
           <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-dark.svg?v=10">
-            <img alt="UX Law of the Day" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-light.svg?v=10" width="100%">
+            <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-dark.svg?v=11">
+            <img alt="UX Law of the Day" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-light.svg?v=11" width="100%">
           </picture>
         </a>
       </td>
@@ -27,8 +27,8 @@
       <td width="49%" align="center" valign="top">
         <a href="https://images.nasa.gov/details/PIA04921" target="_blank">
           <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-dark.svg?v=10">
-            <img alt="NASA Deep Space Observation" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-light.svg?v=10" width="100%">
+            <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-dark.svg?v=11">
+            <img alt="NASA Deep Space Observation" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-light.svg?v=11" width="100%">
           </picture>
         </a>
       </td>
@@ -58,7 +58,7 @@
 
 <!-- Generated automatically by .github/workflows/stemellioglu.yml -->
 <div align="center">
-  <a href="#gh-light-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake.svg?v=10" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake-dark.svg?v=10" width="100%"></a>
+  <a href="#gh-light-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake.svg?v=11" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake-dark.svg?v=11" width="100%"></a>
 </div>
 
 ---

@@ -1,11 +1,13 @@
-<a href="#gh-light-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-light.svg?v=6" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-dark.svg?v=6" width="100%"></a>
+<a href="#gh-light-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-light.svg?v=7" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Selen Yel Temellioğlu — UX Engineer" src="https://raw.githubusercontent.com/selenyel/selenyel/output/header-glass-dark.svg?v=7" width="100%"></a>
 
 <p align="left">
   <!-- <a href="https://selenyel.github.io/selenyel/"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-interactive-cv.svg" height="34" alt="Interactive CV"/></a> -->
   <a href="https://www.linkedin.com/in/selenyeltemellioglu/"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-linkedin.svg" height="34" alt="LinkedIn Profile"/></a> <a href="https://www.credly.com/users/selen-yel-temellioglu"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-credly.svg" height="34" alt="Credly Badges"/></a> <a href="https://developers.google.com/profile/u/112478902926410002610"><img src="https://raw.githubusercontent.com/selenyel/selenyel/output/btn-google.svg" height="34" alt="Google Developers"/></a>
 </p>
 
-<a href="#gh-light-mode-only"><img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg?v=6" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg?v=6" width="100%"></a>
+<a href="#gh-light-mode-only"><img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-light.svg?v=7" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Career Timeline • Engineering &amp; UX Journey" src="https://raw.githubusercontent.com/selenyel/selenyel/output/career-timeline-dark.svg?v=7" width="100%"></a>
+
+<a href="#gh-light-mode-only"><img alt="Daily Insights • UX Architecture &amp; Deep Space Perspective" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-insights-light.svg?v=7" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Daily Insights • UX Architecture &amp; Deep Space Perspective" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-insights-dark.svg?v=7" width="100%"></a>
 
 ---
 
@@ -29,7 +31,7 @@
 
 <!-- Generated automatically by .github/workflows/stemellioglu.yml -->
 <div align="center">
-  <a href="#gh-light-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake.svg?v=6" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake-dark.svg?v=6" width="100%"></a>
+  <a href="#gh-light-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake.svg?v=7" width="100%"></a><a href="#gh-dark-mode-only"><img alt="Stemellioglu Snake Game" src="https://raw.githubusercontent.com/selenyel/selenyel/output/github-contribution-grid-snake-dark.svg?v=7" width="100%"></a>
 </div>
 
 ---

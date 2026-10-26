@@ -447,6 +447,7 @@ def build_timeline_svg(dark_mode=False):
         spine_end_color = "#f472b6"
         spotlight_opacity = 0.28
         spotlight_opacity_2 = 0.22
+        learn_more_color = "#c4b5fd"
     else:
         section_title = "#0284c7"
         archive_text = "#94a3b8"
@@ -464,6 +465,7 @@ def build_timeline_svg(dark_mode=False):
         spine_end_color = "#db2777"
         spotlight_opacity = 0.20
         spotlight_opacity_2 = 0.15
+        learn_more_color = "#6b5b85"
 
     card_fill_opacity = '0.90'
 
@@ -610,17 +612,21 @@ def build_timeline_svg(dark_mode=False):
             parts.append(f'  <text x="{meta_x}" y="{node_cy + 14:.0f}" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="500">{clean_xml(sub_meta)}</text>')
 
         # Floating Glassmorphic Experience Card
-        parts.append(f'  <g transform="translate({card_x}, {y_pos})">')
-        parts.append(f'    <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
-        parts.append(f'    <!-- Specular Meniscus Reflection Highlight -->')
-        parts.append(f'    <line x1="20" y1="1.5" x2="{card_w - 20}" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
-        parts.append(f'    <text x="18" y="26" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="13.5" font-weight="700">{clean_xml(role)}</text>')
-        parts.append(f'    <text x="18" y="46" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="600">{clean_xml(company)}</text>')
+        parts.append(f'  <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">')
+        parts.append(f'    <g transform="translate({card_x}, {y_pos})">')
+        parts.append(f'      <rect width="{card_w}" height="{card_h}" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cardShadow)"/>')
+        parts.append(f'      <!-- Specular Meniscus Reflection Highlight -->')
+        parts.append(f'      <line x1="20" y1="1.5" x2="{card_w - 20}" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
+        parts.append(f'      <text x="18" y="26" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="13.5" font-weight="700">{clean_xml(role)}</text>')
+        parts.append(f'      <text x="18" y="46" fill="{color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="12" font-weight="600">{clean_xml(company)}</text>')
         line_y = 68
         for line in desc_lines:
-            parts.append(f'    <text x="18" y="{line_y}" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="400">{clean_xml(line)}</text>')
+            parts.append(f'      <text x="18" y="{line_y}" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="400">{clean_xml(line)}</text>')
             line_y += 16
-        parts.append('  </g>')
+        parts.append(f'      <!-- Click to learn more hint -->')
+        parts.append(f'      <text x="{card_w - 18}" y="{card_h - 14}" text-anchor="end" fill="{learn_more_color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="10" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>')
+        parts.append('    </g>')
+        parts.append('  </a>')
 
         y_pos += step_y
 
@@ -628,10 +634,331 @@ def build_timeline_svg(dark_mode=False):
     return '\n'.join(parts)
 
 
+_NASA_THUMB_CACHE = {}
+
+
+def get_nasa_thumbnail_b64(url):
+    """Fetch and base64-encode a NASA thumbnail with memoization."""
+    if url in _NASA_THUMB_CACHE:
+        return _NASA_THUMB_CACHE[url]
+    b64_img = ""
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=5) as response:
+            raw = response.read()
+            b64_img = f"data:image/jpeg;base64,{base64.b64encode(raw).decode('utf-8')}"
+    except Exception as e:
+        print(f"Notice: NASA thumbnail fetch skipped ({e})")
+    _NASA_THUMB_CACHE[url] = b64_img
+    return b64_img
+
+
+def get_ux_laws(dark_mode=False):
+    """Return rotating catalog of 8 core UX/HCI design laws."""
+    return [
+        {
+            "name": "Fitts's Law",
+            "category": "INTERACTION KINETICS",
+            "formula": "T = a + b · log₂(2D / W)",
+            "summary": "Target acquisition time depends on distance & size.",
+            "takeaway1": "Touch targets min 44×44pt; pin high-frequency",
+            "takeaway2": "actions to viewport edges or thumb-zones.",
+            "color": "#38bdf8" if dark_mode else "#0284c7",
+            "diagram": "fitts",
+            "link": "https://lawsofux.com/fittss-law/"
+        },
+        {
+            "name": "Jakob's Law",
+            "category": "MENTAL MODELS",
+            "formula": "Users spend most time on other platforms",
+            "summary": "Users expect your UI to work like familiar services.",
+            "takeaway1": "Innovate on core product value, not standard controls;",
+            "takeaway2": "adhere to established navigational conventions.",
+            "color": "#34d399" if dark_mode else "#059669",
+            "diagram": "jakob",
+            "link": "https://lawsofux.com/jakobs-law/"
+        },
+        {
+            "name": "Hick's Law",
+            "category": "COGNITIVE ARCHITECTURE",
+            "formula": "RT = b · log₂(n + 1)",
+            "summary": "Decision time rises logarithmically with choice count.",
+            "takeaway1": "Break complex workflows into progressive steps;",
+            "takeaway2": "highlight recommended defaults to reduce paralysis.",
+            "color": "#fbbf24" if dark_mode else "#d97706",
+            "diagram": "hick",
+            "link": "https://lawsofux.com/hicks-law/"
+        },
+        {
+            "name": "Miller's Law",
+            "category": "WORKING MEMORY",
+            "formula": "Working Memory = 7 ± 2 Chunks",
+            "summary": "Human working memory retains limited clusters at once.",
+            "takeaway1": "Chunk complex state trees & data tables into groups",
+            "takeaway2": "of 5 to 7 elements with clear spatial visual hierarchy.",
+            "color": "#c084fc" if dark_mode else "#7c3aed",
+            "diagram": "miller",
+            "link": "https://lawsofux.com/millers-law/"
+        },
+        {
+            "name": "Doherty Threshold",
+            "category": "FLOW STATE LATENCY",
+            "formula": "System Latency < 400ms",
+            "summary": "Sub-400ms feedback retains user flow state.",
+            "takeaway1": "Implement optimistic client-side mutations & skeleton",
+            "takeaway2": "placeholders to eliminate perceptible cognitive waiting.",
+            "color": "#f472b6" if dark_mode else "#db2777",
+            "diagram": "doherty",
+            "link": "https://lawsofux.com/doherty-threshold/"
+        },
+        {
+            "name": "Aesthetic-Usability Effect",
+            "category": "PERCEIVED VALUE",
+            "formula": "Visual Polish = Perceived Usability",
+            "summary": "Aesthetic designs are perceived as demonstrably easier.",
+            "takeaway1": "Delightful micro-interactions build user trust and foster",
+            "takeaway2": "forgiveness for minor systemic workflow friction.",
+            "color": "#38bdf8" if dark_mode else "#0284c7",
+            "diagram": "aesthetic",
+            "link": "https://lawsofux.com/aesthetic-usability-effect/"
+        },
+        {
+            "name": "Peak-End Rule",
+            "category": "EXPERIENCE MEMORY",
+            "formula": "Memory = (Peak Intensity + Final Step) / 2",
+            "summary": "Journeys are judged by their climax and ending.",
+            "takeaway1": "Celebrate task completions with satisfying transitions;",
+            "takeaway2": "ensure the final interaction feels frictionless.",
+            "color": "#fb7185" if dark_mode else "#e11d48",
+            "diagram": "peakend",
+            "link": "https://lawsofux.com/peak-end-rule/"
+        },
+        {
+            "name": "Tesler's Law",
+            "category": "COMPLEXITY CONSERVATION",
+            "formula": "Inherent Complexity = Constant",
+            "summary": "Complexity cannot be eliminated, only shifted.",
+            "takeaway1": "Design resilient front-end abstractions that absorb",
+            "takeaway2": "underlying API complexity on behalf of the end user.",
+            "color": "#a78bfa" if dark_mode else "#6d28d9",
+            "diagram": "tesler",
+            "link": "https://lawsofux.com/teslers-law/"
+        }
+    ]
+
+
+def get_nasa_archive():
+    """Return rotating catalog of 4 deep space NASA observatory targets."""
+    return [
+        {
+            "name": "Carina Nebula",
+            "subtitle": "Cosmic Cliffs Nursery",
+            "telescope": "James Webb Space Telescope • NIRCam",
+            "desc1": "Infrared view capturing embryonic stars &",
+            "desc2": "supersonic protostellar jets emerging from",
+            "desc3": "towering walls of interstellar gas.",
+            "tag": "Deep Space Archive • 7,600 ly",
+            "url": "https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~thumb.jpg",
+            "link": "https://webbtelescope.org/contents/media/images/2022/031/01G77PKGFW2PFCTY22CHCS2NP4"
+        },
+        {
+            "name": "Pillars of Creation",
+            "subtitle": "Eagle Nebula M16",
+            "telescope": "James Webb Space Telescope • MIRI",
+            "desc1": "Interstellar columns of cold dust & gas",
+            "desc2": "sculpted by intense ultraviolet winds from",
+            "desc3": "massive nearby young stars in Serpens.",
+            "tag": "Deep Space Archive • 6,500 ly",
+            "url": "https://images-assets.nasa.gov/image/PIA25432/PIA25432~thumb.jpg",
+            "link": "https://webbtelescope.org/contents/media/images/2022/053/01GF438HG5MDV37F7EDNBMBCQ4"
+        },
+        {
+            "name": "Tarantula Nebula",
+            "subtitle": "30 Doradus Starburst",
+            "telescope": "JWST NIRCam • Massive Clusters",
+            "desc1": "The most prolific star-forming region in the",
+            "desc2": "Local Group, providing insights into peak",
+            "desc3": "cosmic starburst epochs (Cosmic Noon).",
+            "tag": "Large Magellanic Cloud • 161k ly",
+            "url": "https://images-assets.nasa.gov/image/PIA25438/PIA25438~thumb.jpg",
+            "link": "https://webbtelescope.org/contents/media/images/2022/041/01GA76MYFN0FMKNR46DDC58HRQ"
+        },
+        {
+            "name": "Andromeda Galaxy",
+            "subtitle": "Messier 31 Barred Spiral",
+            "telescope": "Hubble & Spitzer • Spiral Mosaic",
+            "desc1": "Our neighboring galactic titan spanning",
+            "desc2": "over 220,000 light-years, housing one",
+            "desc3": "trillion stars in sweeping spiral arms.",
+            "tag": "Local Group Spiral • 2.5M ly",
+            "url": "https://images-assets.nasa.gov/image/PIA04921/PIA04921~thumb.jpg",
+            "link": "https://images.nasa.gov/details/PIA04921"
+        }
+    ]
+
+
+def render_ux_diagram(diag, accent, badge_bg, base_x, base_y):
+    """Render pure SVG vector mathematical diagram for a UX law."""
+    if diag == "fitts":
+        return f'<g transform="translate({base_x}, {base_y})"><circle cx="0" cy="0" r="16" fill="{badge_bg}" stroke="{accent}" stroke-width="1.6" stroke-dasharray="3 3"/><circle cx="0" cy="0" r="4.5" fill="{accent}"/><line x1="-34" y1="0" x2="-18" y2="0" stroke="{accent}" stroke-width="1.4" stroke-dasharray="2 2"/><text x="-26" y="-5" fill="{accent}" font-size="8" font-weight="700" text-anchor="middle">D</text><text x="0" y="26" fill="{accent}" font-size="7.5" font-weight="600" text-anchor="middle">W ≥ 44pt</text></g>'
+    elif diag == "jakob":
+        return f'<g transform="translate({base_x}, {base_y})"><rect x="-16" y="-16" width="22" height="22" rx="6" fill="none" stroke="{accent}" stroke-width="1.4" opacity="0.4"/><rect x="-6" y="-6" width="22" height="22" rx="6" fill="{badge_bg}" stroke="{accent}" stroke-width="1.8"/><path d="M 0 5 L 4 9 L 11 0" fill="none" stroke="{accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>'
+    elif diag == "hick":
+        return f'<g transform="translate({base_x - 4}, {base_y})"><circle cx="-16" cy="0" r="3.5" fill="{accent}"/><path d="M -13 0 C -4 0 -4 -12 6 -12" fill="none" stroke="{accent}" stroke-width="1.4"/><path d="M -13 0 L 6 0" fill="none" stroke="{accent}" stroke-width="1.4"/><path d="M -13 0 C -4 0 -4 12 6 12" fill="none" stroke="{accent}" stroke-width="1.4"/><circle cx="10" cy="-12" r="3" fill="{accent}" fill-opacity="0.3" stroke="{accent}" stroke-width="1"/><circle cx="10" cy="0" r="3.5" fill="{accent}"/><circle cx="10" cy="12" r="3" fill="{accent}" fill-opacity="0.3" stroke="{accent}" stroke-width="1"/></g>'
+    elif diag == "miller":
+        return f'<g transform="translate({base_x}, {base_y})"><circle cx="-14" cy="-6" r="3" fill="{accent}"/><circle cx="-4" cy="-6" r="3" fill="{accent}"/><circle cx="6" cy="-6" r="3" fill="{accent}"/><circle cx="-18" cy="8" r="3" fill="{accent}"/><circle cx="-8" cy="8" r="3" fill="{accent}"/><circle cx="2" cy="8" r="3" fill="{accent}"/><circle cx="12" cy="8" r="3" fill="{accent}"/></g>'
+    elif diag == "doherty":
+        return f'<g transform="translate({base_x}, {base_y})"><path d="M -18 6 A 18 18 0 0 1 18 6" fill="none" stroke="{accent}" stroke-width="1.8" stroke-linecap="round"/><line x1="0" y1="6" x2="-8" y2="-6" stroke="{accent}" stroke-width="2" stroke-linecap="round"/><circle cx="0" cy="6" r="2.5" fill="{accent}"/><text x="0" y="20" fill="{accent}" font-size="7.5" font-weight="700" text-anchor="middle">&lt;400ms</text></g>'
+    elif diag == "aesthetic":
+        return f'<g transform="translate({base_x}, {base_y - 2})"><polygon points="0,-14 14,-4 9,14 -9,14 -14,-4" fill="{badge_bg}" stroke="{accent}" stroke-width="1.6"/><line x1="-14" y1="-4" x2="14" y2="-4" stroke="{accent}" stroke-width="1"/><line x1="0" y1="-14" x2="-4" y2="14" stroke="{accent}" stroke-width="0.8"/><line x1="0" y1="-14" x2="4" y2="14" stroke="{accent}" stroke-width="0.8"/></g>'
+    elif diag == "peakend":
+        return f'<g transform="translate({base_x - 2}, {base_y})"><path d="M -18 12 C -8 12 -4 -14 4 -14 C 10 -14 12 4 20 4" fill="none" stroke="{accent}" stroke-width="1.8" stroke-linecap="round"/><circle cx="4" cy="-14" r="3.5" fill="{accent}"/><circle cx="20" cy="4" r="3" fill="{accent}"/><text x="4" y="-20" fill="{accent}" font-size="6.5" font-weight="800" text-anchor="middle">PEAK</text><text x="20" y="16" fill="{accent}" font-size="6.5" font-weight="800" text-anchor="middle">END</text></g>'
+    else:
+        return f'<g transform="translate({base_x}, {base_y - 2})"><line x1="0" y1="-10" x2="0" y2="14" stroke="{accent}" stroke-width="1.8"/><line x1="-14" y1="-4" x2="14" y2="-4" stroke="{accent}" stroke-width="1.8" stroke-linecap="round"/><circle cx="0" cy="-10" r="2.5" fill="{accent}"/><path d="M -14 -4 L -19 6 L -9 6 Z" fill="{badge_bg}" stroke="{accent}" stroke-width="1.2"/><path d="M 14 -4 L 9 6 L 19 6 Z" fill="{badge_bg}" stroke="{accent}" stroke-width="1.2"/><line x1="-8" y1="14" x2="8" y2="14" stroke="{accent}" stroke-width="2" stroke-linecap="round"/></g>'
+
+
+def build_daily_law_svg(dark_mode=False):
+    """Build standalone Glassmorphic UX Law card SVG with click-to-learn link."""
+    w, h = 432, 204
+    font_sans = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font_mono = "ui-monospace, SFMono-Regular, Menlo, monospace"
+
+    if dark_mode:
+        card_bg = "#0f172a"
+        card_stroke = "rgba(255, 255, 255, 0.12)"
+        meniscus_stroke = "rgba(255, 255, 255, 0.45)"
+        text_primary = "#f8fafc"
+        text_muted = "#94a3b8"
+        text_sub = "#64748b"
+        shadow_opacity = "0.45"
+        badge_bg = "rgba(56, 189, 248, 0.12)"
+        badge_border = "rgba(56, 189, 248, 0.3)"
+        formula_bg = "rgba(255, 255, 255, 0.05)"
+        learn_more_color = "#c4b5fd"
+    else:
+        card_bg = "#ffffff"
+        card_stroke = "#e2e8f0"
+        meniscus_stroke = "rgba(255, 255, 255, 0.95)"
+        text_primary = "#0f172a"
+        text_muted = "#475569"
+        text_sub = "#94a3b8"
+        shadow_opacity = "0.08"
+        badge_bg = "rgba(2, 132, 199, 0.08)"
+        badge_border = "rgba(2, 132, 199, 0.25)"
+        formula_bg = "rgba(15, 23, 42, 0.04)"
+        learn_more_color = "#6b5b85"
+
+    card_fill_opacity = '0.90'
+    day_idx = datetime.datetime.now(datetime.timezone.utc).timetuple().tm_yday
+    UX_LAWS = get_ux_laws(dark_mode)
+    law = UX_LAWS[day_idx % len(UX_LAWS)]
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
+        '  <defs>',
+        '    <filter id="lawShadow" x="-5%" y="-5%" width="110%" height="125%">',
+        f'      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
+        '    </filter>',
+        '  </defs>',
+        f'  <a href="{law["link"]}" target="_blank">',
+        f'    <rect x="4" y="4" width="424" height="194" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#lawShadow)"/>',
+        f'    <line x1="24" y1="5.5" x2="408" y2="5.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>',
+        f'    <rect x="22" y="20" width="220" height="18" rx="9" fill="{badge_bg}" stroke="{badge_border}" stroke-width="1"/>',
+        f'    <text x="30" y="33" fill="{law["color"]}" font-family="{font_sans}" font-size="9" font-weight="700" letter-spacing="1">UX HEURISTIC • {clean_xml(law["category"])}</text>',
+        f'    <text x="22" y="62" fill="{text_primary}" font-family="{font_sans}" font-size="16" font-weight="800">{clean_xml(law["name"])}</text>',
+        f'    <rect x="22" y="72" width="250" height="22" rx="6" fill="{formula_bg}"/>',
+        f'    <text x="30" y="87" fill="{law["color"]}" font-family="{font_mono}" font-size="10.5" font-weight="700">{clean_xml(law["formula"])}</text>',
+        f'    <text x="22" y="116" fill="{text_primary}" font-family="{font_sans}" font-size="11" font-weight="600">{clean_xml(law["summary"])}</text>',
+        f'    <text x="22" y="134" fill="{text_muted}" font-family="{font_sans}" font-size="10.5" font-weight="400">✦ {clean_xml(law["takeaway1"])}</text>',
+        f'    <text x="22" y="150" fill="{text_muted}" font-family="{font_sans}" font-size="10.5" font-weight="400">  {clean_xml(law["takeaway2"])}</text>',
+        f'    <text x="22" y="180" fill="{text_sub}" font-family="{font_sans}" font-size="9.5" font-weight="600" letter-spacing="0.5">Nielsen Norman Group &amp; HCI Archive</text>',
+        f'    <text x="410" y="180" text-anchor="end" fill="{learn_more_color}" font-family="{font_sans}" font-size="10.5" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>',
+        f'    {render_ux_diagram(law["diagram"], law["color"], badge_bg, 370, 56)}',
+        '  </a>',
+        '</svg>'
+    ]
+    return '\n'.join(parts)
+
+
+def build_daily_cosmic_svg(dark_mode=False):
+    """Build standalone Glassmorphic NASA Deep Space card SVG with click-to-learn link."""
+    w, h = 432, 204
+    font_sans = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+
+    if dark_mode:
+        card_bg = "#0f172a"
+        card_stroke = "rgba(255, 255, 255, 0.12)"
+        meniscus_stroke = "rgba(255, 255, 255, 0.45)"
+        text_primary = "#f8fafc"
+        text_muted = "#94a3b8"
+        text_sub = "#64748b"
+        shadow_opacity = "0.45"
+        cosmic_badge_bg = "rgba(167, 139, 250, 0.12)"
+        cosmic_badge_border = "rgba(167, 139, 250, 0.3)"
+        cosmic_color = "#c084fc"
+        learn_more_color = "#c4b5fd"
+    else:
+        card_bg = "#ffffff"
+        card_stroke = "#e2e8f0"
+        meniscus_stroke = "rgba(255, 255, 255, 0.95)"
+        text_primary = "#0f172a"
+        text_muted = "#475569"
+        text_sub = "#94a3b8"
+        shadow_opacity = "0.08"
+        cosmic_badge_bg = "rgba(124, 58, 237, 0.08)"
+        cosmic_badge_border = "rgba(124, 58, 237, 0.25)"
+        cosmic_color = "#7c3aed"
+        learn_more_color = "#6b5b85"
+
+    card_fill_opacity = '0.90'
+    day_idx = datetime.datetime.now(datetime.timezone.utc).timetuple().tm_yday
+    NASA_ARCHIVE = get_nasa_archive()
+    cosmic = NASA_ARCHIVE[day_idx % len(NASA_ARCHIVE)]
+    b64_img = get_nasa_thumbnail_b64(cosmic["url"])
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
+        '  <defs>',
+        '    <filter id="cosmicShadow" x="-5%" y="-5%" width="110%" height="125%">',
+        f'      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="{shadow_opacity}"/>',
+        '    </filter>',
+        '    <clipPath id="cosmicClip">',
+        '      <rect x="22" y="48" width="112" height="112" rx="12"/>',
+        '    </clipPath>',
+        '  </defs>',
+        f'  <a href="{cosmic["link"]}" target="_blank">',
+        f'    <rect x="4" y="4" width="424" height="194" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#cosmicShadow)"/>',
+        f'    <line x1="24" y1="5.5" x2="408" y2="5.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>',
+        f'    <rect x="22" y="20" width="220" height="18" rx="9" fill="{cosmic_badge_bg}" stroke="{cosmic_badge_border}" stroke-width="1"/>',
+        f'    <text x="30" y="33" fill="{cosmic_color}" font-family="{font_sans}" font-size="9" font-weight="700" letter-spacing="1">COSMIC LENS • NASA OBSERVATION</text>',
+    ]
+
+    if b64_img:
+        parts.append(f'    <image href="{b64_img}" x="22" y="48" width="112" height="112" preserveAspectRatio="xMidYMid slice" clip-path="url(#cosmicClip)"/>')
+    else:
+        parts.append(f'    <rect x="22" y="48" width="112" height="112" rx="12" fill="{cosmic_badge_bg}" stroke="{card_stroke}" stroke-width="1"/>')
+        parts.append(f'    <text x="78" y="109" fill="{cosmic_color}" font-size="12" font-weight="700" text-anchor="middle">NASA SPACE</text>')
+
+    parts.append(f'    <rect x="22" y="48" width="112" height="112" rx="12" fill="none" stroke="{card_stroke}" stroke-width="1"/>')
+    parts.append(f'    <text x="146" y="66" fill="{text_primary}" font-family="{font_sans}" font-size="15" font-weight="800">{clean_xml(cosmic["name"])}</text>')
+    parts.append(f'    <text x="146" y="82" fill="{cosmic_color}" font-family="{font_sans}" font-size="10.5" font-weight="700">{clean_xml(cosmic["telescope"])}</text>')
+    parts.append(f'    <text x="146" y="104" fill="{text_muted}" font-family="{font_sans}" font-size="10" font-weight="400">{clean_xml(cosmic["desc1"])}</text>')
+    parts.append(f'    <text x="146" y="119" fill="{text_muted}" font-family="{font_sans}" font-size="10" font-weight="400">{clean_xml(cosmic["desc2"])}</text>')
+    parts.append(f'    <text x="146" y="134" fill="{text_muted}" font-family="{font_sans}" font-size="10" font-weight="400">{clean_xml(cosmic["desc3"])}</text>')
+    parts.append(f'    <text x="146" y="156" fill="{text_sub}" font-family="{font_sans}" font-size="9.5" font-weight="600" letter-spacing="0.5">✦ {clean_xml(cosmic["tag"])}</text>')
+    parts.append(f'    <text x="22" y="180" fill="{text_sub}" font-family="{font_sans}" font-size="9.5" font-weight="600" letter-spacing="0.5">Deep Space Observation • NASA Imagery</text>')
+    parts.append(f'    <text x="410" y="180" text-anchor="end" fill="{learn_more_color}" font-family="{font_sans}" font-size="10.5" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>')
+    parts.append('  </a>')
+    parts.append('</svg>')
+    return '\n'.join(parts)
+
+
 def build_daily_insights_svg(dark_mode=False):
-    """Build Dual Glassmorphic Insights widget (UX Law of the Day + NASA Deep Space Observation)."""
+    """Build composite Dual Glassmorphic Insights widget (880x238)."""
     w, h = 880, 238
-    
+    font_sans = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font_mono = "ui-monospace, SFMono-Regular, Menlo, monospace"
+
     if dark_mode:
         section_title = "#38bdf8"
         archive_text = "#64748b"
@@ -645,6 +972,10 @@ def build_daily_insights_svg(dark_mode=False):
         badge_bg = "rgba(56, 189, 248, 0.12)"
         badge_border = "rgba(56, 189, 248, 0.3)"
         formula_bg = "rgba(255, 255, 255, 0.05)"
+        cosmic_badge_bg = "rgba(167, 139, 250, 0.12)"
+        cosmic_badge_border = "rgba(167, 139, 250, 0.3)"
+        cosmic_color = "#c084fc"
+        learn_more_color = "#c4b5fd"
     else:
         section_title = "#0284c7"
         archive_text = "#94a3b8"
@@ -658,156 +989,19 @@ def build_daily_insights_svg(dark_mode=False):
         badge_bg = "rgba(2, 132, 199, 0.08)"
         badge_border = "rgba(2, 132, 199, 0.25)"
         formula_bg = "rgba(15, 23, 42, 0.04)"
+        cosmic_badge_bg = "rgba(124, 58, 237, 0.08)"
+        cosmic_badge_border = "rgba(124, 58, 237, 0.25)"
+        cosmic_color = "#7c3aed"
+        learn_more_color = "#6b5b85"
 
     card_fill_opacity = '0.90'
-
     day_idx = datetime.datetime.now(datetime.timezone.utc).timetuple().tm_yday
-
-    # 1. UX Law of the Day Catalog
-    UX_LAWS = [
-        {
-            "name": "Fitts's Law",
-            "category": "INTERACTION KINETICS",
-            "formula": "T = a + b · log₂(2D / W)",
-            "summary": "Target acquisition time depends on distance & size.",
-            "takeaway1": "Touch targets min 44×44pt; pin high-frequency",
-            "takeaway2": "actions to viewport edges or thumb-zones.",
-            "color": "#38bdf8" if dark_mode else "#0284c7",
-            "diagram": "fitts"
-        },
-        {
-            "name": "Jakob's Law",
-            "category": "MENTAL MODELS",
-            "formula": "Users spend most time on other platforms",
-            "summary": "Users expect your UI to work like familiar services.",
-            "takeaway1": "Innovate on core product value, not standard controls;",
-            "takeaway2": "adhere to established navigational conventions.",
-            "color": "#34d399" if dark_mode else "#059669",
-            "diagram": "jakob"
-        },
-        {
-            "name": "Hick's Law",
-            "category": "COGNITIVE ARCHITECTURE",
-            "formula": "RT = b · log₂(n + 1)",
-            "summary": "Decision time rises logarithmically with choice count.",
-            "takeaway1": "Break complex workflows into progressive steps;",
-            "takeaway2": "highlight recommended defaults to reduce paralysis.",
-            "color": "#fbbf24" if dark_mode else "#d97706",
-            "diagram": "hick"
-        },
-        {
-            "name": "Miller's Law",
-            "category": "WORKING MEMORY",
-            "formula": "Working Memory = 7 ± 2 Chunks",
-            "summary": "Human working memory retains limited clusters at once.",
-            "takeaway1": "Chunk complex state trees & data tables into groups",
-            "takeaway2": "of 5 to 7 elements with clear spatial visual hierarchy.",
-            "color": "#c084fc" if dark_mode else "#7c3aed",
-            "diagram": "miller"
-        },
-        {
-            "name": "Doherty Threshold",
-            "category": "FLOW STATE LATENCY",
-            "formula": "System Latency < 400ms",
-            "summary": "Sub-400ms feedback retains user flow state.",
-            "takeaway1": "Implement optimistic client-side mutations & skeleton",
-            "takeaway2": "placeholders to eliminate perceptible cognitive waiting.",
-            "color": "#f472b6" if dark_mode else "#db2777",
-            "diagram": "doherty"
-        },
-        {
-            "name": "Aesthetic-Usability Effect",
-            "category": "PERCEIVED VALUE",
-            "formula": "Visual Polish = Perceived Usability",
-            "summary": "Aesthetic designs are perceived as demonstrably easier.",
-            "takeaway1": "Delightful micro-interactions build user trust and foster",
-            "takeaway2": "forgiveness for minor systemic workflow friction.",
-            "color": "#38bdf8" if dark_mode else "#0284c7",
-            "diagram": "aesthetic"
-        },
-        {
-            "name": "Peak-End Rule",
-            "category": "EXPERIENCE MEMORY",
-            "formula": "Memory = (Peak Intensity + Final Step) / 2",
-            "summary": "Journeys are judged by their climax and ending.",
-            "takeaway1": "Celebrate task completions with satisfying transitions;",
-            "takeaway2": "ensure the final interaction feels frictionless.",
-            "color": "#fb7185" if dark_mode else "#e11d48",
-            "diagram": "peakend"
-        },
-        {
-            "name": "Tesler's Law",
-            "category": "COMPLEXITY CONSERVATION",
-            "formula": "Inherent Complexity = Constant",
-            "summary": "Complexity cannot be eliminated, only shifted.",
-            "takeaway1": "Design resilient front-end abstractions that absorb",
-            "takeaway2": "underlying API complexity on behalf of the end user.",
-            "color": "#a78bfa" if dark_mode else "#6d28d9",
-            "diagram": "tesler"
-        }
-    ]
+    UX_LAWS = get_ux_laws(dark_mode)
     law = UX_LAWS[day_idx % len(UX_LAWS)]
-
-    # 2. Cosmic Observation • NASA Space Imagery Catalog
-    NASA_ARCHIVE = [
-        {
-            "name": "Carina Nebula",
-            "subtitle": "Cosmic Cliffs Nursery",
-            "telescope": "James Webb Space Telescope • NIRCam",
-            "desc1": "Infrared view capturing embryonic stars &",
-            "desc2": "supersonic protostellar jets emerging from",
-            "desc3": "towering walls of interstellar gas.",
-            "tag": "Deep Space Archive • 7,600 ly",
-            "url": "https://images-assets.nasa.gov/image/carina_nebula/carina_nebula~thumb.jpg"
-        },
-        {
-            "name": "Pillars of Creation",
-            "subtitle": "Eagle Nebula M16",
-            "telescope": "James Webb Space Telescope • MIRI",
-            "desc1": "Interstellar columns of cold dust & gas",
-            "desc2": "sculpted by intense ultraviolet winds from",
-            "desc3": "massive nearby young stars in Serpens.",
-            "tag": "Deep Space Archive • 6,500 ly",
-            "url": "https://images-assets.nasa.gov/image/PIA25432/PIA25432~thumb.jpg"
-        },
-        {
-            "name": "Tarantula Nebula",
-            "subtitle": "30 Doradus Starburst",
-            "telescope": "JWST NIRCam • Massive Clusters",
-            "desc1": "The most prolific star-forming region in the",
-            "desc2": "Local Group, providing insights into peak",
-            "desc3": "cosmic starburst epochs (Cosmic Noon).",
-            "tag": "Large Magellanic Cloud • 161k ly",
-            "url": "https://images-assets.nasa.gov/image/PIA25438/PIA25438~thumb.jpg"
-        },
-        {
-            "name": "Andromeda Galaxy",
-            "subtitle": "Messier 31 Barred Spiral",
-            "telescope": "Hubble & Spitzer • Spiral Mosaic",
-            "desc1": "Our neighboring galactic titan spanning",
-            "desc2": "over 220,000 light-years, housing one",
-            "desc3": "trillion stars in sweeping spiral arms.",
-            "tag": "Local Group Spiral • 2.5M ly",
-            "url": "https://images-assets.nasa.gov/image/PIA04921/PIA04921~thumb.jpg"
-        }
-    ]
+    NASA_ARCHIVE = get_nasa_archive()
     cosmic = NASA_ARCHIVE[day_idx % len(NASA_ARCHIVE)]
-    
-    # Download and base64-encode thumbnail
-    b64_img = ""
-    try:
-        req = urllib.request.Request(cosmic["url"], headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=5) as r:
-            raw_img = r.read()
-            b64_img = f"data:image/jpeg;base64,{base64.b64encode(raw_img).decode('ascii')}"
-    except Exception:
-        pass
+    b64_img = get_nasa_thumbnail_b64(cosmic["url"])
 
-    cosmic_color = "#c084fc" if dark_mode else "#7c3aed"
-    cosmic_badge_bg = "rgba(192, 132, 252, 0.12)" if dark_mode else "rgba(124, 58, 237, 0.08)"
-    cosmic_badge_border = "rgba(192, 132, 252, 0.3)" if dark_mode else "rgba(124, 58, 237, 0.25)"
-
-    # SVG assembly
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '  <defs>',
@@ -818,76 +1012,56 @@ def build_daily_insights_svg(dark_mode=False):
         '      <rect x="18" y="44" width="112" height="112" rx="12"/>',
         '    </clipPath>',
         '  </defs>',
-        f'  <text x="8" y="22" fill="{section_title}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">DAILY INSIGHTS • ARCHITECTURE &amp; PERSPECTIVE</text>',
-        f'  <text x="872" y="22" text-anchor="end" fill="{archive_text}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11.5" font-weight="500">Automated Daily Rotation</text>',
+        f'  <text x="8" y="22" fill="{section_title}" font-family="{font_sans}" font-size="11.5" font-weight="700" letter-spacing="1.5">DAILY INSIGHTS • ARCHITECTURE &amp; PERSPECTIVE</text>',
+        f'  <text x="872" y="22" text-anchor="end" fill="{archive_text}" font-family="{font_sans}" font-size="11.5" font-weight="500">Automated Daily Rotation</text>',
         
         '  <!-- Left Card: UX Heuristic of the Day -->',
-        '  <g transform="translate(8, 34)">',
-        f'    <rect width="424" height="190" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#insightShadow)"/>',
-        f'    <line x1="20" y1="1.5" x2="404" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>',
-        f'    <rect x="18" y="16" width="220" height="18" rx="9" fill="{badge_bg}" stroke="{badge_border}" stroke-width="1"/>',
-        f'    <text x="26" y="29" fill="{law["color"]}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="1">UX HEURISTIC • {clean_xml(law["category"])}</text>',
-        f'    <text x="18" y="58" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="16" font-weight="800">{clean_xml(law["name"])}</text>',
-        f'    <rect x="18" y="68" width="250" height="22" rx="6" fill="{formula_bg}"/>',
-        f'    <text x="26" y="83" fill="{law["color"]}" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" font-weight="700">{clean_xml(law["formula"])}</text>',
-        f'    <text x="18" y="112" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="11" font-weight="600">{clean_xml(law["summary"])}</text>',
-        f'    <text x="18" y="130" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="10.5" font-weight="400">✦ {clean_xml(law["takeaway1"])}</text>',
-        f'    <text x="18" y="146" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="10.5" font-weight="400">  {clean_xml(law["takeaway2"])}</text>',
-        f'    <text x="18" y="172" fill="{text_sub}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0.5">Nielsen Norman Group &amp; HCI Archive</text>',
+        f'  <a href="{law["link"]}" target="_blank">',
+        '    <g transform="translate(8, 34)">',
+        f'      <rect width="424" height="190" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#insightShadow)"/>',
+        f'      <line x1="20" y1="1.5" x2="404" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>',
+        f'      <rect x="18" y="16" width="220" height="18" rx="9" fill="{badge_bg}" stroke="{badge_border}" stroke-width="1"/>',
+        f'      <text x="26" y="29" fill="{law["color"]}" font-family="{font_sans}" font-size="9" font-weight="700" letter-spacing="1">UX HEURISTIC • {clean_xml(law["category"])}</text>',
+        f'      <text x="18" y="58" fill="{text_primary}" font-family="{font_sans}" font-size="16" font-weight="800">{clean_xml(law["name"])}</text>',
+        f'      <rect x="18" y="68" width="250" height="22" rx="6" fill="{formula_bg}"/>',
+        f'      <text x="26" y="83" fill="{law["color"]}" font-family="{font_mono}" font-size="10.5" font-weight="700">{clean_xml(law["formula"])}</text>',
+        f'      <text x="18" y="112" fill="{text_primary}" font-family="{font_sans}" font-size="11" font-weight="600">{clean_xml(law["summary"])}</text>',
+        f'      <text x="18" y="130" fill="{text_muted}" font-family="{font_sans}" font-size="10.5" font-weight="400">✦ {clean_xml(law["takeaway1"])}</text>',
+        f'      <text x="18" y="146" fill="{text_muted}" font-family="{font_sans}" font-size="10.5" font-weight="400">  {clean_xml(law["takeaway2"])}</text>',
+        f'      <text x="18" y="172" fill="{text_sub}" font-family="{font_sans}" font-size="9.5" font-weight="600" letter-spacing="0.5">Nielsen Norman Group &amp; HCI Archive</text>',
+        f'      <text x="406" y="172" text-anchor="end" fill="{learn_more_color}" font-family="{font_sans}" font-size="10.5" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>',
+        f'      {render_ux_diagram(law["diagram"], law["color"], badge_bg, 366, 52)}',
+        '    </g>',
+        '  </a>',
+
+        '  <!-- Right Card: Cosmic Observation -->',
+        f'  <a href="{cosmic["link"]}" target="_blank">',
+        '    <g transform="translate(448, 34)">',
+        f'      <rect width="424" height="190" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#insightShadow)"/>',
+        f'      <line x1="20" y1="1.5" x2="404" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>',
+        f'      <rect x="18" y="16" width="220" height="18" rx="9" fill="{cosmic_badge_bg}" stroke="{cosmic_badge_border}" stroke-width="1"/>',
+        f'      <text x="26" y="29" fill="{cosmic_color}" font-family="{font_sans}" font-size="9" font-weight="700" letter-spacing="1">COSMIC LENS • NASA OBSERVATION</text>',
     ]
 
-    # Add diagram for left card
-    diag = law["diagram"]
-    accent = law["color"]
-    if diag == "fitts":
-        parts.append(f'    <g transform="translate(366, 52)"><circle cx="0" cy="0" r="16" fill="{badge_bg}" stroke="{accent}" stroke-width="1.6" stroke-dasharray="3 3"/><circle cx="0" cy="0" r="4.5" fill="{accent}"/><line x1="-34" y1="0" x2="-18" y2="0" stroke="{accent}" stroke-width="1.4" stroke-dasharray="2 2"/><text x="-26" y="-5" fill="{accent}" font-size="8" font-weight="700" text-anchor="middle">D</text><text x="0" y="26" fill="{accent}" font-size="7.5" font-weight="600" text-anchor="middle">W ≥ 44pt</text></g>')
-    elif diag == "jakob":
-        parts.append(f'    <g transform="translate(366, 52)"><rect x="-16" y="-16" width="22" height="22" rx="6" fill="none" stroke="{accent}" stroke-width="1.4" opacity="0.4"/><rect x="-6" y="-6" width="22" height="22" rx="6" fill="{badge_bg}" stroke="{accent}" stroke-width="1.8"/><path d="M 0 5 L 4 9 L 11 0" fill="none" stroke="{accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>')
-    elif diag == "hick":
-        parts.append(f'    <g transform="translate(362, 52)"><circle cx="-16" cy="0" r="3.5" fill="{accent}"/><path d="M -13 0 C -4 0 -4 -12 6 -12" fill="none" stroke="{accent}" stroke-width="1.4"/><path d="M -13 0 L 6 0" fill="none" stroke="{accent}" stroke-width="1.4"/><path d="M -13 0 C -4 0 -4 12 6 12" fill="none" stroke="{accent}" stroke-width="1.4"/><circle cx="10" cy="-12" r="3" fill="{accent}" fill-opacity="0.3" stroke="{accent}" stroke-width="1"/><circle cx="10" cy="0" r="3.5" fill="{accent}"/><circle cx="10" cy="12" r="3" fill="{accent}" fill-opacity="0.3" stroke="{accent}" stroke-width="1"/></g>')
-    elif diag == "miller":
-        parts.append(f'    <g transform="translate(366, 52)"><circle cx="-14" cy="-6" r="3" fill="{accent}"/><circle cx="-4" cy="-6" r="3" fill="{accent}"/><circle cx="6" cy="-6" r="3" fill="{accent}"/><circle cx="-18" cy="8" r="3" fill="{accent}"/><circle cx="-8" cy="8" r="3" fill="{accent}"/><circle cx="2" cy="8" r="3" fill="{accent}"/><circle cx="12" cy="8" r="3" fill="{accent}"/></g>')
-    elif diag == "doherty":
-        parts.append(f'    <g transform="translate(366, 52)"><path d="M -18 6 A 18 18 0 0 1 18 6" fill="none" stroke="{accent}" stroke-width="1.8" stroke-linecap="round"/><line x1="0" y1="6" x2="-8" y2="-6" stroke="{accent}" stroke-width="2" stroke-linecap="round"/><circle cx="0" cy="6" r="2.5" fill="{accent}"/><text x="0" y="20" fill="{accent}" font-size="7.5" font-weight="700" text-anchor="middle">&lt;400ms</text></g>')
-    elif diag == "aesthetic":
-        parts.append(f'    <g transform="translate(366, 50)"><polygon points="0,-14 14,-4 9,14 -9,14 -14,-4" fill="{badge_bg}" stroke="{accent}" stroke-width="1.6"/><line x1="-14" y1="-4" x2="14" y2="-4" stroke="{accent}" stroke-width="1"/><line x1="0" y1="-14" x2="-4" y2="14" stroke="{accent}" stroke-width="0.8"/><line x1="0" y1="-14" x2="4" y2="14" stroke="{accent}" stroke-width="0.8"/></g>')
-    elif diag == "peakend":
-        parts.append(f'    <g transform="translate(364, 52)"><path d="M -18 12 C -8 12 -4 -14 4 -14 C 10 -14 12 4 20 4" fill="none" stroke="{accent}" stroke-width="1.8" stroke-linecap="round"/><circle cx="4" cy="-14" r="3.5" fill="{accent}"/><circle cx="20" cy="4" r="3" fill="{accent}"/><text x="4" y="-20" fill="{accent}" font-size="6.5" font-weight="800" text-anchor="middle">PEAK</text><text x="20" y="16" fill="{accent}" font-size="6.5" font-weight="800" text-anchor="middle">END</text></g>')
-    else:
-        parts.append(f'    <g transform="translate(366, 50)"><line x1="0" y1="-10" x2="0" y2="14" stroke="{accent}" stroke-width="1.8"/><line x1="-14" y1="-4" x2="14" y2="-4" stroke="{accent}" stroke-width="1.8" stroke-linecap="round"/><circle cx="0" cy="-10" r="2.5" fill="{accent}"/><path d="M -14 -4 L -19 6 L -9 6 Z" fill="{badge_bg}" stroke="{accent}" stroke-width="1.2"/><path d="M 14 -4 L 9 6 L 19 6 Z" fill="{badge_bg}" stroke="{accent}" stroke-width="1.2"/><line x1="-8" y1="14" x2="8" y2="14" stroke="{accent}" stroke-width="2" stroke-linecap="round"/></g>')
-
-    parts.append('  </g>')
-
-    # Right Card: Cosmic Observation • NASA Deep Space
-    parts.append('  <!-- Right Card: Cosmic Observation -->')
-    parts.append('  <g transform="translate(448, 34)">')
-    parts.append(f'    <rect width="424" height="190" rx="16" fill="{card_bg}" fill-opacity="{card_fill_opacity}" stroke="{card_stroke}" stroke-width="1" filter="url(#insightShadow)"/>')
-    parts.append(f'    <line x1="20" y1="1.5" x2="404" y2="1.5" stroke="{meniscus_stroke}" stroke-width="1.2" stroke-linecap="round"/>')
-    parts.append(f'    <rect x="18" y="16" width="220" height="18" rx="9" fill="{cosmic_badge_bg}" stroke="{cosmic_badge_border}" stroke-width="1"/>')
-    parts.append(f'    <text x="26" y="29" fill="{cosmic_color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="9" font-weight="700" letter-spacing="1">COSMIC LENS • NASA OBSERVATION</text>')
-    
-    # NASA image or vector fallback
     if b64_img:
-        parts.append(f'    <image href="{b64_img}" x="18" y="44" width="112" height="112" preserveAspectRatio="xMidYMid slice" clip-path="url(#nasaClip)"/>')
+        parts.append(f'      <image href="{b64_img}" x="18" y="44" width="112" height="112" preserveAspectRatio="xMidYMid slice" clip-path="url(#nasaClip)"/>')
     else:
-        parts.append(f'    <rect x="18" y="44" width="112" height="112" rx="12" fill="{cosmic_badge_bg}" stroke="{card_stroke}" stroke-width="1"/>')
-        parts.append(f'    <text x="74" y="105" fill="{cosmic_color}" font-size="12" font-weight="700" text-anchor="middle">NASA SPACE</text>')
+        parts.append(f'      <rect x="18" y="44" width="112" height="112" rx="12" fill="{cosmic_badge_bg}" stroke="{card_stroke}" stroke-width="1"/>')
+        parts.append(f'      <text x="74" y="105" fill="{cosmic_color}" font-size="12" font-weight="700" text-anchor="middle">NASA SPACE</text>')
 
-    parts.append(f'    <rect x="18" y="44" width="112" height="112" rx="12" fill="none" stroke="{card_stroke}" stroke-width="1"/>')
-    
-    # Text details on right
-    parts.append(f'    <text x="142" y="62" fill="{text_primary}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="15" font-weight="800">{clean_xml(cosmic["name"])}</text>')
-    parts.append(f'    <text x="142" y="78" fill="{cosmic_color}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="10.5" font-weight="700">{clean_xml(cosmic["telescope"])}</text>')
-    parts.append(f'    <text x="142" y="100" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="10" font-weight="400">{clean_xml(cosmic["desc1"])}</text>')
-    parts.append(f'    <text x="142" y="115" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="10" font-weight="400">{clean_xml(cosmic["desc2"])}</text>')
-    parts.append(f'    <text x="142" y="130" fill="{text_muted}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="10" font-weight="400">{clean_xml(cosmic["desc3"])}</text>')
-    parts.append(f'    <text x="142" y="152" fill="{text_sub}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0.5">✦ {clean_xml(cosmic["tag"])}</text>')
-    parts.append(f'    <text x="18" y="172" fill="{text_sub}" font-family="-apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0.5">Deep Space Observation • NASA Imagery</text>')
-    parts.append('  </g>')
-
+    parts.append(f'      <rect x="18" y="44" width="112" height="112" rx="12" fill="none" stroke="{card_stroke}" stroke-width="1"/>')
+    parts.append(f'      <text x="142" y="62" fill="{text_primary}" font-family="{font_sans}" font-size="15" font-weight="800">{clean_xml(cosmic["name"])}</text>')
+    parts.append(f'      <text x="142" y="78" fill="{cosmic_color}" font-family="{font_sans}" font-size="10.5" font-weight="700">{clean_xml(cosmic["telescope"])}</text>')
+    parts.append(f'      <text x="142" y="100" fill="{text_muted}" font-family="{font_sans}" font-size="10" font-weight="400">{clean_xml(cosmic["desc1"])}</text>')
+    parts.append(f'      <text x="142" y="115" fill="{text_muted}" font-family="{font_sans}" font-size="10" font-weight="400">{clean_xml(cosmic["desc2"])}</text>')
+    parts.append(f'      <text x="142" y="130" fill="{text_muted}" font-family="{font_sans}" font-size="10" font-weight="400">{clean_xml(cosmic["desc3"])}</text>')
+    parts.append(f'      <text x="142" y="152" fill="{text_sub}" font-family="{font_sans}" font-size="9.5" font-weight="600" letter-spacing="0.5">✦ {clean_xml(cosmic["tag"])}</text>')
+    parts.append(f'      <text x="18" y="172" fill="{text_sub}" font-family="{font_sans}" font-size="9.5" font-weight="600" letter-spacing="0.5">Deep Space Observation • NASA Imagery</text>')
+    parts.append(f'      <text x="406" y="172" text-anchor="end" fill="{learn_more_color}" font-family="{font_sans}" font-size="10.5" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>')
+    parts.append('    </g>')
+    parts.append('  </a>')
     parts.append('</svg>')
     return '\n'.join(parts)
-
 
 def build_button_svg(text, width=150):
     """Build an adaptive droplet pill button SVG matching the web app design."""
@@ -971,6 +1145,26 @@ def main():
         print(f"✓ Saved {b_file}")
 
     # 5. Dual Glassmorphic Insights SVGs (UX Law + NASA Cosmic Observation)
+    law_light = build_daily_law_svg(dark_mode=False)
+    with open(os.path.join(out_dir, "daily-law-light.svg"), "w", encoding="utf-8") as f:
+        f.write(law_light)
+    print("✓ Saved daily-law-light.svg (light)")
+
+    law_dark = build_daily_law_svg(dark_mode=True)
+    with open(os.path.join(out_dir, "daily-law-dark.svg"), "w", encoding="utf-8") as f:
+        f.write(law_dark)
+    print("✓ Saved daily-law-dark.svg (dark)")
+
+    cosmic_light = build_daily_cosmic_svg(dark_mode=False)
+    with open(os.path.join(out_dir, "daily-cosmic-light.svg"), "w", encoding="utf-8") as f:
+        f.write(cosmic_light)
+    print("✓ Saved daily-cosmic-light.svg (light)")
+
+    cosmic_dark = build_daily_cosmic_svg(dark_mode=True)
+    with open(os.path.join(out_dir, "daily-cosmic-dark.svg"), "w", encoding="utf-8") as f:
+        f.write(cosmic_dark)
+    print("✓ Saved daily-cosmic-dark.svg (dark)")
+
     insights_light = build_daily_insights_svg(dark_mode=False)
     with open(os.path.join(out_dir, "daily-insights-light.svg"), "w", encoding="utf-8") as f:
         f.write(insights_light)

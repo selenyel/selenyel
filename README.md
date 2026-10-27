@@ -15,7 +15,7 @@
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
       <td width="49%" align="center" valign="top">
-        <a href="https://lawsofux.com/millers-law/" target="_blank">
+        <a href="https://lawsofux.com/doherty-threshold/" target="_blank">
           <picture>
             <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-dark.svg?v=11">
             <img alt="UX Law of the Day" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-light.svg?v=11" width="100%">
@@ -24,7 +24,7 @@
       </td>
       <td width="2%"></td>
       <td width="49%" align="center" valign="top">
-        <a href="https://images.nasa.gov/details/PIA04921" target="_blank">
+        <a href="https://webbtelescope.org/contents/media/images/2022/031/01G77PKGFW2PFCTY22CHCS2NP4" target="_blank">
           <picture>
             <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-dark.svg?v=11">
             <img alt="NASA Deep Space Observation" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-light.svg?v=11" width="100%">

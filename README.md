@@ -15,7 +15,7 @@
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
       <td width="49%" align="center" valign="top">
-        <a href="https://lawsofux.com/aesthetic-usability-effect/" target="_blank">
+        <a href="https://lawsofux.com/peak-end-rule/" target="_blank">
           <picture>
             <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-dark.svg?v=11">
             <img alt="UX Law of the Day" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-law-light.svg?v=11" width="100%">
@@ -24,7 +24,7 @@
       </td>
       <td width="2%"></td>
       <td width="49%" align="center" valign="top">
-        <a href="https://webbtelescope.org/contents/media/images/2022/053/01GF438HG5MDV37F7EDNBMBCQ4" target="_blank">
+        <a href="https://webbtelescope.org/contents/media/images/2022/041/01GA76MYFN0FMKNR46DDC58HRQ" target="_blank">
           <picture>
             <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-dark.svg?v=11">
             <img alt="NASA Deep Space Observation" src="https://raw.githubusercontent.com/selenyel/selenyel/output/daily-cosmic-light.svg?v=11" width="100%">
@@ -44,7 +44,7 @@
 
 ---
 
-## 2-Day Contribution Streak &bull; Custom Snake
+## Contribution Streak &bull; Custom Snake
 
 <!-- Generated automatically by .github/workflows/stemellioglu.yml -->
 <div align="center">

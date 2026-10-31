@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="38" viewBox="0 0 160 38">
+  <defs>
+    <filter id="btnShadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <style>
+    .btn-bg { fill: #ffffff; stroke: #e2e8f0; }
+    .btn-txt { fill: #1e293b; }
+    @media (prefers-color-scheme: dark) {
+      .btn-bg { fill: #1e293b; stroke: #334155; }
+      .btn-txt { fill: #f8fafc; }
+    }
+  </style>
+  <rect class="btn-bg" x="2" y="2" width="156" height="34" rx="17" stroke-width="1.2" filter="url(#btnShadow)"/>
+  <text class="btn-txt" x="80.0" y="22" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="600">Google Developers</text>
+</svg>

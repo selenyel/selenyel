@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="860" viewBox="0 0 880 860">
+  <defs>
+    <linearGradient id="spineGrad" x1="440" y1="42" x2="440" y2="828" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="25%" stop-color="#059669"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="75%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+    <!-- Organic Drifting Pastel Ambient Spotlights (Vivid, Same-Lightness Hues) -->
+    <radialGradient id="ambientGlow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.2">
+        <animate attributeName="stop-color" values="#7dd3fc; #a5b4fc; #d8b4fe; #f472b6; #fda4af; #fde047; #6ee7b7; #7dd3fc" dur="34s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="45%" stop-color="#7dd3fc" stop-opacity="0.080">
+        <animate attributeName="stop-color" values="#7dd3fc; #a5b4fc; #d8b4fe; #f472b6; #fda4af; #fde047; #6ee7b7; #7dd3fc" dur="34s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0">
+        <animate attributeName="stop-color" values="#7dd3fc; #a5b4fc; #d8b4fe; #f472b6; #fda4af; #fde047; #6ee7b7; #7dd3fc" dur="34s" repeatCount="indefinite"/>
+      </stop>
+    </radialGradient>
+    <radialGradient id="ambientGlow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fda4af" stop-opacity="0.15">
+        <animate attributeName="stop-color" values="#fda4af; #fde047; #6ee7b7; #7dd3fc; #a5b4fc; #d8b4fe; #f472b6; #fda4af" dur="42s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="45%" stop-color="#fda4af" stop-opacity="0.060">
+        <animate attributeName="stop-color" values="#fda4af; #fde047; #6ee7b7; #7dd3fc; #a5b4fc; #d8b4fe; #f472b6; #fda4af" dur="42s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#fda4af" stop-opacity="0">
+        <animate attributeName="stop-color" values="#fda4af; #fde047; #6ee7b7; #7dd3fc; #a5b4fc; #d8b4fe; #f472b6; #fda4af" dur="42s" repeatCount="indefinite"/>
+      </stop>
+    </radialGradient>
+  </defs>
+  <!-- Ambient Drifting Pastel Lights (Slow, Organic Trajectories) -->
+  <g>
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="200 160; 660 260; 340 480; 620 660; 260 760; 520 380; 200 160"
+      dur="36s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95"
+    />
+    <circle cx="0" cy="0" r="340" fill="url(#ambientGlow1)"/>
+  </g>
+  <g>
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="680 740; 240 540; 640 320; 280 180; 560 520; 320 720; 680 740"
+      dur="44s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95; 0.45 0.05 0.55 0.95"
+    />
+    <circle cx="0" cy="0" r="300" fill="url(#ambientGlow2)"/>
+  </g>
+  <text x="8" y="24" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="700" letter-spacing="1.5">CAREER TIMELINE • ENGINEERING &amp; UX JOURNEY</text>
+  <text x="872" y="24" text-anchor="end" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" font-weight="500">Chronological Archive</text>
+  <!-- Central Spine Track (Tapered dynamic rainbow ribbon) -->
+  <path d="M 438.8 42.0 C 438.5 201.0, 437.6 340.1, 437.6 439.5 C 437.6 538.9, 438.5 678.0, 438.8 837.0 L 441.2 837.0 C 441.5 678.0, 442.4 538.9, 442.4 439.5 C 442.4 340.1, 441.5 201.0, 441.2 42.0 Z" fill="url(#spineGrad)" opacity="0.18"/>
+  <path d="M 439.4 42.0 C 439.3 201.0, 438.6 340.1, 438.6 439.5 C 438.6 538.9, 439.3 678.0, 439.4 837.0 L 440.6 837.0 C 440.7 678.0, 441.4 538.9, 441.4 439.5 C 441.4 340.1, 440.7 201.0, 440.6 42.0 Z" fill="url(#spineGrad)" opacity="0.95"/>
+  <!-- Top Start Node Bead -->
+  <circle cx="440" cy="42.0" r="3.5" fill="#0284c7" stroke="#ffffff" stroke-width="1.2"/>
+  <!-- Downwards Terminal Chevron (Touches line apex directly) -->
+  <path d="M 435 829.0 L 440 837.0 L 445 829.0" stroke="#db2777" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.95"/>
+  <!-- Node Bead at y=118 -->
+  <circle cx="440" cy="118" r="12" fill="#0284c7" fill-opacity="0.18"/>
+  <circle cx="440" cy="118" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+  <circle cx="440" cy="118" r="2.5" fill="#0284c7"/>
+  <line x1="452" y1="118" x2="466" y2="118" stroke="#0284c7" stroke-width="1.3" stroke-dasharray="2.5 2.5" stroke-linecap="round" opacity="0.7"/>
+  <text x="416" y="114" text-anchor="end" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">Sep 2025 – Present</text>
+  <text x="416" y="132" text-anchor="end" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500">Multi-Platform Ecosystem</text>
+  <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">
+    <g transform="translate(466, 50)">
+      <rect width="390" height="136" rx="16" fill="#ffffff" fill-opacity="0.90" stroke="#e2e8f0" stroke-width="1" filter="url(#cardShadow)"/>
+      <!-- Specular Meniscus Reflection Highlight -->
+      <line x1="20" y1="1.5" x2="370" y2="1.5" stroke="rgba(255, 255, 255, 0.95)" stroke-width="1.2" stroke-linecap="round"/>
+      <text x="18" y="26" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">UI/UX Designer &amp; Front-End Developer</text>
+      <text x="18" y="46" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">OneWell</text>
+      <text x="18" y="68" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">Design and engineer the unified interface layer across</text>
+      <text x="18" y="84" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">watchOS, iOS, Android, and Web. Own component systems,</text>
+      <text x="18" y="100" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">WCAG 2.1 AA accessibility, and API contracts under shift.</text>
+      <!-- Click to learn more hint -->
+      <text x="372" y="122" text-anchor="end" fill="#6b5b85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>
+    </g>
+  </a>
+  <!-- Node Bead at y=276 -->
+  <circle cx="440" cy="276" r="12" fill="#059669" fill-opacity="0.18"/>
+  <circle cx="440" cy="276" r="7" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+  <circle cx="440" cy="276" r="2.5" fill="#059669"/>
+  <line x1="414" y1="276" x2="428" y2="276" stroke="#059669" stroke-width="1.3" stroke-dasharray="2.5 2.5" stroke-linecap="round" opacity="0.7"/>
+  <text x="464" y="272" fill="#059669" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">Nov 2022 – Jul 2025</text>
+  <text x="464" y="290" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500">National Scale Systems</text>
+  <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">
+    <g transform="translate(24, 208)">
+      <rect width="390" height="136" rx="16" fill="#ffffff" fill-opacity="0.90" stroke="#e2e8f0" stroke-width="1" filter="url(#cardShadow)"/>
+      <!-- Specular Meniscus Reflection Highlight -->
+      <line x1="20" y1="1.5" x2="370" y2="1.5" stroke="rgba(255, 255, 255, 0.95)" stroke-width="1.2" stroke-linecap="round"/>
+      <text x="18" y="26" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">Lead Front-End Developer</text>
+      <text x="18" y="46" fill="#059669" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">Ministry of Commerce • ESBIS &amp; Consumer Portal</text>
+      <text x="18" y="68" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">Led front-end architecture for two national government web</text>
+      <text x="18" y="84" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">applications. Governed component lifecycles, rendering</text>
+      <text x="18" y="100" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">performance, state isolation, and responsive UI for citizens.</text>
+      <!-- Click to learn more hint -->
+      <text x="372" y="122" text-anchor="end" fill="#6b5b85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>
+    </g>
+  </a>
+  <!-- Node Bead at y=434 -->
+  <circle cx="440" cy="434" r="12" fill="#d97706" fill-opacity="0.18"/>
+  <circle cx="440" cy="434" r="7" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+  <circle cx="440" cy="434" r="2.5" fill="#d97706"/>
+  <line x1="452" y1="434" x2="466" y2="434" stroke="#d97706" stroke-width="1.3" stroke-dasharray="2.5 2.5" stroke-linecap="round" opacity="0.7"/>
+  <text x="416" y="430" text-anchor="end" fill="#d97706" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">Jan – Mar 2020</text>
+  <text x="416" y="448" text-anchor="end" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500">Spatial &amp; Metric Dashboards</text>
+  <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">
+    <g transform="translate(466, 366)">
+      <rect width="390" height="136" rx="16" fill="#ffffff" fill-opacity="0.90" stroke="#e2e8f0" stroke-width="1" filter="url(#cardShadow)"/>
+      <!-- Specular Meniscus Reflection Highlight -->
+      <line x1="20" y1="1.5" x2="370" y2="1.5" stroke="rgba(255, 255, 255, 0.95)" stroke-width="1.2" stroke-linecap="round"/>
+      <text x="18" y="26" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">Front-End Engineering Intern</text>
+      <text x="18" y="46" fill="#d97706" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">Bisoft</text>
+      <text x="18" y="68" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">Engineered React dashboards rendering complex real-time</text>
+      <text x="18" y="84" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">seismic metric datasets. Focused on adaptive graphs, data</text>
+      <text x="18" y="100" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">density normalization, and tabular stability.</text>
+      <!-- Click to learn more hint -->
+      <text x="372" y="122" text-anchor="end" fill="#6b5b85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>
+    </g>
+  </a>
+  <!-- Node Bead at y=592 -->
+  <circle cx="440" cy="592" r="12" fill="#7c3aed" fill-opacity="0.18"/>
+  <circle cx="440" cy="592" r="7" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="440" cy="592" r="2.5" fill="#7c3aed"/>
+  <line x1="414" y1="592" x2="428" y2="592" stroke="#7c3aed" stroke-width="1.3" stroke-dasharray="2.5 2.5" stroke-linecap="round" opacity="0.7"/>
+  <text x="464" y="588" fill="#7c3aed" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">2017 &amp; 2018</text>
+  <text x="464" y="606" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500">Enterprise Component Architecture</text>
+  <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">
+    <!-- Double Stacked Card (Went there twice: 2017 & 2018) -->
+    <g transform="translate(21, 528) rotate(-2.4, 195.0, 68.0)">
+      <rect width="390" height="136" rx="16" fill="#ffffff" fill-opacity="0.90" stroke="#e2e8f0" stroke-width="1" filter="url(#cardShadow)"/>
+      <line x1="20" y1="1.5" x2="370" y2="1.5" stroke="rgba(255, 255, 255, 0.95)" stroke-width="1.2" stroke-linecap="round"/>
+      <rect x="20" y="24" width="70" height="5" rx="2.5" fill="#7c3aed" fill-opacity="0.2"/>
+      <rect x="20" y="36" width="110" height="4" rx="2" fill="#7c3aed" fill-opacity="0.12"/>
+    </g>
+    <g transform="translate(24, 524)">
+      <rect width="390" height="136" rx="16" fill="#ffffff" fill-opacity="0.90" stroke="#e2e8f0" stroke-width="1" filter="url(#cardShadow)"/>
+      <!-- Specular Meniscus Reflection Highlight -->
+      <line x1="20" y1="1.5" x2="370" y2="1.5" stroke="rgba(255, 255, 255, 0.95)" stroke-width="1.2" stroke-linecap="round"/>
+      <text x="18" y="26" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">Front-End Engineering Intern</text>
+      <text x="18" y="46" fill="#7c3aed" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">LOGO Yazılım</text>
+      <text x="18" y="68" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">Developed enterprise Angular components directly from design</text>
+      <text x="18" y="84" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">specs. Authored automated release scripts, test coverage suites,</text>
+      <text x="18" y="100" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">and CI verification pipelines.</text>
+      <!-- Click to learn more hint -->
+      <text x="372" y="122" text-anchor="end" fill="#6b5b85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>
+    </g>
+  </a>
+  <!-- Node Bead at y=750 -->
+  <circle cx="440" cy="750" r="12" fill="#db2777" fill-opacity="0.18"/>
+  <circle cx="440" cy="750" r="7" fill="#ffffff" stroke="#db2777" stroke-width="2"/>
+  <circle cx="440" cy="750" r="2.5" fill="#db2777"/>
+  <line x1="452" y1="750" x2="466" y2="750" stroke="#db2777" stroke-width="1.3" stroke-dasharray="2.5 2.5" stroke-linecap="round" opacity="0.7"/>
+  <text x="416" y="746" text-anchor="end" fill="#db2777" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">Academic Foundations</text>
+  <text x="416" y="764" text-anchor="end" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500">Computer Engineering</text>
+  <a href="https://www.linkedin.com/in/selenyeltemellioglu/" target="_blank">
+    <g transform="translate(466, 682)">
+      <rect width="390" height="136" rx="16" fill="#ffffff" fill-opacity="0.90" stroke="#e2e8f0" stroke-width="1" filter="url(#cardShadow)"/>
+      <!-- Specular Meniscus Reflection Highlight -->
+      <line x1="20" y1="1.5" x2="370" y2="1.5" stroke="rgba(255, 255, 255, 0.95)" stroke-width="1.2" stroke-linecap="round"/>
+      <text x="18" y="26" fill="#0f172a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">B.S. in Computer Engineering • TÜBİTAK Researcher</text>
+      <text x="18" y="46" fill="#db2777" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600">TOBB University of Economics &amp; Technology</text>
+      <text x="18" y="68" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">Collaborated on TÜBİTAK research website (ADMPD). Rigorous</text>
+      <text x="18" y="84" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">training in algorithmic design and distributed systems that</text>
+      <text x="18" y="100" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400">laid the foundation for treating user interfaces as mission-critical.</text>
+      <!-- Click to learn more hint -->
+      <text x="372" y="122" text-anchor="end" fill="#6b5b85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="500" letter-spacing="0.3">click to learn more &#8250;</text>
+    </g>
+  </a>
+</svg>

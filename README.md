@@ -44,7 +44,7 @@
 
 ---
 
-## Contribution Streak &bull; Custom Snake
+## 1-Day Contribution Streak &bull; Custom Snake
 
 <!-- Generated automatically by .github/workflows/stemellioglu.yml -->
 <div align="center">

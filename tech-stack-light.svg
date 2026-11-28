@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="295" viewBox="0 0 880 295">
+  <defs>
+    <filter id="pillShadow" x="-5%" y="-10%" width="110%" height="125%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <text x="8" y="22" fill="#0284c7" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" letter-spacing="1.5">TECH STACK</text>
+  <text x="8" y="48" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1">DESIGN &amp; SYSTEMS</text>
+  <g transform="translate(8.0, 58.0)">
+    <rect width="54.6" height="24" rx="6" fill="rgba(244, 114, 182, 0.14)" stroke="rgba(190, 24, 93, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#be185d"/>
+    <text x="15" y="15.5" fill="#be185d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Figma</text>
+  </g>
+  <g transform="translate(72.6, 58.0)">
+    <rect width="162.2" height="24" rx="6" fill="rgba(251, 191, 36, 0.14)" stroke="rgba(180, 83, 9, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#b45309"/>
+    <text x="15" y="15.5" fill="#b45309" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Design Token Architecture</text>
+  </g>
+  <g transform="translate(244.8, 58.0)">
+    <rect width="162.7" height="24" rx="6" fill="rgba(52, 211, 153, 0.14)" stroke="rgba(4, 120, 87, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#047857"/>
+    <text x="15" y="15.5" fill="#047857" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">WCAG 2.1 AA Accessibility</text>
+  </g>
+  <g transform="translate(417.5, 58.0)">
+    <rect width="128.3" height="24" rx="6" fill="rgba(192, 132, 252, 0.14)" stroke="rgba(109, 40, 217, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#6d28d9"/>
+    <text x="15" y="15.5" fill="#6d28d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Micro-Interactions</text>
+  </g>
+  <g transform="translate(555.8, 58.0)">
+    <rect width="135.9" height="24" rx="6" fill="rgba(52, 211, 153, 0.14)" stroke="rgba(4, 120, 87, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#047857"/>
+    <text x="15" y="15.5" fill="#047857" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Component Contracts</text>
+  </g>
+  <text x="8" y="94" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1">FRONT-END &amp; CROSS-PLATFORM</text>
+  <g transform="translate(8.0, 104.0)">
+    <rect width="81.8" height="24" rx="6" fill="rgba(56, 189, 248, 0.14)" stroke="rgba(3, 105, 161, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#0369a1"/>
+    <text x="15" y="15.5" fill="#0369a1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">TypeScript</text>
+  </g>
+  <g transform="translate(99.8, 104.0)">
+    <rect width="54.0" height="24" rx="6" fill="rgba(192, 132, 252, 0.14)" stroke="rgba(109, 40, 217, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#6d28d9"/>
+    <text x="15" y="15.5" fill="#6d28d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">React</text>
+  </g>
+  <g transform="translate(163.8, 104.0)">
+    <rect width="119.4" height="24" rx="6" fill="rgba(56, 189, 248, 0.14)" stroke="rgba(3, 105, 161, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#0369a1"/>
+    <text x="15" y="15.5" fill="#0369a1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">JavaScript (ES6+)</text>
+  </g>
+  <g transform="translate(293.2, 104.0)">
+    <rect width="63.2" height="24" rx="6" fill="rgba(192, 132, 252, 0.14)" stroke="rgba(109, 40, 217, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#6d28d9"/>
+    <text x="15" y="15.5" fill="#6d28d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Angular</text>
+  </g>
+  <g transform="translate(366.4, 104.0)">
+    <rect width="61.0" height="24" rx="6" fill="rgba(251, 191, 36, 0.14)" stroke="rgba(180, 83, 9, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#b45309"/>
+    <text x="15" y="15.5" fill="#b45309" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Next.js</text>
+  </g>
+  <g transform="translate(437.4, 104.0)">
+    <rect width="156.6" height="24" rx="6" fill="rgba(244, 114, 182, 0.14)" stroke="rgba(190, 24, 93, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#be185d"/>
+    <text x="15" y="15.5" fill="#be185d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">SwiftUI (iOS &amp; watchOS)</text>
+  </g>
+  <g transform="translate(604.0, 104.0)">
+    <rect width="92.4" height="24" rx="6" fill="rgba(52, 211, 153, 0.14)" stroke="rgba(4, 120, 87, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#047857"/>
+    <text x="15" y="15.5" fill="#047857" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Tailwind CSS</text>
+  </g>
+  <g transform="translate(706.4, 104.0)">
+    <rect width="83.6" height="24" rx="6" fill="rgba(56, 189, 248, 0.14)" stroke="rgba(3, 105, 161, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#0369a1"/>
+    <text x="15" y="15.5" fill="#0369a1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Sass/SCSS</text>
+  </g>
+  <text x="8" y="140" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1">STATE &amp; DATA ARCHITECTURE</text>
+  <g transform="translate(8.0, 150.0)">
+    <rect width="68.4" height="24" rx="6" fill="rgba(56, 189, 248, 0.14)" stroke="rgba(3, 105, 161, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#0369a1"/>
+    <text x="15" y="15.5" fill="#0369a1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">GraphQL</text>
+  </g>
+  <g transform="translate(86.4, 150.0)">
+    <rect width="98.5" height="24" rx="6" fill="rgba(52, 211, 153, 0.14)" stroke="rgba(4, 120, 87, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#047857"/>
+    <text x="15" y="15.5" fill="#047857" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">RESTful APIs</text>
+  </g>
+  <g transform="translate(194.9, 150.0)">
+    <rect width="54.0" height="24" rx="6" fill="rgba(192, 132, 252, 0.14)" stroke="rgba(109, 40, 217, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#6d28d9"/>
+    <text x="15" y="15.5" fill="#6d28d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Redux</text>
+  </g>
+  <g transform="translate(258.9, 150.0)">
+    <rect width="49.8" height="24" rx="6" fill="rgba(129, 140, 248, 0.14)" stroke="rgba(67, 56, 202, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#4338ca"/>
+    <text x="15" y="15.5" fill="#4338ca" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">NgRx</text>
+  </g>
+  <g transform="translate(318.7, 150.0)">
+    <rect width="102.4" height="24" rx="6" fill="rgba(251, 191, 36, 0.14)" stroke="rgba(180, 83, 9, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#b45309"/>
+    <text x="15" y="15.5" fill="#b45309" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Reactive State</text>
+  </g>
+  <text x="8" y="186" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1">WORKFLOW &amp; INFRASTRUCTURE</text>
+  <g transform="translate(8.0, 196.0)">
+    <rect width="40.4" height="24" rx="6" fill="rgba(244, 114, 182, 0.14)" stroke="rgba(190, 24, 93, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#be185d"/>
+    <text x="15" y="15.5" fill="#be185d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Git</text>
+  </g>
+  <g transform="translate(58.4, 196.0)">
+    <rect width="101.7" height="24" rx="6" fill="rgba(129, 140, 248, 0.14)" stroke="rgba(67, 56, 202, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#4338ca"/>
+    <text x="15" y="15.5" fill="#4338ca" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">GitHub Actions</text>
+  </g>
+  <g transform="translate(170.1, 196.0)">
+    <rect width="46.1" height="24" rx="6" fill="rgba(192, 132, 252, 0.14)" stroke="rgba(109, 40, 217, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#6d28d9"/>
+    <text x="15" y="15.5" fill="#6d28d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Vite</text>
+  </g>
+  <g transform="translate(226.2, 196.0)">
+    <rect width="67.7" height="24" rx="6" fill="rgba(251, 191, 36, 0.14)" stroke="rgba(180, 83, 9, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#b45309"/>
+    <text x="15" y="15.5" fill="#b45309" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Webpack</text>
+  </g>
+  <g transform="translate(303.9, 196.0)">
+    <rect width="95.3" height="24" rx="6" fill="rgba(251, 113, 133, 0.14)" stroke="rgba(190, 18, 60, 0.28)" stroke-width="1" filter="url(#pillShadow)"/>
+    <circle cx="8" cy="12" r="2.3" fill="#be123c"/>
+    <text x="15" y="15.5" fill="#be123c" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Jest / Vitest</text>
+  </g>
+  <circle cx="817.4" cy="275.5" r="3" fill="#be123c"/>
+  <text x="823.4" y="279.0" fill="#be123c" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600">Testing</text>
+  <circle cx="752.8" cy="275.5" r="3" fill="#4338ca"/>
+  <text x="758.8" y="279.0" fill="#4338ca" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600">CI / CD</text>
+  <circle cx="659.2" cy="275.5" r="3" fill="#b45309"/>
+  <text x="665.2" y="279.0" fill="#b45309" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600">Architecture</text>
+  <circle cx="588.8" cy="275.5" r="3" fill="#047857"/>
+  <text x="594.8" y="279.0" fill="#047857" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600">Standard</text>
+  <circle cx="512.6" cy="275.5" r="3" fill="#6d28d9"/>
+  <text x="518.6" y="279.0" fill="#6d28d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600">Framework</text>
+  <circle cx="442.2" cy="275.5" r="3" fill="#0369a1"/>
+  <text x="448.2" y="279.0" fill="#0369a1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600">Language</text>
+  <circle cx="395.0" cy="275.5" r="3" fill="#be185d"/>
+  <text x="401.0" y="279.0" fill="#be185d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600">Tool</text>
+</svg>
